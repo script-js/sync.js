@@ -90,6 +90,9 @@ onAuthStateChanged(auth, (user) => {
         set(ref(db, 'users/' + fbuid1 + "/" + encodeFB(fromURL)), lsData).catch((error) => {
           alert(error);
          });
+        gbtn.style.display = "none";
+          donei.src = "done.png";
+          mc.innerHTML = "<h1>Backup Successful</h1>";
       }
       }).catch((error) => {
         alert(error);

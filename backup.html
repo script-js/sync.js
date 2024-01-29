@@ -89,10 +89,14 @@ function encodeFB(text2) {
   const db = getDatabase();
   var urijson = new URLSearchParams(window.location.search).get("data");
   var fromURL = new URLSearchParams(window.location.search).get("fromURL");
-  var lsData = JSON.parse(atob(urijson.replaceAll("%2B","+")));  
+  var lsData1 = JSON.parse(atob(urijson.replaceAll("%2B","+")));  
               var toaddHTML = "";
-              Object.keys(lsData).forEach(function (k) {
-                toaddHTML = toaddHTML + k + ": " + lsData[k] + "<br>";
+              Object.keys(lsData1).forEach(function (k) {
+                toaddHTML = toaddHTML + k + ": " + lsData1[k] + "<br>";
+              });
+              var lsData = {}
+              Object.keys(lsData1).forEach(function (k) {
+                lsData[k] = encodeFB(lsData1[k])
               });
 
 onAuthStateChanged(auth, (user) => {

@@ -58,7 +58,7 @@ function encodeFB(text2) {
   var fromURL = new URLSearchParams(window.location.search).get("fromURL");
   var lsData = JSON.parse(urijson);  
 
-  if (auth.uid) {
+  if (auth) {
     gbtn.style.display = "block";
     mc.innerHTML = "<h1>Back Up from " + decodeURI(fromURL) + "</h1>";
   } else {

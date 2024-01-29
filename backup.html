@@ -35,15 +35,15 @@
     </style>
     <script>
       function mored() {
-        mdb.innerHTML = "Show Less <span class='material-symbols-outlined'>arrow_drop_up</span>"
+        mdb.innerHTML = "Show Less <span class='material-symbols-outlined'>arrow_drop_up</span>";
         mdd.style.display = "block";
-        mdb.onclick = moreu
+        mdb.onclick = moreu;
       }
 
-      function mored() {
-        mdb.innerHTML = "Show More <span class='material-symbols-outlined'>arrow_drop_down</span>"
+      function moreu() {
+        mdb.innerHTML = "Show More <span class='material-symbols-outlined' style='display:inline'>arrow_drop_down</span>";
         mdd.style.display = "none";
-        mdb.onclick = mored
+        mdb.onclick = mored;
       }
     </script>
             <script type="module">
@@ -92,14 +92,14 @@ function encodeFB(text2) {
   var lsData = JSON.parse(atob(urijson.replaceAll("%2B","+")));  
               var toaddHTML = "";
               Object.keys(lsData).forEach(function (k) {
-                toaddHTML = toaddHTML + k + ": " + lsData[k];
+                toaddHTML = toaddHTML + k + ": " + lsData[k] + "<br>";
               });
 
 onAuthStateChanged(auth, (user) => {
   if (user) {
     window.fbuid1 = user.uid
     gbtn.style.display = "block";
-    mc.innerHTML = "<h1>Back Up from " + decodeURI(fromURL) + "</h1><button onclick='mored()' id='mdb'>Show More <span class='material-symbols-outlined'>arrow_drop_down</span></button><div id='mdd'>" + toaddHTML + "</div>";
+    mc.innerHTML = "<h1>Back Up from " + decodeURI(fromURL) + "</h1><button onclick='mored()' id='mdb'>Show More <span class='material-symbols-outlined' style='display:inline'>arrow_drop_down</span></button><div id='mdd'>" + toaddHTML + "</div>";
   } else {
     location.replace("login?handoff=" + btoa(location.href).replaceAll("+","%2B"))
   }

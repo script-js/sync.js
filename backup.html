@@ -94,9 +94,9 @@ function encodeFB(text2) {
               Object.keys(lsData1).forEach(function (k) {
                 toaddHTML = toaddHTML + k + ": " + lsData1[k] + "<br>";
               });
-              var lsData = {}
+              var lsData = {};
               Object.keys(lsData1).forEach(function (k) {
-                lsData[k] = encodeFB(lsData1[k])
+                lsData[encodeFB(k)] = lsData1[k]
               });
 
 onAuthStateChanged(auth, (user) => {

@@ -56,7 +56,7 @@ function encodeFB(text2) {
   const db = getDatabase();
   var urijson = new URLSearchParams(window.location.search).get("data");
   var fromURL = new URLSearchParams(window.location.search).get("fromURL");
-  var lsData = JSON.parse(urijson);  
+  var lsData = JSON.parse(atob(urijson.replaceAll("%2B","+")));  
 
 onAuthStateChanged(auth, (user) => {
   if (user) {

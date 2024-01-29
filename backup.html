@@ -58,9 +58,9 @@ function encodeFB(text2) {
   var fromURL = new URLSearchParams(window.location.search).get("fromURL");
   var lsData = JSON.parse(urijson);  
   console.log(auth)
-      console.log(auth.uid)
+      console.log(auth.currentUser.uid)
 
-  if (auth) {
+  if (auth.currentUser.uid) {
     gbtn.style.display = "block";
     mc.innerHTML = "<h1>Back Up from " + decodeURI(fromURL) + "</h1>";
   } else {
@@ -69,16 +69,16 @@ function encodeFB(text2) {
               
   gbtn.addEventListener('click',(e)=>{
     console.log(auth)
-    console.log(auth.uid)
-    get(child(dbRef, "users/" + auth.uid + "/" + encodeFB(fromURL))).then((snapshot) => {
+    console.log(auth.currentUser.uid)
+    get(child(dbRef, "users/" + auth.currentUser.uid + "/" + encodeFB(fromURL))).then((snapshot) => {
       console.log(auth)
-      console.log(auth.uid)
+      console.log(auth.currentUser.uid)
       if (snapshot.exists()) {
         var con1 = confirm("A backup of this website already exists. Continuing with this operation will overwrite this.\nWould you like to continue?")
         console.log(auth)
-      console.log(auth.uid)
+      console.log(auth.currentUser.uid)
         if (con1 == true) {
-          set(ref(db, 'users/' + auth.uid + "/" + encodeFB(fromURL)), lsData).catch((error) => {
+          set(ref(db, 'users/' + auth.currentUser.uid + "/" + encodeFB(fromURL)), lsData).catch((error) => {
             alert(error);
           });
           gbtn.style.display = "none";
@@ -86,7 +86,7 @@ function encodeFB(text2) {
           mc.innerHTML = "<h1>Backup Successful</h1>";
         }
       } else {
-        set(ref(db, 'users/' + auth.uid + "/" + encodeFB(fromURL)), lsData).catch((error) => {
+        set(ref(db, 'users/' + auth.currentUser.uid + "/" + encodeFB(fromURL)), lsData).catch((error) => {
           alert(error);
          });
       }

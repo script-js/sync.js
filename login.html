@@ -1,0 +1,81 @@
+<!DOCTYPE HTML>
+<link rel="stylesheet" href="home.css" />
+<link rel="stylesheet" href="login.css" />
+<html style="width:100%;height:100%;">
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js"></script>
+  <body style="width:100%;height:100%;">
+    <div class="modal" style="display:block"><div class="modal-content" style="width:80%;height:80%;align-items:center;text-align:center;" id="ibox"><h1>Log In</h1><input id="eip" type="email" style="width:80%;height:40px;" class="addngbtns" placeholder="Email"><br><input class="addngbtns" id="pip" type="password" style="width:80%;height:40px;" placeholder="Password"><p>&nbsp;</p><button id="gbtn" class="addngbtns">Log In</button></div></div>
+      <script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-analytics.js";
+  import { getAuth, setPersistence, signInWithEmailAndPassword, browserLocalPersistence  } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+  import { getDatabase, ref, set, get, child } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  const firebaseConfig = {
+    apiKey: "AIzaSyBsS4vb2oCsHPNIbsDplMShZPxldOB8lr0",
+    authDomain: "white-market-games-250d7.firebaseapp.com",
+    projectId: "white-market-games-250d7",
+    storageBucket: "white-market-games-250d7.appspot.com",
+    messagingSenderId: "629064500076",
+    appId: "1:629064500076:web:a072453811815a54aaa949",
+    measurementId: "G-4TTGJ1LT94"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+  const db = getDatabase();
+  const dbRef = ref(getDatabase());
+
+  const auth = getAuth();
+  gbtn.addEventListener('click',(e)=>{
+    signInWithEmailAndPassword(auth, document.getElementById("eip").value, document.getElementById("pip").value)
+  .then((userCredential) => {
+    const user = userCredential.user;
+    ibox.innerHTML = "<img src='https://cdn.pixabay.com/animation/2023/03/20/02/45/02-45-27-186_512.gif' width='415px;' /><h1>Just a moment...</h1>"
+    console.log(user)
+    localStorage.setItem("login",user.email)
+    localStorage.setItem("userID",user.uid)
+    get(child(dbRef, "users/" + localStorage.getItem("userID"))).then((snapshot) => {
+  if (snapshot.exists()) {
+    var gdata = snapshot.val();
+    if (gdata.username) {
+      localStorage.setItem("login",gdata.username)
+    }
+    if (gdata.isadmin == "true") {
+      localStorage.setItem("admin","on")
+    }
+  }
+}).catch((error) => {
+  alert(error);
+});
+    setPersistence(auth, browserLocalPersistence)
+  .then(() => {
+    return signInWithEmailAndPassword(auth, email, password);
+  })
+  .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+  });
+    if (location.href.includes("?ref=osui")) {
+      location.replace("static/settings.html")
+    } else if (location.href.includes("?ref=embed")) {
+      location.replace("games")
+    }
+  })
+  .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    alert("ERROR: " + errorCode)
+    console.log(errorMessage)
+  });
+  });
+        
+</script>
+  </body>
+</html>

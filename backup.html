@@ -3,7 +3,7 @@
   <head>
     <link href="home.css" rel="stylesheet" type="text/css" />
     <link rel="icon" id='hphficon' href="icon.png"/>
-    <title>Export Wizard</title>
+    <title>Backup | sync.js</title>
     <link href="login.css" rel="stylesheet" type="text/css" />
   </head>
   <body style="background-image: url('icon.png');background-color: #464fb0;">
@@ -57,17 +57,26 @@ function encodeFB(text2) {
   var urijson = new URLSearchParams(window.location.search).get("data");
   var fromURL = new URLSearchParams(window.location.search).get("fromURL");
   var lsData = JSON.parse(urijson);  
-  
+
+  if (auth.uid) {
+    gbtn.style.display = "block";
+    mc.innerHTML = "<h1>Back Up from " + decodeURI(fromURL) + "</h1>";
+  } else {
+    location.replace("login?handoff=" + btoa(location.href).replaceAll("+","%2B"))
+  }
+              
   gbtn.addEventListener('click',(e)=>{
-    set(ref(db, 'users/' + auth.uid + "/" + encodeFB(fromURL)), lsData);
     get(child(dbRef, "users/" + auth.uid + "/" + encodeFB(fromURL))).then((snapshot) => {
       if (snapshot.exists()) {
-        console.log(snapshot.val());
-        gbtn.style.display = "none";
-        donei.src = "done.png";
-        mc.innerHTML = "<h1>Backup Successful</h1>";
+        var con1 = confirm("A backup of this website already exists. Continuing with this operation will overwrite this.\nWould you like to continue?")
+        if (con1 == true) {
+          set(ref(db, 'users/' + auth.uid + "/" + encodeFB(fromURL)), lsData);
+          gbtn.style.display = "none";
+          donei.src = "done.png";
+          mc.innerHTML = "<h1>Backup Successful</h1>";
+        }
       } else {
-        console.log("No data available");
+        set(ref(db, 'users/' + auth.uid + "/" + encodeFB(fromURL)), lsData);
       }
       }).catch((error) => {
         console.error(error);

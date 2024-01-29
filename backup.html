@@ -60,7 +60,7 @@ function encodeFB(text2) {
 
 onAuthStateChanged(auth, (user) => {
   if (user) {
-    const fbuid1 = user.uid
+    window.fbuid1 = user.uid
     gbtn.style.display = "block";
     mc.innerHTML = "<h1>Back Up from " + decodeURI(fromURL) + "</h1>";
   } else {

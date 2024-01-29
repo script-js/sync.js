@@ -1,0 +1,80 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <link href="home.css" rel="stylesheet" type="text/css" />
+    <link rel="icon" id='hphficon' href="icon.png"/>
+    <title>Export Wizard</title>
+    <link href="login.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body style="background-image: url('icon.png');background-color: #464fb0;">
+    <button hidden id="gbtn"></button>
+    <div class="modal-content" style="width:80%;height:80%;align-items:center;text-align:center;">
+      <img src="icon.png" style="margin:auto" id="donei" />
+      <div id="mc"><h1>Getting Ready...</h1></div>
+      <button style="width:500px;display:none;" id="gbtn">Back Up</button>
+    </div>
+            <script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+  import { getAuth } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+  import { getDatabase, ref, set, get, child } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+
+  const firebaseConfig = {
+
+    apiKey: "AIzaSyDWGbCICgDCm6XLz6gvuxnZTbsxACm-Fx4",
+
+    authDomain: "sync-js-6aa9d.firebaseapp.com",
+
+    projectId: "sync-js-6aa9d",
+
+    storageBucket: "sync-js-6aa9d.appspot.com",
+
+    messagingSenderId: "856081502457",
+
+    appId: "1:856081502457:web:8579832305cceae2e89228"
+
+  };
+
+function encodeFB(text2) {
+     var text1 = text2.replaceAll(".","%2E").replaceAll("#","%23").replaceAll("$","%24").replaceAll("/","%2F").replaceAll("[","%5B").replaceAll("]","%5D").replaceAll('"',"%22")
+     return text1;
+   }
+   
+   function decodeFB(text2) {
+     var text1 = text2.replaceAll("%2E",".").replaceAll("%23","#").replaceAll("%24","$").replaceAll("%2F","/").replaceAll("%5B","[").replaceAll("%5D","]").replaceAll('%22','"')
+     return text1;
+   }  
+  
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth();
+  const dbRef = ref(getDatabase());
+  const db = getDatabase();
+  var urijson = new URLSearchParams(window.location.search).get("data");
+  var fromURL = new URLSearchParams(window.location.search).get("fromURL");
+  var lsData = JSON.parse(urijson);  
+  
+  gbtn.addEventListener('click',(e)=>{
+    set(ref(db, 'users/' + auth.uid + "/" + encodeFB(fromURL)), lsData);
+    get(child(dbRef, "users/" + auth.uid + "/" + encodeFB(fromURL))).then((snapshot) => {
+      if (snapshot.exists()) {
+        console.log(snapshot.val());
+        gbtn.style.display = "none";
+        donei.src = "done.png";
+        mc.innerHTML = "<h1>Backup Successful</h1>";
+      } else {
+        console.log("No data available");
+      }
+      }).catch((error) => {
+        console.error(error);
+    });
+  });
+
+              
+    </script>
+  </body>
+</html>

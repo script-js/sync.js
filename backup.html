@@ -57,6 +57,8 @@ function encodeFB(text2) {
   var urijson = new URLSearchParams(window.location.search).get("data");
   var fromURL = new URLSearchParams(window.location.search).get("fromURL");
   var lsData = JSON.parse(urijson);  
+  console.log(auth)
+      console.log(auth.uid)
 
   if (auth) {
     gbtn.style.display = "block";
@@ -66,20 +68,30 @@ function encodeFB(text2) {
   }
               
   gbtn.addEventListener('click',(e)=>{
+    console.log(auth)
+    console.log(auth.uid)
     get(child(dbRef, "users/" + auth.uid + "/" + encodeFB(fromURL))).then((snapshot) => {
+      console.log(auth)
+      console.log(auth.uid)
       if (snapshot.exists()) {
         var con1 = confirm("A backup of this website already exists. Continuing with this operation will overwrite this.\nWould you like to continue?")
+        console.log(auth)
+      console.log(auth.uid)
         if (con1 == true) {
-          set(ref(db, 'users/' + auth.uid + "/" + encodeFB(fromURL)), lsData);
+          set(ref(db, 'users/' + auth.uid + "/" + encodeFB(fromURL)), lsData).catch((error) => {
+            alert(error);
+          });
           gbtn.style.display = "none";
           donei.src = "done.png";
           mc.innerHTML = "<h1>Backup Successful</h1>";
         }
       } else {
-        set(ref(db, 'users/' + auth.uid + "/" + encodeFB(fromURL)), lsData);
+        set(ref(db, 'users/' + auth.uid + "/" + encodeFB(fromURL)), lsData).catch((error) => {
+          alert(error);
+         });
       }
       }).catch((error) => {
-        console.error(error);
+        alert(error);
     });
   });
 

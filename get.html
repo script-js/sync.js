@@ -42,9 +42,9 @@ function encodeFB(text2) {
     window.fbuid1 = user.uid
       get(child(dbRef, "users/" + fbuid1 + "/" + encodeFB(url1))).then((snapshot) => {
     if (snapshot.exists()) {
-      alert(JSON.stringify(snapshot.val()))
+      document.write(JSON.stringify(snapshot.val()))
     } else {
-      alert("No Data.")
+      document.write("No Data.")
     }
   })
   }

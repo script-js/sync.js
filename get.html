@@ -44,7 +44,7 @@ function encodeFB(text2) {
   onAuthStateChanged(auth, (user) => {
   if (!user) {
     window.open("/login")
-    const fbuid1 = user.uid
+    window.fbuid1 = user.uid
   }
   });
   

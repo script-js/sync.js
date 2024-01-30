@@ -19,7 +19,7 @@
   <body style="background-image: url('icon.png');background-color: #464fb0;">
     <div class="modal-content" style="height:80%;align-items:center;text-align:center;">
       <p></p>
-      <img src="icon.png" style="margin:auto" />
+      <img src="icon.png" style="margin:auto" id="nd" />
       <div id="mc"><h1>Getting Data...</h1></div>
       <input id="copyIP"/>
       <p></p>
@@ -28,7 +28,9 @@
       function copy() {
         copyIP.select();
         document.execCommand("copy");
-        mc.innerHTML = "<img src='done.png' /><h1>Close this window</h1>"
+        mc.innerHTML = "<img src='done.png' /><h1>Close this window</h1>";
+        nd.style.display = "none";
+        copyIP.style.display = "none";
       }
     </script>
 <script type="module">

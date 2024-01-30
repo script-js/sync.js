@@ -1,3 +1,3 @@
 <p>Drag these buttons into your bookmarks bar:</p>
 <a href='javascript:void(window.open("https://sync-js.pages.dev/backup?fromURL=" + encodeURI(location.href) + "&data=" + btoa(JSON.stringify(localStorage)).replaceAll("+","%2B")))'><button>Back up to sync.js</button></a>
-<a href='javascript:alert("A new tab will open with the stored data. Copy it, then paste it into the next prompt.");window.open("https://sync-js.pages.dev/get?url=" + location.href);var sjsSYSjson = JSON.parse(prompt("Paste Data:"));Object.keys(sjsSYSjson).forEach(function (k) {localStorage.setItem(k,sjsSYSjson[k])})'><button>Restore from sync.js</button></a>
+<a href='javascript:window.open("https://sync-js.pages.dev/get?url=" + location.href);var sjsSYSjson = JSON.parse(prompt("Paste Data:"));Object.keys(sjsSYSjson).forEach(function (k) {localStorage.setItem(k,sjsSYSjson[k])})'><button>Restore from sync.js</button></a>

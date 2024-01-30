@@ -78,7 +78,7 @@ function encodeFB(text2) {
       get(child(dbRef, "users/" + fbuid1 + "/" + encodeFB(url1))).then((snapshot) => {
     if (snapshot.exists()) {
       copyIP.value = decodeFB(JSON.stringify(snapshot.val()))
-      mc.innerHTML = '<h1>Restore Data</h1><p>Press the copy button below. Then close this page and paste the data into the prompt waiting for you on the previous page.</p><button style="width:500px;margin:auto;" id="gbtn" onclick="copy()">Copy</button>'
+      mc.innerHTML = '<h1>Restore Data</h1><p>Press the copy button below. Then use the restore bookmarklet to restore your data.</p><button style="width:500px;margin:auto;" id="gbtn" onclick="copy()">Copy</button>'
     } else {
       mc.innerHTML = "<h1>No Data</h1>"
     }

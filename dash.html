@@ -40,9 +40,9 @@ ul.topnav li.right {float: right;}
 <body>
 
 <ul class="topnav">
-  <li><a class="active" href="#" id="home">Home</a></li>
-  <li><a href="#data" id="data">My Data</a></li>
-  <li><a href="#setup" id="setup">Bookmarklets</a></li>
+  <li><a class="active" href="#" id="home" onclick="tabChange()">Home</a></li>
+  <li><a href="#data" id="data" onclick="tabChange()">My Data</a></li>
+  <li><a href="#setup" id="setup" onclick="tabChange()">Bookmarklets</a></li>
 </ul>
 
 <div style="padding:0 16px;">
@@ -51,6 +51,7 @@ ul.topnav li.right {float: right;}
   <div id="setupC" style="display:none">setup</div>
 </div>
 <script>
+function tabChange() {
   if (location.href.includes("#data")) {
     home.classList = "";
     homeC.style.display = "none";
@@ -63,6 +64,8 @@ ul.topnav li.right {float: right;}
     setup.classList = "active"
     setupC.style.display = "block"
   }
+}
+tabChange()
 </script>
 </body>
 </html>

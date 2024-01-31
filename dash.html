@@ -50,6 +50,19 @@ ul.topnav li.right {float: right;}
   <div id="dataC" style="display:none">data</div>
   <div id="setupC" style="display:none">setup</div>
 </div>
-
+<script>
+  if (location.href.includes("#data")) {
+    home.classList = "";
+    homeC.style.display = "none";
+    data.classList = "active"
+    dataC.style.display = "block"
+  }
+  if (location.href.includes("#setup")) {
+    home.classList = "";
+    homeC.style.display = "none";
+    setup.classList = "active"
+    setupC.style.display = "block"
+  }
+</script>
 </body>
 </html>

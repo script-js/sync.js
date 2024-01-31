@@ -1,0 +1,82 @@
+<!DOCTYPE HTML>
+<link href="login.css" rel="stylesheet" />
+<link href="icon.png" rel="icon" />
+<title>Sign Up | sync.js</title>
+<html style="width:100%;height:100%;">
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js"></script>
+  <body style="width:100%;height:100%;background-image: url('icon.png');background-color: #464fb0;">
+    <div class="modal-content" style="height:80%;align-items:center;text-align:center;" id="ibox">
+<p></p>
+<img src="icon.png" style="margin:auto" /><h1>Log In</h1><div class="inputBox">
+                <input type="email" name="email" id="eip" value="" onkeyup="this.setAttribute('value', this.value);">
+                <label>Email</label>
+            </div><div class="inputBox">
+                    <input type="password" name="text" value="" id="pip" onkeyup="this.setAttribute('value', this.value);">
+                    <label>Password</label>
+                </div><p>&nbsp;</p><button id="gbtn" class="addngbtns">Sign Up</button></div>
+      <script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-analytics.js";
+  import { getAuth, setPersistence, signInWithEmailAndPassword, browserLocalPersistence, createUserWithEmailAndPassword  } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+  import { getDatabase, ref, set, get, child } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  const firebaseConfig = {
+
+    apiKey: "AIzaSyDWGbCICgDCm6XLz6gvuxnZTbsxACm-Fx4",
+
+    authDomain: "sync-js-6aa9d.firebaseapp.com",
+
+    projectId: "sync-js-6aa9d",
+
+    storageBucket: "sync-js-6aa9d.appspot.com",
+
+    messagingSenderId: "856081502457",
+
+    appId: "1:856081502457:web:8579832305cceae2e89228"
+
+  };
+
+  var redirect = new URLSearchParams(window.location.search).get("handoff");
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+  const db = getDatabase();
+  const dbRef = ref(getDatabase());
+
+  const auth = getAuth();
+  gbtn.addEventListener('click',(e)=>{
+    createUserWithEmailAndPassword(auth, document.getElementById("eip").value, document.getElementById("pip").value)
+  .then((userCredential) => {
+    const user = userCredential.user;
+    ibox.innerHTML = "<img src='https://cdn.pixabay.com/animation/2023/03/20/02/45/02-45-27-186_512.gif' width='415px;' /><h1>Just a moment...</h1>";
+    if (redirect) {
+      location.replace(atob(redirect.replaceAll("%2B","+")))
+    } else {
+      location.replace("/dash")
+    }
+    setPersistence(auth, browserLocalPersistence)
+  .then(() => {
+    return signInWithEmailAndPassword(auth, email, password);
+  })
+  .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+  });
+  })
+  .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    alert("ERROR: " + errorCode)
+    console.log(errorMessage)
+  });
+  });
+        
+</script>
+  </body>
+</html>

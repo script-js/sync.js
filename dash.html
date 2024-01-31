@@ -40,9 +40,9 @@ ul.topnav li.right {float: right;}
 <body>
 
 <ul class="topnav">
-  <li><a class="active" href="#" id="home" onclick="location.reload()">Home</a></li>
-  <li><a href="#data" id="data" onclick="location.reload()">My Data</a></li>
-  <li><a href="#setup" id="setup" onclick="location.reload()">Bookmarklets</a></li>
+  <li><a class="active" href="#" id="home" onclick="tabChange(this)">Home</a></li>
+  <li><a href="#data" id="data" onclick="tabChange(this)">My Data</a></li>
+  <li><a href="#setup" id="setup" onclick="tabChange(this)">Bookmarklets</a></li>
 </ul>
 
 <div style="padding:0 16px;">
@@ -51,21 +51,15 @@ ul.topnav li.right {float: right;}
   <div id="setupC" style="display:none">setup</div>
 </div>
 <script>
-function tabChange() {
-  if (location.href.includes("#data")) {
-    home.classList = "";
-    homeC.style.display = "none";
-    data.classList = "active"
-    dataC.style.display = "block"
-  }
-  if (location.href.includes("#setup")) {
-    home.classList = "";
-    homeC.style.display = "none";
-    setup.classList = "active"
-    setupC.style.display = "block"
-  }
+var currentTab = "home";
+function tabChange(tab) {
+  tab.classList = "active";
+  var tabid = tab.id
+  document.getElementById(tabid + "C").style.display = "block";
+  document.getElementById(currentTab + "C").style.display = "none";
+  document.getElementById(currentTab).classList = "";
+  currentTab = tabid
 }
-tabChange()
 </script>
 </body>
 </html>

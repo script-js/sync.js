@@ -1,0 +1,13 @@
+button {
+  transition: ease 150ms;
+  background: #46b063;
+  border: none;
+  border-radius: 3px;
+  width: 100px;
+  height: 30px;
+}
+
+button:hover {
+  border-radius: 8px;
+  background: #56bf73;
+}

@@ -75,6 +75,11 @@ function tabChange(tab) {
 var currentSite = "";
 function changeSite(site) {
   site.classList = "dropdownli dropdownliFocus";
+  if (site.innerHTML.includes("arrow_drop_down")) {
+    site.innerHTML = site.innerHTML.replace("arrow_drop_down","arrow_drop_up")
+  } else {
+    site.innerHTML = site.innerHTML.replace("arrow_drop_up","arrow_drop_down")
+  }
   var siteid = site.id;
   document.getElementById(siteid + "C").style.display = "block";
   if (currentSite) {

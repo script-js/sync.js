@@ -115,7 +115,7 @@ function changeSite(site) {
   function listSites(jarray) {
     var toadd = "<p></p>";
     Object.keys(jarray).forEach(function (k) {
-      toadd = toadd + "<a onclick='changeSite(this)' id='" + k + "'>" + k + "</a><div style='display:none' id='" + k + "C'>somedata</div>";
+      toadd = toadd + "<a class='dropdownli' onclick='changeSite(this)' id='" + k + "'>" + k + "</a><div style='display:none;padding:50px;' id='" + k + "C'>somedata</div><br>";
     })
     return toadd;
   }

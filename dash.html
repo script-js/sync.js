@@ -71,8 +71,10 @@ function tabChange(tab) {
   tab.classList = "active";
   var tabid = tab.id
   document.getElementById(tabid + "C").style.display = "block";
+  if (currentTab != tabid) {
   document.getElementById(currentTab + "C").style.display = "none";
   document.getElementById(currentTab).classList = "";
+  }
   currentTab = tabid
 }
 

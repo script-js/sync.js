@@ -10,7 +10,7 @@
         <span style="color: red; float: right; font-size: 28px; font-weight: bold; cursor:pointer;" onclick="sjsSetModal.style.display = 'none'">&times;</span>
         <button onclick='window.open("https://sync-js.pages.dev/backup?fromURL=" + btoa(location.href) + "&data=" + btoa(JSON.stringify(localStorage)).replaceAll("+","%2B"),"","width=500,height=900")' style="transition: ease 150ms; background: #46b063; border: none; border-radius: 3px; width: 500px; height: 50px;">Back Up</button>
         <p></p>
-        &nbsp;&nbsp;<button onclick='var sjswin123 = window.open("https://sync-js.pages.dev/get?url=" + btoa(location.href),"","width=500,height=900"); var sjstimer = setInterval(function() { if(sjswin123.closed) { clearInterval(sjstimer); var sjsSYSjson = JSON.parse(prompt("Paste Data:"));Object.keys(sjsSYSjson).forEach(function (k) {localStorage.setItem(k,sjsSYSjson[k])}) } }, 1000)' style="transition: ease 150ms; background: #46b063; border: none; border-radius: 3px; width: 500px; height: 50px;">Restore</button>
+        <button onclick='var sjswin123 = window.open("https://sync-js.pages.dev/get?url=" + btoa(location.href),"","width=500,height=900"); var sjstimer = setInterval(function() { if(sjswin123.closed) { clearInterval(sjstimer); var sjsSYSjson = JSON.parse(prompt("Paste Data:"));Object.keys(sjsSYSjson).forEach(function (k) {localStorage.setItem(k,sjsSYSjson[k])}) } }, 1000)' style="transition: ease 150ms; background: #46b063; border: none; border-radius: 3px; width: 500px; height: 50px;">Restore</button>
         </div></div>
     </div>
   </body>

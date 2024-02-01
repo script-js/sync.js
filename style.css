@@ -34,3 +34,8 @@ button:hover {
   background-size: 100% var(--bg-h);
   background-position-x: left;
 }
+
+.dropdownliFocus {
+  background-size: 100% var(--bg-h);
+  background-position-x: left;
+}

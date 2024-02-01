@@ -80,15 +80,15 @@ function changeSite(site,close) {
     document.getElementById(currentSite).innerHTML = document.getElementById(currentSite).innerHTML.replace("arrow_drop_up","arrow_drop_down")
   }
   var siteid = site.id;
-  site.classList = "dropdownli dropdownliFocus";
   if (site.innerHTML.includes("arrow_drop_down")) {
     site.innerHTML = site.innerHTML.replace("arrow_drop_down","arrow_drop_up")
     document.getElementById(siteid + "C").style.display = "block";
-  } else {
+    site.classList = "dropdownli dropdownliFocus";
+  } else if (site.innerHTML.includes("arrow_drop_up")) {
     site.innerHTML = site.innerHTML.replace("arrow_drop_up","arrow_drop_down");
     document.getElementById(siteid + "C").style.display = "none";
+    site.classList = "dropdownli";
   }
-  if (close) {document.getElementById(siteid + "C").style.display = "none";}
   currentSite = siteid;
 }
 </script>

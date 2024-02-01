@@ -74,6 +74,11 @@ function tabChange(tab) {
 
 var currentSite = "";
 function changeSite(site) {
+   if (currentSite) {
+    document.getElementById(currentSite + "C").style.display = "none";
+    document.getElementById(currentSite).classList = "dropdownli";
+    document.getElementById(currentSite).innerHTML = document.getElementById(currentSite).innerHTML.replace("arrow_drop_up","arrow_drop_down")
+  }
   site.classList = "dropdownli dropdownliFocus";
   if (site.innerHTML.includes("arrow_drop_down")) {
     site.innerHTML = site.innerHTML.replace("arrow_drop_down","arrow_drop_up")
@@ -82,11 +87,6 @@ function changeSite(site) {
   }
   var siteid = site.id;
   document.getElementById(siteid + "C").style.display = "block";
-  if (currentSite) {
-    document.getElementById(currentSite + "C").style.display = "none";
-    document.getElementById(currentSite).classList = "dropdownli";
-    document.getElementById(currentSite).innerHTML = document.getElementById(currentSite).innerHTML.replace("arrow_drop_up","arrow_drop_down")
-  }
   currentSite = siteid;
 }
 </script>
@@ -121,6 +121,12 @@ function changeSite(site) {
   function listSites(jarray) {
     var toadd = "<p></p>";
     Object.keys(jarray).forEach(function (k) {
+      var toadd2 = "";
+      var arrTemp = jarray[k];
+      console.log(arrTemp)
+      Object.keys(arrTemp).forEach(function (k2) {
+        toadd2 = toadd2 + "<p>" + k + ": " + arrTemp[k2] + "</p>"
+      });
       toadd = toadd + "<a class='dropdownli' onclick='changeSite(this)' id='" + k + "'>" + k + " <span class='material-symbols-outlined'>arrow_drop_down</span></a><div style='display:none;padding:0 50px;' id='" + k + "C'>somedata</div><br>";
     })
     return toadd;

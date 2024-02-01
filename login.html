@@ -41,8 +41,8 @@
     appId: "1:856081502457:web:8579832305cceae2e89228"
 
   };
-
-  var redirect = atob(new URLSearchParams(window.location.search).get("handoff"));
+  var para1 = new URLSearchParams(window.location.search).get("handoff")
+  var redirect = atob(para1);
 
   // Initialize Firebase
   const app = initializeApp(firebaseConfig);

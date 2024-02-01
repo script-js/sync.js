@@ -140,6 +140,9 @@ onAuthStateChanged(auth, (user) => {
     get(child(dbRef, "users/" + user.uid)).then((snapshot) => {
       if (snapshot.exists()) {
         dataC.innerHTML = listSites(snapshot.val());
+        window.lstestarr = snapshot.val();
+      } else {
+        console.log("no123987")
       }
     });
   } else {

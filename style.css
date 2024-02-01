@@ -22,14 +22,15 @@ button:hover {
 }
 
 .dropdownli {
-  transition: background-size 400ms;
+  background: linear-gradient(0deg, slateblue, slateblue) no-repeat right bottom / 0 var(--bg-h);
+  transition: background-size 350ms;
+  padding-bottom: 2px;
+  --bg-h: 2px;
   text-decoration: none;
-  background: rgba(100, 200, 200, 1)
-  background-position: 100% 100%, 0 100%;
-  background-repeat: no-repeat;
+  color: inherit;
+  line-height: 1;
 }
-
-.dropdownli:hover {
-  transition: background-size 400ms;
-  background-size: 0 3px, 100% 3px;
+.dropdownli:where(:hover, :focus-visible) {
+  background-size: 100% var(--bg-h);
+  background-position-x: left;
 }

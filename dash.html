@@ -39,14 +39,18 @@ ul.topnav li.right {float: right;}
   ul.topnav li.right, 
   ul.topnav li {float: none;}
 }
+
+  .msoBig {
+    font-size: 60px;
+  }
 </style>
 </head>
 <body>
 
 <ul class="topnav">
-  <li><a class="active" href="#" id="home" onclick="tabChange(this)">Home</a></li>
-  <li><a href="#" id="data" onclick="tabChange(this)">My Data</a></li>
-  <li><a href="#" id="setup" onclick="tabChange(this)">Bookmarklets</a></li>
+  <li><a class="active" href="#" id="home" onclick="tabChange(this)"><span class="material-symbols-outlined msoBig" title="Account">account_circle</span></a></li>
+  <li><a href="#" id="data" onclick="tabChange(this)"><span class="material-symbols-outlined msoBig" title="My Data">folder_open</span></a></li>
+  <li><a href="#" id="setup" onclick="tabChange(this)"><span class="material-symbols-outlined msoBig" title="Bookmarklets">bookmark</span></a></li>
 </ul>
 
 <div style="padding:0 16px;">

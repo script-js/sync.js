@@ -51,7 +51,7 @@ ul.topnav li.right {float: right;}
 
 <div style="padding:0 16px;">
   <div id="homeC" style="text-align:center"></div>
-  <div id="dataC" style="display:none">Page in Development!</div>
+  <div id="dataC" style="display:none">Loading...</div>
   <div id="setupC" style="display:none">
     <p>Drag these links into your bookmarks bar:</p>
 <a href='javascript:void(window.open("https://sync-js.pages.dev/backup?fromURL=" + encodeURI(location.href) + "&data=" + btoa(JSON.stringify(localStorage)).replaceAll("+","%2B")))'>Back up to sync.js</a>
@@ -74,24 +74,20 @@ function tabChange(tab) {
 
 var currentSite = "";
 function changeSite(site) {
+  if (currentSite) {
+    document.getElementById(currentSite + "C").style.display = "none";
+    document.getElementById(currentSite).classList = "dropdownli";
+    document.getElementById(currentSite).innerHTML = document.getElementById(currentSite).innerHTML.replace("arrow_drop_up","arrow_drop_down")
+  }
   var siteid = site.id;
   site.classList = "dropdownli dropdownliFocus";
   if (site.innerHTML.includes("arrow_drop_down")) {
     site.innerHTML = site.innerHTML.replace("arrow_drop_down","arrow_drop_up")
-    if (currentSite && currentSite != siteid) {
-      document.getElementById(currentSite + "C").style.display = "none";
-      document.getElementById(currentSite).classList = "dropdownli";
-      document.getElementById(currentSite).innerHTML = document.getElementById(currentSite).innerHTML.replace("arrow_drop_up","arrow_drop_down")
-    }
+    document.getElementById(siteid + "C").style.display = "block";
   } else {
-    site.innerHTML = site.innerHTML.replace("arrow_drop_up","arrow_drop_down")
-    if (currentSite) {
-      document.getElementById(currentSite + "C").style.display = "none";
-      document.getElementById(currentSite).classList = "dropdownli";
-      document.getElementById(currentSite).innerHTML = document.getElementById(currentSite).innerHTML.replace("arrow_drop_up","arrow_drop_down")
-    }
+    site.innerHTML = site.innerHTML.replace("arrow_drop_up","arrow_drop_down");
+    document.getElementById(siteid + "C").style.display = "none";
   }
-  document.getElementById(siteid + "C").style.display = "block";
   currentSite = siteid;
 }
 </script>

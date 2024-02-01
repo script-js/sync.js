@@ -72,13 +72,7 @@ function tabChange(tab) {
   currentTab = tabid
 }
 
-var currentSite = "";
-function changeSite(site,close) {
-  if (currentSite) {
-    document.getElementById(currentSite + "C").style.display = "none";
-    document.getElementById(currentSite).classList = "dropdownli";
-    document.getElementById(currentSite).innerHTML = document.getElementById(currentSite).innerHTML.replace("arrow_drop_up","arrow_drop_down")
-  }
+function changeSite(site) {
   var siteid = site.id;
   if (site.innerHTML.includes("arrow_drop_down")) {
     site.innerHTML = site.innerHTML.replace("arrow_drop_down","arrow_drop_up")
@@ -89,7 +83,6 @@ function changeSite(site,close) {
     document.getElementById(siteid + "C").style.display = "none";
     site.classList = "dropdownli";
   }
-  currentSite = siteid;
 }
 </script>
   <script type="module">

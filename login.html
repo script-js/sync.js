@@ -54,7 +54,6 @@
   
 onAuthStateChanged(auth, (user) => {
   if (user.uid) {location.replace("/dash")}
-}
         
   gbtn.addEventListener('click',(e)=>{
     signInWithEmailAndPassword(auth, document.getElementById("eip").value, document.getElementById("pip").value)
@@ -81,7 +80,7 @@ onAuthStateChanged(auth, (user) => {
     alert("ERROR: " + errorCode)
     console.log(errorMessage)
   });
-  });
+  }); });
         
 </script>
   </body>

@@ -2,6 +2,8 @@
 <html>
 <head>
   <link rel="stylesheet" href="style.css" />
+  <title>Dashboard | sync.js</title>
+  <link rel="icon" href="icon.png" />
 <style>
 body {margin: 0;}
 
@@ -100,7 +102,7 @@ function tabChange(tab) {
   
 onAuthStateChanged(auth, (user) => {
   if (user) {
-    homeC.innerHTML = "<h1>Welcome, " + user.email + "</h1><p>Select a tab above to get started.</p><button onclick=''userLogout()'>Sign Out</button>"
+    homeC.innerHTML = "<h1>Welcome, " + user.email + "<img src='icon.png' /></h1><p>Select a tab above to get started.</p><button onclick=''userLogout()'>Sign Out</button>"
   } else {
     location.replace("login")
   }
@@ -112,6 +114,7 @@ onAuthStateChanged(auth, (user) => {
         alert(error)
       });
     }
+    window.userLogout = userLogout;
   </script>
 </body>
 </html>

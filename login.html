@@ -42,7 +42,7 @@
 
   };
 
-  var redirect = new URLSearchParams(window.location.search).get("handoff");
+  var redirect = atob(new URLSearchParams(window.location.search).get("handoff"));
 
   // Initialize Firebase
   const app = initializeApp(firebaseConfig);

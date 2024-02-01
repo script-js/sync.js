@@ -50,7 +50,7 @@
   const auth = getAuth();
 
   gbtn.addEventListener('click',(e)=>{
-    sendPasswordResetEmail(auth, document.getElementById("eip"))
+    sendPasswordResetEmail(auth, document.getElementById("eip").value)
   .then(() => {
     ibox.innerHTML = "<img src='done.png' /><h1>Email Sent</h1>";
   })

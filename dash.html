@@ -127,7 +127,7 @@ function changeSite(site) {
       Object.keys(arrTemp).forEach(function (k2) {
         toadd2 = toadd2 + "<p>" + k + ": " + arrTemp[k2] + "</p>"
       });
-      toadd = toadd + "<a class='dropdownli' onclick='changeSite(this)' id='" + k + "'>" + k + " <span class='material-symbols-outlined'>arrow_drop_down</span></a><div style='display:none;padding:0 50px;' id='" + k + "C'>somedata</div><br>";
+      toadd = toadd + "<a class='dropdownli' onclick='changeSite(this)' id='" + k + "'>" + k + " <span class='material-symbols-outlined'>arrow_drop_down</span></a><div style='display:none;padding:0 50px;' id='" + k + "C'>" + toadd2 + "</div><br>";
     })
     return toadd;
   }

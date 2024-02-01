@@ -102,7 +102,7 @@ function encodeFB(text2) {
       return hostname;
   }
 
-  var fromURL = extractHostname(url2)
+  var fromURL = extractHostname(url2.replaceAll("_SJSCnum_","#").replaceAll("_SJSCand_","&"))
               var toaddHTML = "";
               Object.keys(lsData1).forEach(function (k) {
                 toaddHTML = toaddHTML + k + ": " + lsData1[k] + "<br>";

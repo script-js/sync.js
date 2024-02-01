@@ -84,7 +84,7 @@ function encodeFB(text2) {
   var url1 = extractHostname(url2)
   onAuthStateChanged(auth, (user) => {
   if (!user) {
-    window.open("/login")
+    location.replace("/login")
   } else {
     window.fbuid1 = user.uid
       get(child(dbRef, "users/" + fbuid1 + "/" + encodeFB(url1))).then((snapshot) => {

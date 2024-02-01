@@ -142,7 +142,7 @@ onAuthStateChanged(auth, (user) => {
         dataC.innerHTML = listSites(snapshot.val());
         window.lstestarr = snapshot.val();
       } else {
-        console.log("no123987")
+        dataC.innerHTML = "<h1 style='text-align:center'>No Data Yet!</h1>"
       }
     });
   } else {

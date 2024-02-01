@@ -102,7 +102,7 @@ function tabChange(tab) {
   
 onAuthStateChanged(auth, (user) => {
   if (user) {
-    homeC.innerHTML = "<img src='icon.png' /><h1>Welcome, " + user.email + "</h1><p>Select a tab above to get started.</p><button onclick='userLogout()'>Sign Out</button>"
+    homeC.innerHTML = "<p></p><img src='icon.png' /><h1>Welcome, " + user.email + "</h1><button onclick='userLogout()'>Sign Out</button><p>Select a tab above to get started.</p>"
   } else {
     location.replace("login")
   }

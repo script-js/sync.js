@@ -85,6 +85,7 @@ function changeSite(site) {
   if (currentSite) {
     document.getElementById(currentSite + "C").style.display = "none";
     document.getElementById(currentSite).classList = "dropdownli";
+    document.getElementById(currentSite).innerHTML = document.getElementById(currentSite).innerHTML.replace("arrow_drop_up","arrow_drop_down")
   }
   currentSite = siteid;
 }

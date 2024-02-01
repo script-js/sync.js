@@ -118,6 +118,7 @@ function changeSite(site) {
   }; 
   const app = initializeApp(firebaseConfig);
   const auth = getAuth();
+  const dbRef = ref(getDatabase());
   function listSites(jarray) {
     var toadd = "<p></p>";
     Object.keys(jarray).forEach(function (k) {

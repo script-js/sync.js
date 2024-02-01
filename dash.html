@@ -136,6 +136,11 @@ function changeSite(site) {
 onAuthStateChanged(auth, (user) => {
   if (user) {
     homeC.innerHTML = "<p></p><img src='icon.png' /><h1>Welcome, " + user.email + "</h1><button onclick='userLogout()'>Sign Out</button><p>Select a tab above to get started.</p>";
+    get(child(dbRef, "users/" + user.uid)).then((snapshot) => {
+      if (snapshot.exists()) {
+        dataC.innerHTML = listSites(snapshot.val());
+      }
+    });
   } else {
     location.replace("login")
   }

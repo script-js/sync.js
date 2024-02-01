@@ -73,7 +73,7 @@ function tabChange(tab) {
 }
 
 var currentSite = "";
-function changeSite(site) {
+function changeSite(site,close) {
   if (currentSite) {
     document.getElementById(currentSite + "C").style.display = "none";
     document.getElementById(currentSite).classList = "dropdownli";
@@ -88,6 +88,7 @@ function changeSite(site) {
     site.innerHTML = site.innerHTML.replace("arrow_drop_up","arrow_drop_down");
     document.getElementById(siteid + "C").style.display = "none";
   }
+  if (close) {document.getElementById(siteid + "C").style.display = "none";}
   currentSite = siteid;
 }
 </script>

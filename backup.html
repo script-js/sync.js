@@ -116,17 +116,19 @@ function encodeFB(text2) {
 
 onAuthStateChanged(auth, (user) => {
   if (user) {
-    window.fbuid1 = user.uid
-    gbtn.style.display = "block";
-    mc.innerHTML = "<h1>Back Up from " + decodeURI(fromURL) + "</h1><button onclick='mored()' id='mdb'>Show More <span class='material-symbols-outlined' style='display:inline'>arrow_drop_down</span></button><div id='mdd'>" + toaddHTML + "</div>";
+    if (JSON.stringify(lsData1) == "{}")
+      window.fbuid1 = user.uid
+      gbtn.style.display = "block";
+      mc.innerHTML = "<h1>Back Up from " + decodeURI(fromURL) + "</h1><button onclick='mored()' id='mdb'>Show More <span class='material-symbols-outlined' style='display:inline'>arrow_drop_down</span></button><div id='mdd'>" + toaddHTML + "</div>";
+  } else {
+    mc.innerHTML = "<h1>No Data</h1>"
+  }
   } else {
     location.replace("login?handoff=" + btoa(location.href).replaceAll("+","%2B"))
   }
 });
               
   gbtn.addEventListener('click',(e)=>{
-    console.log(auth)
-    console.log(fbuid1)
     get(child(dbRef, "users/" + fbuid1 + "/" + encodeFB(fromURL))).then((snapshot) => {
       console.log(auth)
       console.log(fbuid1)
@@ -154,7 +156,6 @@ onAuthStateChanged(auth, (user) => {
         alert(error);
     });
   });
-
               
     </script>
   </body>

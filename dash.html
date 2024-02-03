@@ -47,7 +47,13 @@ ul.topnav li.right {float: right;}
 </style>
 </head>
 <body>
-
+<div style="display: block; position: fixed; z-index: 1; left: 0px; top: 0px; width: 100%; height: 100%; overflow: auto; background-color: rgba(0, 0, 0, 0.4);" id="editor"><div style="margin: 15% auto; background: white; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); text-align: center; box-sizing: border-box; border-radius: 10px; width: 50%; border: 2px solid blue;padding: 20px;">
+        <span style="color: red; float: right; font-size: 28px; font-weight: bold; cursor:pointer;" onclick="editor.style.display = 'none'">&times;</span>
+  <h1 id="edtext">Something went wrong</h1>
+        <textarea id="editorText"></textarea>
+        <button id="editorSave"><span class="material-symbols-outlined">save</span></button>
+        </div>
+      </div>
 <ul class="topnav">
   <li><a class="active" href="#" id="home" onclick="tabChange(this)"><span class="material-symbols-outlined msoBig" title="Account">account_circle</span></a></li>
   <li><a href="#" id="data" onclick="tabChange(this)"><span class="material-symbols-outlined msoBig" title="My Data">folder_open</span></a></li>
@@ -118,6 +124,7 @@ function changeSite(site) {
   const app = initializeApp(firebaseConfig);
   const auth = getAuth();
   const dbRef = ref(getDatabase());
+  const db = getDatabase()
 
   function decodeFB(text2) {
      var text1 = text2.replaceAll("%2E",".").replaceAll("%23","#").replaceAll("%24","$").replaceAll("%2F","/").replaceAll("%5B","[").replaceAll("%5D","]").replaceAll('%22','"').replaceAll("%3A",":")
@@ -175,6 +182,24 @@ onAuthStateChanged(auth, (user) => {
       });
     }
     window.userLogout = userLogout;
+
+    function editorOpen(domain) {
+      get(child(dbRef, "users/" + user.uid + "/" + encodeFB(domain))).then((snapshot) => {
+        if (snapshot.exists()) {
+          edtext.innerHTML = "Editing JSON: " + domain;
+          editorText.value = JSON.stringify(snapshot.val());
+          editorSave.onclick = function() {
+            try {
+              var toset = JSON.parse(editorText.value)
+              set(ref(db, 'users/' + fbuid1 + "/" + encodeFB(domain)), toset)
+            } catch (error) {
+              alert(error)
+            }
+          }
+        }
+      });
+    }
+    window.editorOpen = editorOpen
   </script>
 </body>
 </html>

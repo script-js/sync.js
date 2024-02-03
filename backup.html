@@ -142,8 +142,8 @@ onAuthStateChanged(auth, (user) => {
             alert(error);
           });
           gbtn.style.display = "none";
-          donei.src = "done.png";
-          mc.innerHTML = "<h1>Backup Successful</h1>";
+          donei.style.display = "none";
+          mc.innerHTML = "<img src='done.png' width='95%'/><h1>Backup Successful</h1>";
         }
       } else {
         set(ref(db, 'users/' + fbuid1 + "/" + encodeFB(fromURL)), lsData).catch((error) => {

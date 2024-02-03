@@ -181,8 +181,9 @@ onAuthStateChanged(auth, (user) => {
       editor.style.display = "block"
       get(child(dbRef, "users/" + fbuid1 + "/" + encodeFB(domain))).then((snapshot) => {
         if (snapshot.exists()) {
+          var ss = snapshot.val()
           edtext.innerHTML = "Editing JSON: " + domain;
-          editorText.innerHTML = JSON.stringify(snapshot.val());
+          editorText.innerHTML = JSON.stringify(ss);
           editorSave.onclick = function() {
             try {
               var toset = JSON.parse(editorText.value)

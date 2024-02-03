@@ -123,6 +123,11 @@ function changeSite(site) {
      var text1 = text2.replaceAll("%2E",".").replaceAll("%23","#").replaceAll("%24","$").replaceAll("%2F","/").replaceAll("%5B","[").replaceAll("%5D","]").replaceAll('%22','"').replaceAll("%3A",":")
      return text1;
    }  
+
+    function encodeFB(text2) {
+     var text1 = text2.replaceAll(".","%2E").replaceAll("#","%23").replaceAll("$","%24").replaceAll("/","%2F").replaceAll("[","%5B").replaceAll("]","%5D").replaceAll('"',"%22").replaceAll(":","%3A")
+     return text1;
+   }
     
   function listSites(jarray) {
     var toadd = "<p></p>";
@@ -137,6 +142,14 @@ function changeSite(site) {
     })
     return toadd;
   }
+
+    function listSitesSM(jarray) {
+      var toadd = "";
+      Object.keys(jarray).forEach(function (k2) {
+        toadd = toadd + "<p>" + decodeFB(k2) + ": " + jarray[k2] + "</p>"
+      });
+      return toadd;
+    }
     window.listSites = listSites
     
 onAuthStateChanged(auth, (user) => {

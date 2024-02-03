@@ -197,8 +197,10 @@ onAuthStateChanged(auth, (user) => {
             } catch (error) {
               alert(error)
             }
-            set(ref(db, 'users/' + fbuid1 + "/" + encodeFB(domain)), toset)
-            location.reload()
+            if (toset) {
+              set(ref(db, 'users/' + fbuid1 + "/" + encodeFB(domain)), toset)
+              location.reload()
+            }
           }
         }
       });

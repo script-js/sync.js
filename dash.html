@@ -161,6 +161,7 @@ function changeSite(site) {
     
 onAuthStateChanged(auth, (user) => {
   if (user) {
+    window.fbuid1 = user.uid;
     homeC.innerHTML = "<p></p><img src='icon.png' /><h1>Welcome, " + user.email + "</h1><button onclick='userLogout()'><span class='material-symbols-outlined'>logout</span></button><p>Select a tab above to get started.</p>";
     get(child(dbRef, "users/" + user.uid)).then((snapshot) => {
       if (snapshot.exists()) {
@@ -184,7 +185,7 @@ onAuthStateChanged(auth, (user) => {
     window.userLogout = userLogout;
 
     function editorOpen(domain) {
-      get(child(dbRef, "users/" + user.uid + "/" + encodeFB(domain))).then((snapshot) => {
+      get(child(dbRef, "users/" + fbuid1 + "/" + encodeFB(domain))).then((snapshot) => {
         if (snapshot.exists()) {
           edtext.innerHTML = "Editing JSON: " + domain;
           editorText.value = JSON.stringify(snapshot.val());

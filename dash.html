@@ -51,6 +51,7 @@ ul.topnav li.right {float: right;}
         <span style="color: red; float: right; font-size: 28px; font-weight: bold; cursor:pointer;" onclick="editor.style.display = 'none'">&times;</span>
   <h1 id="edtext">Something went wrong</h1>
         <textarea id="editorText"></textarea>
+  <br>
         <button id="editorSave"><span class="material-symbols-outlined">save</span></button>
         </div>
       </div>
@@ -188,14 +189,14 @@ onAuthStateChanged(auth, (user) => {
       get(child(dbRef, "users/" + fbuid1 + "/" + encodeFB(domain))).then((snapshot) => {
         if (snapshot.exists()) {
           edtext.innerHTML = "Editing JSON: " + domain;
-          editorText.value = JSON.stringify(snapshot.val());
+          editorText.innerHTML = JSON.stringify(snapshot.val());
           editorSave.onclick = function() {
             try {
               var toset = JSON.parse(editorText.value)
-              set(ref(db, 'users/' + fbuid1 + "/" + encodeFB(domain)), toset)
             } catch (error) {
               alert(error)
             }
+            set(ref(db, 'users/' + fbuid1 + "/" + encodeFB(domain)), toset)
           }
         }
       });

@@ -178,7 +178,6 @@ onAuthStateChanged(auth, (user) => {
     window.userLogout = userLogout;
 
     function editorOpen(domain) {
-      editor.style.display = "block"
       get(child(dbRef, "users/" + fbuid1 + "/" + encodeFB(domain))).then((snapshot) => {
         if (snapshot.exists()) {
           var ss = snapshot.val()
@@ -197,6 +196,7 @@ onAuthStateChanged(auth, (user) => {
           }
         }
       });
+      editor.style.display = "block"
     }
     window.editorOpen = editorOpen
   </script>

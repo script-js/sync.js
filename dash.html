@@ -4,6 +4,7 @@
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
   <title>Dashboard | sync.js</title>
+  <script src="https://script-js.github.io/js-css/browserDetect.js"></script>
   <link rel="icon" href="icon.png" />
 <style>
 body {margin: 0;}
@@ -155,7 +156,14 @@ function changeSite(site) {
 onAuthStateChanged(auth, (user) => {
   if (user) {
     window.fbuid1 = user.uid;
-    homeC.innerHTML = "<p></p><img src='icon.png' /><h1>Welcome, " + user.email + "</h1><button onclick='userLogout()'><span class='material-symbols-outlined'>logout</span></button><p>Select a tab above to get started.</p>";
+    if (getBrowser() == "FIREFOX") {
+      var extURL = "<a href='https://addons.mozilla.org/en-US/firefox/addon/sync-js/' target='_blank'>Download Firefox Addon</a>"
+    }
+    if (!extURL) {
+      homeC.innerHTML = "<p></p><img src='icon.png' /><h1>Welcome, " + user.email + "</h1><button onclick='userLogout()'><span class='material-symbols-outlined'>logout</span></button><p>Select a tab above to get started.</p>";
+    } else {
+      homeC.innerHTML = "<p></p><img src='icon.png' /><h1>Welcome, " + user.email + "</h1><button onclick='userLogout()'><span class='material-symbols-outlined'>logout</span></button><p>Select a tab above to get started.</p><br><p>" + extURL + "</p>";
+    }
     get(child(dbRef, "users/" + user.uid)).then((snapshot) => {
       if (snapshot.exists()) {
         dataC.innerHTML = listSites(snapshot.val());

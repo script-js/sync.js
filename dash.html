@@ -158,6 +158,8 @@ onAuthStateChanged(auth, (user) => {
     window.fbuid1 = user.uid;
     if (getBrowser() == "FIREFOX") {
       var extURL = "<a href='https://addons.mozilla.org/en-US/firefox/addon/sync-js/' target='_blank'>Download Firefox Addon</a>"
+    } else if (getBrowser() == "CHROMIUM") {
+      var extURL = "<a href='' target='_blank'>Download Chrome Extension</a>"
     }
     if (!extURL) {
       homeC.innerHTML = "<p></p><img src='icon.png' /><h1>Welcome, " + user.email + "</h1><button onclick='userLogout()'><span class='material-symbols-outlined'>logout</span></button><p>Select a tab above to get started.</p>";

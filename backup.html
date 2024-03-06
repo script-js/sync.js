@@ -91,7 +91,6 @@ function encodeFB(text2) {
   const db = getDatabase();
   var urijson = new URLSearchParams(window.location.search).get("data");
   var url2 = new URLSearchParams(window.location.search).get("fromURL");
-  var clickit = new URLSearchParams(window.location.search).get("ab");
   var lsData1 = JSON.parse(atob(urijson.replaceAll("%2B","+")));  
               function extractHostname(url) {
       let hostname;
@@ -122,6 +121,10 @@ onAuthStateChanged(auth, (user) => {
     if (JSON.stringify(lsData1) != "{}") {
       gbtn.style.display = "block";
       mc.innerHTML = "<h1>Back Up from " + decodeURI(fromURL) + "</h1><button onclick='mored()' id='mdb'>Show More <span class='material-symbols-outlined' style='display:inline'>arrow_drop_down</span></button><div id='mdd'>" + toaddHTML + "</div>";
+      var clickit = new URLSearchParams(window.location.search).get("ab");
+      if (clickit == "true") {
+        setTimeout(function() {gbtn.click()},1000)
+      }
     } else {
       mc.innerHTML = "<h1>No Data</h1>"
     }
@@ -132,28 +135,12 @@ onAuthStateChanged(auth, (user) => {
               
   gbtn.addEventListener('click',(e)=>{
     get(child(dbRef, "users/" + fbuid1 + "/" + encodeFB(fromURL))).then((snapshot) => {
-      console.log(auth)
-      console.log(fbuid1)
-      if (snapshot.exists()) {
-        var con1 = confirm("A backup of this website already exists. Continuing with this operation will overwrite this.\nWould you like to continue?")
-        console.log(auth)
-      console.log(fbuid1)
-        if (con1 == true) {
           update(ref(db, 'users/' + fbuid1 + "/" + encodeFB(fromURL)), lsData).catch((error) => {
             alert(error);
           });
           gbtn.style.display = "none";
           donei.style.display = "none";
           mc.innerHTML = "<img src='done.png' width='95%'/><h1>Backup Successful</h1>";
-        }
-      } else {
-        update(ref(db, 'users/' + fbuid1 + "/" + encodeFB(fromURL)), lsData).catch((error) => {
-          alert(error);
-         });
-        gbtn.style.display = "none";
-          donei.style.display = "none";
-          mc.innerHTML = "<img src='done.png' width='95%'/><h1>Backup Successful</h1>";
-      }
       }).catch((error) => {
         alert(error);
     });

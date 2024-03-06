@@ -42,19 +42,13 @@
 
   };
   var redirect = new URLSearchParams(window.location.search).get("handoff")
-  var auto1 = new URLSearchParams(window.location.search).get("fromext")
 
   // Initialize Firebase
   const app = initializeApp(firebaseConfig);
   const analytics = getAnalytics(app);
   const db = getDatabase();
   const dbRef = ref(getDatabase());
-  if (auto1) {
-    var auto = JSON.parse(auto1)
-  } else {
-    var auto = null
-  }
-  var auto2 = auto
+
   const auth = getAuth();
 
   
@@ -68,10 +62,6 @@ onAuthStateChanged(auth, (user) => {
     ibox.innerHTML = "<img src='https://cdn.pixabay.com/animation/2023/03/20/02/45/02-45-27-186_512.gif' width='415px;' /><h1>Just a moment...</h1>";
     if (redirect) {
       location.replace(atob(redirect.replaceAll("%2B","+")))
-    } else if (auto == "goto") {
-      window.extE = eip.value;
-      window.extP = pip.value;
-      ibox.innerHTML = "<img src='done.png' width='415px;' /><h1>Please close this window</h1>";
     } else {
       location.replace("/dash")
     }
@@ -91,11 +81,7 @@ onAuthStateChanged(auth, (user) => {
     console.log(errorMessage)
   });
   });
- if (auto) {
-     eip.value = auto2.email;
-     pip.value = auto2.pwd;
-     gbtn.click()
-  }
+        
 </script>
   </body>
 </html>

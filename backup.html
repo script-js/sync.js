@@ -122,7 +122,7 @@ onAuthStateChanged(auth, (user) => {
     if (JSON.stringify(lsData1) != "{}") {
       gbtn.style.display = "block";
       mc.innerHTML = "<h1>Back Up from " + decodeURI(fromURL) + "</h1><button onclick='mored()' id='mdb'>Show More <span class='material-symbols-outlined' style='display:inline'>arrow_drop_down</span></button><div id='mdd'>" + toaddHTML + "</div>";
-      if (clickit) {
+      if (clickit == "true") {
         setTimeout(function() {gbtn.click()},1000)
       }
     } else {

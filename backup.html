@@ -123,7 +123,7 @@ onAuthStateChanged(auth, (user) => {
       mc.innerHTML = "<h1>Back Up from " + decodeURI(fromURL) + "</h1><button onclick='mored()' id='mdb'>Show More <span class='material-symbols-outlined' style='display:inline'>arrow_drop_down</span></button><div id='mdd'>" + toaddHTML + "</div>";
       var clickit = new URLSearchParams(window.location.search).get("ab");
       if (clickit == "true") {
-        setTimeout(function() {gbtn.click()},1000)
+        sendoff()
       }
     } else {
       mc.innerHTML = "<h1>No Data</h1>"
@@ -133,7 +133,7 @@ onAuthStateChanged(auth, (user) => {
   }
 });
               
-  gbtn.addEventListener('click',(e)=>{
+  function sendoff() {
     get(child(dbRef, "users/" + fbuid1 + "/" + encodeFB(fromURL))).then((snapshot) => {
           update(ref(db, 'users/' + fbuid1 + "/" + encodeFB(fromURL)), lsData).catch((error) => {
             alert(error);
@@ -144,6 +144,10 @@ onAuthStateChanged(auth, (user) => {
       }).catch((error) => {
         alert(error);
     });
+  }     
+              
+  gbtn.addEventListener('click',(e)=>{
+    sendoff()
   });
               
     </script>

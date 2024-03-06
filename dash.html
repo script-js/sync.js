@@ -208,7 +208,21 @@ onAuthStateChanged(auth, (user) => {
       });
       editor.style.display = "block"
     }
+    function editorDelete(domain) {
+      get(child(dbRef, "users/" + fbuid1 + "/" + encodeFB(domain))).then((snapshot) => {
+        if (snapshot.exists()) {
+          var ss = snapshot.val()
+          var con1 = confirm("Are you sure you want to delete all data from " + domain + "?")
+          if (con1 == true) {
+            set(ref(db, 'users/' + fbuid1 + "/" + encodeFB(domain)), {})
+            location.reload()
+          }
+        }
+      });
+      editor.style.display = "block"
+    }
     window.editorOpen = editorOpen
+    window.editorDelete = editorDelete
   </script>
 </body>
 </html>

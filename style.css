@@ -30,6 +30,7 @@ button:hover {
   text-decoration: none;
   color: inherit;
   line-height: 1;
+  cursor: pointer;
 }
 .dropdownli:where(:hover, :focus-visible) {
   background-size: 100% var(--bg-h);

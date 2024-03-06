@@ -49,7 +49,11 @@
   const analytics = getAnalytics(app);
   const db = getDatabase();
   const dbRef = ref(getDatabase());
-  var auto = JSON.parse(auto1)
+  if (auto1) {
+    var auto = JSON.parse(auto1)
+  } else {
+    var auto = null
+  }
   var auto2 = auto
   const auth = getAuth();
 

@@ -147,7 +147,7 @@ function changeSite(site) {
       Object.keys(arrTemp).forEach(function (k2) {
         toadd2 = toadd2 + "<p>" + decodeFB(k2) + ": " + arrTemp[k2] + "</p>"
       });
-      toadd = toadd + "<a class='dropdownli' onclick='changeSite(this)' id='" + decodeFB(k) + "'>" + decodeFB(k) + " <span class='material-symbols-outlined'>arrow_drop_down</span></a><button style='width:inherit' onclick='editorOpen(" + '"' + decodeFB(k) + '"' + ")'><span class='material-symbols-outlined'>edit</span></button><button style='width:inherit' onclick='editorDelete(" + '"' + decodeFB(k) + '"' + ")'><span class='material-symbols-outlined'>delete</span></button><div style='display:none;padding:0 50px;' id='" + decodeFB(k) + "C'>" + toadd2 + "</div><br>";
+      toadd = toadd + "<a class='dropdownli' onclick='changeSite(this)' id='" + decodeFB(k) + "'>" + decodeFB(k) + " <span class='material-symbols-outlined'>arrow_drop_down</span></a><button style='width:inherit' onclick='editorOpen(" + '"' + decodeFB(k) + '"' + ")'><span class='material-symbols-outlined'>edit</span></button>&nbsp;<button style='width:inherit' onclick='editorDelete(" + '"' + decodeFB(k) + '"' + ")'><span class='material-symbols-outlined'>delete</span></button><div style='display:none;padding:0 50px;' id='" + decodeFB(k) + "C'>" + toadd2 + "</div><br>";
     })
     return toadd;
   }

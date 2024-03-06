@@ -70,6 +70,8 @@ function encodeFB(text2) {
   const dbRef = ref(getDatabase());
   const db = getDatabase();
   var url2 = new URLSearchParams(window.location.search).get("url");
+  var sendoff = new URLSearchParams(window.location.search).get("sendoff");
+  
   function extractHostname(url) {
       let hostname;
       if (url.indexOf("://") > -1) {
@@ -91,7 +93,13 @@ function encodeFB(text2) {
       get(child(dbRef, "users/" + fbuid1 + "/" + encodeFB(url1))).then((snapshot) => {
     if (snapshot.exists()) {
       copyIP.value = decodeFB(JSON.stringify(snapshot.val()))
-      mc.innerHTML = '<h1>Restore Data</h1><p>Press the copy button below. When you close this window, paste the data into the popup that appears.</p><button style="margin:auto;" id="gbtn" onclick="copy()"><span class="material-symbols-outlined">content_copy</span></button>'
+      if (!sendoff) {
+        mc.innerHTML = '<h1>Restore Data</h1><p>Press the copy button below. When you close this window, paste the data into the popup that appears.</p><button style="margin:auto;" id="gbtn" onclick="copy()"><span class="material-symbols-outlined">content_copy</span></button>';
+      } else {
+        window.sodata = copyIP.value;
+        mc.innerHTML = "<img src='done.png' width='95%' /><h1>Please Close this Window</h1>";
+        window.close();
+      }
     } else {
       mc.innerHTML = "<h1>No Data</h1>"
     }

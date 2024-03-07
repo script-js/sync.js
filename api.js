@@ -7,7 +7,9 @@ function sjsinit() {
 function restore() {
   var sjswin123 = window.open("https://sync-js.pages.dev/get?sendoff=true&url=" + btoa(location.href),"","width=500,height=900");
     window.addEventListener('message', function(event) {
-      var sjsSYSjson = JSON.parse(event.data);
-      Object.keys(sjsSYSjson).forEach(function (k) {localStorage.setItem(k,sjsSYSjson[k])}) 
+      if (event.origin.includes("sync-js.pages.dev/get")) {
+        var sjsSYSjson = JSON.parse(event.data);
+        Object.keys(sjsSYSjson).forEach(function (k) {localStorage.setItem(k,sjsSYSjson[k])}) 
+      }
     });
 }

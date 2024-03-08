@@ -97,8 +97,9 @@ function encodeFB(text2) {
       if (!sendoff) {
         mc.innerHTML = '<h1>Restore Data</h1><p>Press the copy button below. When you close this window, paste the data into the popup that appears.</p><button style="margin:auto;" id="gbtn" onclick="copy()"><span class="material-symbols-outlined">content_copy</span></button>';
       } else {
-        window.opener.postMessage("test");
+        window.getLS = function() {return copyIP.value};
         mc.innerHTML = "<img src='done.png' width='95%' /><h1>Please Close this Window</h1>";
+        nd.style.display = "none";
         //window.close();
       }
     } else {

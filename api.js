@@ -5,5 +5,5 @@ function sjsinit() {
 }
 
 function restore() {
-  var sjswin123 = window.open("https://sync-js.pages.dev/get?url=" + btoa(location.href),"","width=500,height=900"); var sjstimer = setInterval(function() { if(sjswin123.getLS) { clearInterval(sjstimer); var sjsSYSjson = JSON.parse(sjswin123.getLS());Object.keys(sjsSYSjson).forEach(function (k) {localStorage.setItem(k,sjsSYSjson[k])}) } }, 1000)
+  var sjswin123 = window.open("https://sync-js.pages.dev/get?url=" + btoa(location.href),"","width=500,height=900"); var sjstimer = setInterval(function() { if(sjswin123.getLS) { clearInterval(sjstimer); var sjsSYSjson = JSON.parse(sjswin123.getLS);Object.keys(sjsSYSjson).forEach(function (k) {localStorage.setItem(k,sjsSYSjson[k])}) } }, 1000)
 }

@@ -43,7 +43,7 @@
         '\r\n' +
         base64Data +
         close_delim;
-
+gapi.load('client', function() {
     var request = gapi.client.request({
         'path': '/upload/drive/v3/files',
         'method': 'POST',
@@ -56,6 +56,7 @@
     request.execute(function(file) {
         console.log("Uploaded file: " + file.id);
     });
+})
 }
 
   </script>

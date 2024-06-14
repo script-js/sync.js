@@ -13,9 +13,10 @@
     <p></p>
   </body>
   <script>
+    var id_token;
     function handleCredentialResponse(response) {
     // Use the ID token to authenticate with the Google Drive API
-    var id_token = response.credential;
+    id_token = response.credential;
     // ...
 }
     function uploadTextFile(id_token, text, filename) {

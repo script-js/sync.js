@@ -2,54 +2,58 @@
 <html>
   <head>
     <title>Test</title>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
   </head>
   <body>
-    <button id="signinButton">SignIn</button>
-    <button id="signoutButton">SignOut</button>
-    <button id="btn">Go!</button>
+    <button id="g_id_onload"
+     data-client_id="YOUR_CLIENT_ID"
+     data-callback="handleCredentialResponse">
+  Sign in with Google
+</button>
     <p></p>
-    <script src="https://apis.google.com/js/platform.js" async defer></script>
-    <meta name="google-signin-client_id" content="532321740472-sav0pgph4pqehgsu6ed1b6gges3uc9c1.apps.googleusercontent.com">
-    <div class="g-signin2" data-onsuccess="handleCredentialResponse"></div
   </body>
-  <script src="https://apis.google.com/js/api.js"></script>
-   <script>
-     var CLIENT_ID = "532321740472-sav0pgph4pqehgsu6ed1b6gges3uc9c1.apps.googleusercontent.com";
-     var API_KEY = "AIzaSyDFaabRSbNULI9UxcBEzKqNE_01SiepwhE"
-     var DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/drive/v3/rest"]
-     var SCOPES = "https://www.googleapis.com/auth/drive"
+  <script>
+    function handleCredentialResponse(response) {
+    // Use the ID token to authenticate with the Google Drive API
+    var id_token = response.credential;
+    // ...
+}
+    function uploadTextFile(id_token, text, filename) {
+    var boundary = '-------314159265358979323846';
+    var delimiter = "\r\n--" + boundary + "\r\n";
+    var close_delim = "\r\n--" + boundary + "--";
 
-     function initClient() {
-       gapi.client.init({
-         apiKey: API_KEY,
-         clientId: CLIENT_ID,
-         discoveryDocs: DISCOVERY_DOCS,
-         scope: SCOPES
-       }).then(function() {
-         gapi.auth2.getAuthInstance().isSignedIn.listen(updateSigninStatus)
-         updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get())
-         signinButton.onclick = handleSignin;
-         signoutButton.onclick = handleSignout;
-       }, function(error) {console.error(error)})
-     }
-     
-     function handleClientLoad() {
-       gapi.load("client:auth2", initClient)
-     }
+    var contentType = 'text/plain';
+    var metadata = {
+        'name': filename,
+        'mimeType': contentType
+    };
 
-     function updateSigninStatus(si) {
-       alert(si)
-     }
+    var base64Data = btoa(text);
+    var multipartRequestBody =
+        delimiter +
+        'Content-Type: application/json\r\n\r\n' +
+        JSON.stringify(metadata) +
+        delimiter +
+        'Content-Type: ' + contentType + '\r\n' +
+        'Content-Transfer-Encoding: base64\r\n' +
+        '\r\n' +
+        base64Data +
+        close_delim;
 
-     window.onload = handleClientLoad
+    var request = gapi.client.request({
+        'path': '/upload/drive/v3/files',
+        'method': 'POST',
+        'params': {'uploadType': 'multipart'},
+        'headers': {
+            'Content-Type': 'multipart/related; boundary="' + boundary + '"',
+            'Authorization': 'Bearer ' + id_token
+        },
+        'body': multipartRequestBody});
+    request.execute(function(file) {
+        console.log("Uploaded file: " + file.id);
+    });
+}
 
-     function handleSignin() {
-       gapi.auth2.getAuthInstance().signIn()
-     }
-
-     function handleSignout() {
-       gapi.auth2.getAuthInstance().signOut().then(function() {location.reload()})
-       gapi.auth2.getAuthInstance().disconnect()
-     }
-   </script>
+  </script>
 </html>

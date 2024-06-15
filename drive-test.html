@@ -232,14 +232,14 @@ async function deleteFile(fileId) {
 			if (fid == false) {
 			  uploadFile(JSON.stringify(jdata))
 			} else {
-		  await get_doc(fid).then(data => 
+		  await get_doc(fid).then(function(data) {
 		    var d2 = JSON.parse(data)
 		    Object.keys(jdata).forEach(function(k) {
 		      d2[k] = jdata[k]
 		    })
 		    deleteFile(fid)
 		    uploadFile(JSON.stringify(d2))
-		  );
+		  });
 			}
 		}
     </script>

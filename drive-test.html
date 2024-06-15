@@ -166,6 +166,7 @@ async function uploadFile(fileContent) {
 	console.log(files)
         if (!files || files.length == 0) {
 		console.log("uhoh")
+		uploadFile("{}") 
           document.getElementById('content').innerText = 'No files found.';
           return;
         } else {

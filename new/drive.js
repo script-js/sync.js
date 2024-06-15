@@ -211,7 +211,7 @@ async function deleteFile(fileId) {
 		  })
 		}
 
-async function addEntriesBySite(jdata1,siteid) {
+async function addEntriesBySite(jdata,siteid) {
 		  await findFile().then(async function (fid) {
 			console.log(fid)
 			if (fid == false) {

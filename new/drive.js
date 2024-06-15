@@ -11,9 +11,6 @@ let tokenClient;
 let gapiInited = false;
 let gisInited = false;
 
-document.getElementById('authorize_button').style.visibility = 'hidden';
-document.getElementById('signout_button').style.visibility = 'hidden';
-
 /**
  * Callback after api.js is loaded.
  */
@@ -52,7 +49,7 @@ function gisLoaded() {
  */
 function maybeEnableButtons() {
 	if (gapiInited && gisInited) {
-		document.getElementById('authorize_button').style.visibility = 'visible';
+		startup()
 	}
 }
 
@@ -64,8 +61,6 @@ function handleAuthClick(placeholder,func) {
 		if (resp.error !== undefined) {
 			throw (resp);
 		}
-		document.getElementById('signout_button').style.visibility = 'visible';
-		document.getElementById('authorize_button').value = 'Refresh';
                 await findFile().then(function (fid) {
 		  if (fid == false) {
 		    uploadFile("{}")
@@ -94,10 +89,6 @@ function handleSignoutClick() {
 	if (token !== null) {
 		google.accounts.oauth2.revoke(token.access_token);
 		gapi.client.setToken('');
-		document.getElementById('content').style.display = 'none';
-		document.getElementById('content').innerHTML = '';
-		document.getElementById('authorize_button').value = 'Authorize';
-		document.getElementById('signout_button').style.visibility = 'hidden';
 	}
 }
 
@@ -123,8 +114,7 @@ async function uploadFile(fileContent) {
 	xhr.setRequestHeader('Authorization', 'Bearer ' + accessToken);
 	xhr.responseType = 'json';
 	xhr.onload = () => {
-		document.getElementById('content').innerHTML = "File uploaded successfully. The Google Drive file id is <b>" + xhr.response.id + "</b>";
-		document.getElementById('content').style.display = 'block';
+		console.log("File uploaded successfully. The Google Drive file id is <b>" + xhr.response.id + "</b>")
 	};
 	xhr.send(form);
 }
@@ -136,14 +126,14 @@ async function uploadFile(fileContent) {
             'fields': 'files(id, name)',
           });
         } catch (err) {
-          document.getElementById('content').innerText = err.message;
+          console.error(err.message);
           return;
         }
         const files = response.result.files;
 	console.log(files)
         if (!files || files.length == 0) {
 		uploadFile("{}") 
-          document.getElementById('content').innerText = 'No files found.';
+          console.log('File Created');
           return;
         } else {
 	var fid;

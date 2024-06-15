@@ -228,7 +228,7 @@ async function deleteFile(fileId) {
 }
 
 		async function addEntries(jdata) {
-		  var fid = findFile()
+		  await findFile().then(function (fid) {
 			console.log(fid)
 			if (fid == false) {
 			  uploadFile(JSON.stringify(jdata))
@@ -243,6 +243,7 @@ async function deleteFile(fileId) {
 		    uploadFile(JSON.stringify(d2))
 		  });
 			}
+		  })
 		}
     </script>
     <script async defer src="https://apis.google.com/js/api.js"

@@ -224,7 +224,16 @@ async function uploadFile(fileContent) {
             });
     }
 }
-
+function deleteFile(fileid) {
+  const access_token = gapi.auth.getToken().access_token;
+  const url = `https://www.googleapis.com/drive/v3/files/${fileId}`;
+  return await fetch(url, {
+    method: 'DELETE',
+    headers: {
+      'Authorization': `Bearer ${access_token}`
+    }
+  }).then(res => res.json());
+}
     </script>
     <script async defer src="https://apis.google.com/js/api.js"
         onload="gapiLoaded()"></script>

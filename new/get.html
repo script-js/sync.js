@@ -59,7 +59,7 @@
   var url1 = extractHostname(atob(url2))
 			  var data1 = JSON.parse(data2)
   if (data1[url1]) {
-      copyIP.value = data1[url1]
+      copyIP.value = JSON.stringify(data1[url1])
       mc.innerHTML = '<h1>Restore Data</h1><p>Press the copy button below. When you close this window, paste the data into the popup that appears.</p><button style="margin:auto;" id="gbtn" onclick="copy()"><span class="material-symbols-outlined">content_copy</span></button>';
     } else {
       mc.innerHTML = "<h1>No Data</h1>"

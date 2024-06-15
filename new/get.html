@@ -29,6 +29,32 @@
       <p></p>
     </div>
     <script>
+	    function encodeFB(text2) {
+     var text1 = text2.replaceAll(".","%2E").replaceAll("#","%23").replaceAll("$","%24").replaceAll("/","%2F").replaceAll("[","%5B").replaceAll("]","%5D").replaceAll('"',"%22").replaceAll(":","%3A")
+     return text1;
+   }
+   
+   function decodeFB(text2) {
+     var text1 = text2.replaceAll("%2E",".").replaceAll("%23","#").replaceAll("%24","$").replaceAll("%2F","/").replaceAll("%5B","[").replaceAll("%5D","]").replaceAll('%22','"').replaceAll("%3A",":")
+     return text1;
+   }  
+  
+  
+  var sendoff = new URLSearchParams(window.location.search).get("sendoff");
+  
+  function extractHostname(url) {
+      let hostname;
+      if (url.indexOf("://") > -1) {
+          hostname = url.split('/')[2];
+      } else {
+          hostname = url.split('/')[0];
+      }
+      hostname = hostname.split(':')[0];
+      hostname = hostname.split('?')[0];
+      return hostname;
+  }
+
+
 	    var url2 = new URLSearchParams(window.location.search).get("url");
   var url1 = extractHostname(atob(url2))
 	    
@@ -66,34 +92,6 @@
         nd.style.display = "none";
         copyIP.style.display = "none";
       }
-    </script>
-<script>
-function encodeFB(text2) {
-     var text1 = text2.replaceAll(".","%2E").replaceAll("#","%23").replaceAll("$","%24").replaceAll("/","%2F").replaceAll("[","%5B").replaceAll("]","%5D").replaceAll('"',"%22").replaceAll(":","%3A")
-     return text1;
-   }
-   
-   function decodeFB(text2) {
-     var text1 = text2.replaceAll("%2E",".").replaceAll("%23","#").replaceAll("%24","$").replaceAll("%2F","/").replaceAll("%5B","[").replaceAll("%5D","]").replaceAll('%22','"').replaceAll("%3A",":")
-     return text1;
-   }  
-  
-  
-  var sendoff = new URLSearchParams(window.location.search).get("sendoff");
-  
-  function extractHostname(url) {
-      let hostname;
-      if (url.indexOf("://") > -1) {
-          hostname = url.split('/')[2];
-      } else {
-          hostname = url.split('/')[0];
-      }
-      hostname = hostname.split(':')[0];
-      hostname = hostname.split('?')[0];
-      return hostname;
-  }
-
-
     </script>
     
       </body>

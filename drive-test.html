@@ -166,9 +166,9 @@ async function uploadFile(fileContent) {
         if (!files || files.length == 0) {
           document.getElementById('content').innerText = 'No files found.';
           return;
-        }
+        } else {
 	var fid;
-        files.forEach(function(k) {
+        Object.keys(files).forEach(function(k) {
 	  if (files[k].name == FNAME) {
 	    console.log(files[k])
             fid = files[k].id
@@ -179,6 +179,7 @@ async function uploadFile(fileContent) {
 		document.getElementById('content').style.display = 'block';
 	} else {
 	  uploadFile("{}") 
+	}
 	}
       }
 

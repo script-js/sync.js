@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+  <title>Dashboard | sync.js</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://script-js.github.io/js-css/browserDetect.js"></script>
+  <link rel="icon" href="icon.png" />
+  <script src='https://exactalytics.pages.dev/import.js'></script>
+<script>analyticsInit('sync.js','3moxYInXFN6fp')</script>
+<style>
+body {margin: 0;}
+  
+ul.topnav {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: whitesmoke;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  text-align: center;
+  display: flex;
+  justify-content: center;
+}
+
+ul.topnav li {float: left;}
+
+ul.topnav li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+ul.topnav li a:hover:not(.active) {background-color: #d9d9d9;}
+
+ul.topnav li a.active {background-color: #1a73e8;}
+
+ul.topnav li.right {float: right;}
+
+@media screen and (max-width: 600px) {
+  ul.topnav li.right, 
+  ul.topnav li {float: none;}
+}
+
+  .msoBig {
+    font-size: 35px;
+  }
+</style>
+</head>
+<body>
+<div style="display: none; position: fixed; z-index: 1; left: 0px; top: 0px; width: 100%; height: 100%; overflow: auto; background-color: rgba(0, 0, 0, 0.4);" id="editor"><div style="margin: 15% auto; background: white; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); text-align: center; box-sizing: border-box; border-radius: 10px; width: 50%; border: 2px solid blue;padding: 20px;">
+        <span style="color: red; float: right; font-size: 28px; font-weight: bold; cursor:pointer;" onclick="editor.style.display = 'none'">&times;</span>
+  <h1 id="edtext">Something went wrong</h1>
+        <textarea id="editorText"></textarea>
+  <br>
+        <button id="editorSave"><span class="material-symbols-outlined">save</span></button>
+        </div>
+      </div>
+<ul class="topnav">
+  <li><a class="active" href="#" id="home" onclick="tabChange(this)"><span class="material-symbols-outlined msoBig" title="Account">account_circle</span></a></li>
+  <li><a href="#" id="data" onclick="tabChange(this)"><span class="material-symbols-outlined msoBig" title="My Data">folder_open</span></a></li>
+  <li><a href="#" id="setup" onclick="tabChange(this)"><span class="material-symbols-outlined msoBig" title="Bookmarklets">bookmark</span></a></li>
+</ul>
+
+<div style="padding:0 16px;">
+  <div id="homeC" style="text-align:center"></div>
+  <div id="dataC" style="display:none">Loading...</div>
+  <div id="setupC" style="display:none">
+    <p>Drag this link into your bookmarks bar:</p>
+    <a href='javascript:try {void(window.open("https://sync-js.pages.dev/backup?fromURL=" + btoa(location.href) + "&data=" + btoa(JSON.stringify(localStorage)).replaceAll("+","%2B"),"","width=500,height=900"))} catch(error) {alert(error)}'>Back Up</a>
+        |
+        <a href='javascript:var sjswin123 = window.open("https://sync-js.pages.dev/get?url=" + btoa(location.href),"","width=500,height=900"); var sjstimer = setInterval(function() { if(sjswin123.closed) { clearInterval(sjstimer); var sjsSYSjson = JSON.parse(prompt("Paste Data:"));Object.keys(sjsSYSjson).forEach(function (k) {localStorage.setItem(k,sjsSYSjson[k])}) } }, 1000)'>Restore</a>
+</div>
+<script src="drive.js"></script>
+<script async defer src="https://apis.google.com/js/api.js"
+        onload="gapiLoaded()"></script>
+    <script async defer src="https://accounts.google.com/gsi/client"
+        onload="gisLoaded()"></script>
+<script>
+var currentTab = "home";
+function tabChange(tab) {
+  tab.classList = "active";
+  var tabid = tab.id
+  document.getElementById(tabid + "C").style.display = "block";
+  if (currentTab != tabid) {
+  document.getElementById(currentTab + "C").style.display = "none";
+  document.getElementById(currentTab).classList = "";
+  }
+  currentTab = tabid
+}
+
+function changeSite(site) {
+  var siteid = site.id;
+  if (site.innerHTML.includes("arrow_drop_down")) {
+    site.innerHTML = site.innerHTML.replace("arrow_drop_down","arrow_drop_up")
+    document.getElementById(siteid + "C").style.display = "block";
+    site.classList = "dropdownli dropdownliFocus";
+  } else if (site.innerHTML.includes("arrow_drop_up")) {
+    site.innerHTML = site.innerHTML.replace("arrow_drop_up","arrow_drop_down");
+    document.getElementById(siteid + "C").style.display = "none";
+    site.classList = "dropdownli";
+  }
+}
+</script>
+  <script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+  import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+  import { getDatabase, ref, set, get, child } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+
+  const firebaseConfig = {
+
+    apiKey: "AIzaSyDWGbCICgDCm6XLz6gvuxnZTbsxACm-Fx4",
+
+    authDomain: "sync-js-6aa9d.firebaseapp.com",
+
+    projectId: "sync-js-6aa9d",
+
+    storageBucket: "sync-js-6aa9d.appspot.com",
+
+    messagingSenderId: "856081502457",
+
+    appId: "1:856081502457:web:8579832305cceae2e89228"
+
+  }; 
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth();
+  const dbRef = ref(getDatabase());
+  const db = getDatabase()
+
+  function decodeFB(text2) {
+     var text1 = text2.replaceAll("%2E",".").replaceAll("%23","#").replaceAll("%24","$").replaceAll("%2F","/").replaceAll("%5B","[").replaceAll("%5D","]").replaceAll('%22','"').replaceAll("%3A",":")
+     return text1;
+   }  
+
+    function encodeFB(text2) {
+     var text1 = text2.replaceAll(".","%2E").replaceAll("#","%23").replaceAll("$","%24").replaceAll("/","%2F").replaceAll("[","%5B").replaceAll("]","%5D").replaceAll('"',"%22").replaceAll(":","%3A")
+     return text1;
+   }
+    
+  function listSites(jarray) {
+    var toadd = "<p></p>";
+    Object.keys(jarray).forEach(function (k) {
+      var toadd2 = "";
+      var arrTemp = jarray[k];
+      console.log(arrTemp)
+      Object.keys(arrTemp).forEach(function (k2) {
+        toadd2 = toadd2 + "<p>" + decodeFB(k2) + ": " + arrTemp[k2] + "</p>"
+      });
+      toadd = toadd + "<a class='dropdownli' onclick='changeSite(this)' id='" + decodeFB(k) + "'>" + decodeFB(k) + " <span class='material-symbols-outlined'>arrow_drop_down</span></a><button style='width:inherit' onclick='editorOpen(" + '"' + decodeFB(k) + '"' + ")'><span class='material-symbols-outlined'>edit</span></button>&nbsp;<button style='width:inherit' onclick='editorDelete(" + '"' + decodeFB(k) + '"' + ")'><span class='material-symbols-outlined'>delete</span></button><div style='display:none;padding:0 50px;' id='" + decodeFB(k) + "C'>" + toadd2 + "</div><br>";
+    })
+    return toadd;
+  }
+    window.listSites = listSites
+    
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    window.fbuid1 = user.uid;
+    if (getBrowser() == "FIREFOX") {
+      var extURL = "<a href='https://addons.mozilla.org/en-US/firefox/addon/sync-js/' target='_blank'>Download Firefox Addon</a>"
+    } else if (getBrowser() == "CHROMIUM") {
+      var extURL = "<a href='https://chrome.google.com/webstore/detail/syncjs/jobnjgnmbknekedfmaafenkejolhfgje' target='_blank'>Download Chrome Extension</a>"
+    }
+    if (!extURL) {
+      homeC.innerHTML = "<p></p><img src='icon.png' /><h1>Welcome, " + user.email + "</h1><button onclick='userLogout()'><span class='material-symbols-outlined'>logout</span></button><p>Select a tab above to get started.</p>";
+    } else {
+      homeC.innerHTML = "<p></p><img src='icon.png' /><h1>Welcome, " + user.email + "</h1><button onclick='userLogout()'><span class='material-symbols-outlined'>logout</span></button><p>Select a tab above to get started.</p><br><p>" + extURL + "</p>";
+    }
+    get(child(dbRef, "users/" + user.uid)).then((snapshot) => {
+      if (snapshot.exists()) {
+        dataC.innerHTML = listSites(snapshot.val());
+        window.lstestarr = snapshot.val();
+      } else {
+        dataC.innerHTML = "<h1 style='text-align:center'>No Data Yet!</h1>"
+      }
+    });
+  } else {
+    location.replace("login")
+  }
+});
+    function userLogout() {
+      signOut(auth).then(() => {
+        location.replace("/")
+      }).catch((error) => {
+        alert(error)
+      });
+    }
+    window.userLogout = userLogout;
+
+    function editorOpen(domain) {
+      get(child(dbRef, "users/" + fbuid1 + "/" + encodeFB(domain))).then((snapshot) => {
+        if (snapshot.exists()) {
+          var ss = snapshot.val()
+          edtext.innerHTML = "Editing JSON: " + domain;
+          editorText.innerHTML = JSON.stringify(ss);
+          editorSave.onclick = function() {
+            try {
+              var toset = JSON.parse(editorText.value)
+            } catch (error) {
+              alert(error)
+            }
+            if (toset) {
+              set(ref(db, 'users/' + fbuid1 + "/" + encodeFB(domain)), toset)
+              location.reload()
+            }
+          }
+        }
+      });
+      editor.style.display = "block"
+    }
+    function editorDelete(domain) {
+      get(child(dbRef, "users/" + fbuid1 + "/" + encodeFB(domain))).then((snapshot) => {
+        if (snapshot.exists()) {
+          var ss = snapshot.val()
+          var con1 = confirm("Are you sure you want to delete all data from " + domain + "?")
+          if (con1 == true) {
+            set(ref(db, 'users/' + fbuid1 + "/" + encodeFB(domain)), {})
+            location.reload()
+          }
+        }
+      });
+    }
+    window.editorOpen = editorOpen
+    window.editorDelete = editorDelete
+  </script>
+</body>
+</html>

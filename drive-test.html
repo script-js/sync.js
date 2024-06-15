@@ -4,8 +4,6 @@
 <title>Google Drive upload using JavaScript</title>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="stylesheet" type="text/css" href="css/style.css" />
-<link rel="stylesheet" type="text/css" href="css/form.css" />
 <style>
 #content {
     display: none;
@@ -136,7 +134,7 @@ async function uploadFile() {
 		'mimeType': 'text/plain', // mimeType at Google Drive
 		// TODO [Optional]: Set the below credentials
 		// Note: remove this parameter, if no target is needed
-		'parents': ['sync.js'],
+		'parents': ['syncjs'],
 	};
 
 	var accessToken = gapi.auth.getToken().access_token; // Here gapi is used for retrieving the access token.

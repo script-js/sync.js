@@ -224,7 +224,7 @@ async function uploadFile(fileContent) {
             });
     }
 }
-async function deleteFile(fileid) {
+async function deleteFile(fileId) {
   const access_token = gapi.auth.getToken().access_token;
   const url = `https://www.googleapis.com/drive/v3/files/${fileId}`;
   return await fetch(url, {

@@ -128,13 +128,12 @@ function handleSignoutClick() {
  */
 async function uploadFile() {
 	var fileContent = '{}'; // As a sample, upload a text file.
-	var file = new Blob([fileContent], { type: 'text/json' });
+	var file = new Blob([fileContent], { type: 'text/plain' });
 	var metadata = {
 		'name': 'data.json', // Filename at Google Drive
-		'mimeType': 'text/plain', // mimeType at Google Drive
+		'mimeType': 'text/json', // mimeType at Google Drive
 		// TODO [Optional]: Set the below credentials
 		// Note: remove this parameter, if no target is needed
-		'parents': ['syncjs'],
 	};
 
 	var accessToken = gapi.auth.getToken().access_token; // Here gapi is used for retrieving the access token.

@@ -36,6 +36,7 @@
 			  location.reload()
 			} else {
 		  await get_doc(fid).then(function(data1) {
+var url1 = extractHostname(atob(url2))
         var data = data1[url1]
   if (data) {
       copyIP.value = decodeFB(data)
@@ -87,7 +88,7 @@ function encodeFB(text2) {
       return hostname;
   }
 
-  var url1 = extractHostname(atob(url2))
+  
     </script>
     
       </body>

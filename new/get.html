@@ -29,16 +29,6 @@
       <p></p>
     </div>
     <script>
-	    function encodeFB(text2) {
-     var text1 = text2.replaceAll(".","%2E").replaceAll("#","%23").replaceAll("$","%24").replaceAll("/","%2F").replaceAll("[","%5B").replaceAll("]","%5D").replaceAll('"',"%22").replaceAll(":","%3A")
-     return text1;
-   }
-   
-   function decodeFB(text2) {
-     var text1 = text2.replaceAll("%2E",".").replaceAll("%23","#").replaceAll("%24","$").replaceAll("%2F","/").replaceAll("%5B","[").replaceAll("%5D","]").replaceAll('%22','"').replaceAll("%3A",":")
-     return text1;
-   }  
-  
   
   var sendoff = new URLSearchParams(window.location.search).get("sendoff");
   
@@ -69,7 +59,7 @@
   var url1 = extractHostname(atob(url2))
 			  var data1 = JSON.parse(data2)
   if (data1[url1]) {
-      copyIP.value = decodeFB(data1[url1])
+      copyIP.value = data1[url1]
       mc.innerHTML = '<h1>Restore Data</h1><p>Press the copy button below. When you close this window, paste the data into the popup that appears.</p><button style="margin:auto;" id="gbtn" onclick="copy()"><span class="material-symbols-outlined">content_copy</span></button>';
     } else {
       mc.innerHTML = "<h1>No Data</h1>"

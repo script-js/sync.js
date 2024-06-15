@@ -29,7 +29,7 @@
 	<script>
         const CLIENT_ID = '532321740472-sav0pgph4pqehgsu6ed1b6gges3uc9c1.apps.googleusercontent.com';
 const API_KEY = 'AIzaSyDFaabRSbNULI9UxcBEzKqNE_01SiepwhE';
-		const FNAME = "syncjsdata.json"
+		var FNAME = "syncjsdata.json"
 
 // Discovery URL for APIs used by the quickstart
 const DISCOVERY_DOC = 'https://www.googleapis.com/discovery/v1/apis/drive/v3/rest';
@@ -89,13 +89,12 @@ function maybeEnableButtons() {
  *  Sign in the user upon button click.
  */
 function handleAuthClick() {
-	tokenClient.callback = async (resp) => {
+	tokenClient.callback = (resp) => {
 		if (resp.error !== undefined) {
 			throw (resp);
 		}
 		document.getElementById('signout_button').style.visibility = 'visible';
 		document.getElementById('authorize_button').value = 'Refresh';
-		await findFile();
 
 	};
 
@@ -165,28 +164,21 @@ async function uploadFile(fileContent) {
         const files = response.result.files;
 	console.log(files)
         if (!files || files.length == 0) {
-		console.log("uhoh")
 		uploadFile("{}") 
           document.getElementById('content').innerText = 'No files found.';
           return;
         } else {
-		console.log("madeit")
 	var fid;
         Object.keys(files).forEach(function(k) {
-		console.log("check")
 	  if (files[k].name == FNAME) {
 	    console.log(files[k])
             fid = files[k].id
 	  }
 	})
-		console.log("check2")
         if (fid) {
-		console.log("check3")
-          await get_doc(fid).then(data => document.getElementById('content').innerHTML =  data);
-		document.getElementById('content').style.display = 'block';
+	  return fid;
 	} else {
-		console.log("check33")
-	  uploadFile("{}") 
+	  return false
 	}
 	}
       }
@@ -234,6 +226,22 @@ async function deleteFile(fileId) {
     }
   }).then(res => res.json());
 }
+
+		async function addEntries(jdata) {
+		  var fid = findFile()
+			if (fid == false) {
+			  uploadFile(JSON.stringify(jdata))
+			} else {
+		  await get_doc(fid).then(data => 
+		    var d2 = JSON.parse(data)
+		    Object.keys(jdata).forEach(function(k) {
+		      d2[k] = jdata[k]
+		    })
+		    deleteFile(fid)
+		    uploadFile(JSON.stringify(d2))
+		  );
+			}
+		}
     </script>
     <script async defer src="https://apis.google.com/js/api.js"
         onload="gapiLoaded()"></script>

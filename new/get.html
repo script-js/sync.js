@@ -36,7 +36,7 @@
 			  location.reload()
 			} else {
 		  await get_doc(fid).then(function(data1) {
-var url1 = extractHostname(atob(url2))
+
         var data = data1[url1]
   if (data) {
       copyIP.value = decodeFB(data)
@@ -62,7 +62,7 @@ var url1 = extractHostname(atob(url2))
         copyIP.style.display = "none";
       }
     </script>
-<script type="module">
+<script>
 function encodeFB(text2) {
      var text1 = text2.replaceAll(".","%2E").replaceAll("#","%23").replaceAll("$","%24").replaceAll("/","%2F").replaceAll("[","%5B").replaceAll("]","%5D").replaceAll('"',"%22").replaceAll(":","%3A")
      return text1;
@@ -88,7 +88,7 @@ function encodeFB(text2) {
       return hostname;
   }
 
-  
+  var url1 = extractHostname(atob(url2))
     </script>
     
       </body>

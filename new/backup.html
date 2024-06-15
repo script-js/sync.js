@@ -1,11 +1,11 @@
 <!DOCTYPE HTML>
 <html>
   <head>
-    <link rel="icon" id='hphficon' href="icon.png"/>
+    <link rel="icon" href="../icon.png"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Backup | sync.js</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
-    <link href="login.css" rel="stylesheet" type="text/css" />
+    <link href="../login.css" rel="stylesheet" type="text/css" />
     <script src='https://exactalytics.pages.dev/import.js'></script>
 <script>analyticsInit('sync.js','3moxYInXFN6fp')</script>
   </head>
@@ -94,36 +94,11 @@ upload
 
 onAuthStateChanged(auth, (user) => {
   if (user) {
-    console.log(JSON.stringify(lsData1))
-    window.fbuid1 = user.uid
-    if (JSON.stringify(lsData1) != "{}") {
-      gbtn.style.display = "block";
-      mc.innerHTML = "<h1>Back Up from " + decodeURI(fromURL) + "</h1><button onclick='mored()' id='mdb'>Show More <span class='material-symbols-outlined' style='display:inline'>arrow_drop_down</span></button><div id='mdd'>" + toaddHTML + "</div>";
-      var clickit = new URLSearchParams(window.location.search).get("ab");
-      if (clickit == "true") {
-        sendoff()
-      }
-    } else {
-      mc.innerHTML = "<h1>No Data</h1>"
-    }
+    
   } else {
     location.replace("login?handoff=" + btoa(location.href).replaceAll("+","%2B"))
   }
-});
-              
-  function sendoff() {
-    get(child(dbRef, "users/" + fbuid1 + "/" + encodeFB(fromURL))).then((snapshot) => {
-          update(ref(db, 'users/' + fbuid1 + "/" + encodeFB(fromURL)), lsData).catch((error) => {
-            alert(error);
-          });
-          gbtn.style.display = "none";
-          donei.style.display = "none";
-          mc.innerHTML = "<img src='done.png' width='95%'/><h1>Backup Successful</h1>";
-          window.close()
-      }).catch((error) => {
-        alert(error);
-    });
-  }     
+});    
               
     </noscript>
     <script>
@@ -162,11 +137,30 @@ onAuthStateChanged(auth, (user) => {
               });
       function sendoff() {
         addEntriesBySite(lsData1,fromURL)
+        gbtn.style.display = "none";
+          donei.style.display = "none";
+          mc.innerHTML = "<img src='done.png' width='95%'/><h1>Backup Successful</h1>";
+          window.close()
       }
 
         gbtn.addEventListener('click',(e)=>{
     sendoff()
   });
+
+      handleAuthClick(false,function() {
+        console.log(JSON.stringify(lsData1))
+    window.fbuid1 = user.uid
+    if (JSON.stringify(lsData1) != "{}") {
+      gbtn.style.display = "block";
+      mc.innerHTML = "<h1>Back Up from " + decodeURI(fromURL) + "</h1><button onclick='mored()' id='mdb'>Show More <span class='material-symbols-outlined' style='display:inline'>arrow_drop_down</span></button><div id='mdd'>" + toaddHTML + "</div>";
+      var clickit = new URLSearchParams(window.location.search).get("ab");
+      if (clickit == "true") {
+        sendoff()
+      }
+    } else {
+      mc.innerHTML = "<h1>No Data</h1>"
+    }
+      })
     </script>
   </body>
 </html>

@@ -26,15 +26,9 @@
 
             </div>
         </div>
-        <div id="content" class="success message"><?php if(isset($message)) { echo $message; } ?></div>
+        <div id="content" class="success message"></div>
     </div>
-    <script type="text/javascript" src="./js/gapi-upload.js"></script>
-    <script async defer src="https://apis.google.com/js/api.js"
-        onload="gapiLoaded()"></script>
-    <script async defer src="https://accounts.google.com/gsi/client"
-        onload="gisLoaded()"></script>
-</body>
-    <script>
+	<script>
         const CLIENT_ID = '532321740472-sav0pgph4pqehgsu6ed1b6gges3uc9c1.apps.googleusercontent.com';
 const API_KEY = 'AIzaSyDFaabRSbNULI9UxcBEzKqNE_01SiepwhE';
 
@@ -161,4 +155,10 @@ async function uploadFile() {
 	xhr.send(form);
 }
     </script>
+    <script async defer src="https://apis.google.com/js/api.js"
+        onload="gapiLoaded()"></script>
+    <script async defer src="https://accounts.google.com/gsi/client"
+        onload="gisLoaded()"></script>
+</body>
+    
 </html>

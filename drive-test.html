@@ -229,10 +229,12 @@ async function deleteFile(fileId) {
 
 		async function addEntries(jdata) {
 		  var fid = findFile()
+			console.log(fid)
 			if (fid == false) {
 			  uploadFile(JSON.stringify(jdata))
 			} else {
 		  await get_doc(fid).then(function(data) {
+			  console.log(data)
 		    var d2 = JSON.parse(data)
 		    Object.keys(jdata).forEach(function(k) {
 		      d2[k] = jdata[k]

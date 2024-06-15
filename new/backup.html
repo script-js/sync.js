@@ -57,7 +57,7 @@ upload
       }
     </script>
 
-            <script type="module">
+             <noscript type="module">
   // Import the functions you need from the SDKs you need
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
   import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
@@ -84,44 +84,13 @@ upload
 
   };
 
-function encodeFB(text2) {
-     var text1 = text2.replaceAll(".","%2E").replaceAll("#","%23").replaceAll("$","%24").replaceAll("/","%2F").replaceAll("[","%5B").replaceAll("]","%5D").replaceAll('"',"%22").replaceAll(":","%3A")
-     return text1;
-   }
-   
-   function decodeFB(text2) {
-     var text1 = text2.replaceAll("%2E",".").replaceAll("%23","#").replaceAll("%24","$").replaceAll("%2F","/").replaceAll("%5B","[").replaceAll("%5D","]").replaceAll('%22','"').replaceAll("%3A",":")
-     return text1;
-   }  
+
   
   const app = initializeApp(firebaseConfig);
   const auth = getAuth();
   const dbRef = ref(getDatabase());
   const db = getDatabase();
-  var urijson = new URLSearchParams(window.location.search).get("data");
-  var url2 = new URLSearchParams(window.location.search).get("fromURL");
-  var lsData1 = JSON.parse(atob(urijson.replaceAll("%2B","+")));  
-              function extractHostname(url) {
-      let hostname;
-      if (url.indexOf("://") > -1) {
-          hostname = url.split('/')[2];
-      } else {
-          hostname = url.split('/')[0];
-      }
-      hostname = hostname.split(':')[0];
-      hostname = hostname.split('?')[0];
-      return hostname;
-  }
-
-  var fromURL = extractHostname(atob(url2))
-              var toaddHTML = "";
-              Object.keys(lsData1).forEach(function (k) {
-                toaddHTML = toaddHTML + k + ": " + lsData1[k] + "<br>";
-              });
-              var lsData = {};
-              Object.keys(lsData1).forEach(function (k) {
-                lsData[encodeFB(k)] = lsData1[k]
-              });
+  
 
 onAuthStateChanged(auth, (user) => {
   if (user) {
@@ -156,10 +125,48 @@ onAuthStateChanged(auth, (user) => {
     });
   }     
               
-  gbtn.addEventListener('click',(e)=>{
+    </noscript>
+    <script>
+      var urijson = new URLSearchParams(window.location.search).get("data");
+  var url2 = new URLSearchParams(window.location.search).get("fromURL");
+  var lsData1 = JSON.parse(atob(urijson.replaceAll("%2B","+")));  
+              function extractHostname(url) {
+      let hostname;
+      if (url.indexOf("://") > -1) {
+          hostname = url.split('/')[2];
+      } else {
+          hostname = url.split('/')[0];
+      }
+      hostname = hostname.split(':')[0];
+      hostname = hostname.split('?')[0];
+      return hostname;
+  }
+
+      function encodeFB(text2) {
+     var text1 = text2.replaceAll(".","%2E").replaceAll("#","%23").replaceAll("$","%24").replaceAll("/","%2F").replaceAll("[","%5B").replaceAll("]","%5D").replaceAll('"',"%22").replaceAll(":","%3A")
+     return text1;
+   }
+   
+   function decodeFB(text2) {
+     var text1 = text2.replaceAll("%2E",".").replaceAll("%23","#").replaceAll("%24","$").replaceAll("%2F","/").replaceAll("%5B","[").replaceAll("%5D","]").replaceAll('%22','"').replaceAll("%3A",":")
+     return text1;
+   }  
+  var fromURL = extractHostname(atob(url2))
+              var toaddHTML = "";
+              Object.keys(lsData1).forEach(function (k) {
+                toaddHTML = toaddHTML + k + ": " + lsData1[k] + "<br>";
+              });
+              var lsData = {};
+              Object.keys(lsData1).forEach(function (k) {
+                lsData[encodeFB(k)] = lsData1[k]
+              });
+      function sendoff() {
+        addEntriesBySite(lsData1,fromURL)
+      }
+
+        gbtn.addEventListener('click',(e)=>{
     sendoff()
   });
-              
     </script>
   </body>
 </html>

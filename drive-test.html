@@ -88,8 +88,8 @@ function maybeEnableButtons() {
 /**
  *  Sign in the user upon button click.
  */
-async function handleAuthClick() {
-	tokenClient.callback = (resp) => {
+function handleAuthClick() {
+	tokenClient.callback = async (resp) => {
 		if (resp.error !== undefined) {
 			throw (resp);
 		}

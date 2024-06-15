@@ -249,21 +249,6 @@ async function deleteFile(fileId) {
 			}
 		  })
 		}
-
-		function createFolder() {
-  var body = {
-    'title': "syncjs",
-    'mimeType': "application/vnd.google-apps.folder"
-  };
-
-  var request = gapi.client.drive.files.insert({
-    'resource': body
-  });
-
- return request.execute(function(resp) {
-    return resp.id
-  });
-}
     </script>
     <script async defer src="https://apis.google.com/js/api.js"
         onload="gapiLoaded()"></script>

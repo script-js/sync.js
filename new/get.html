@@ -64,14 +64,10 @@
 			  uploadFile("{}")
 			  location.reload()
 			} else {
-		  await get_doc(fid).then(function(data1) {
+		  await get_doc(fid).then(function(data2) {
 			   var url2 = new URLSearchParams(window.location.search).get("url");
   var url1 = extractHostname(atob(url2))
-			  console.log(data1[url1])
-			  console.log(data1)
-			  console.log(url1)
-			  console.log(typeof url1)
-			  console.log(data1["www.google.com"])
+			  var data1 = JSON.parse(data2)
   if (data1[url1]) {
       copyIP.value = decodeFB(data1[url1])
       mc.innerHTML = '<h1>Restore Data</h1><p>Press the copy button below. When you close this window, paste the data into the popup that appears.</p><button style="margin:auto;" id="gbtn" onclick="copy()"><span class="material-symbols-outlined">content_copy</span></button>';

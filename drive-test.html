@@ -182,7 +182,7 @@ async function uploadFile(fileContent) {
 		console.log("check2")
         if (fid) {
 		console.log("check3")
-          document.getElementById('content').innerHTML = "File id: " + fid;
+          document.getElementById('content').innerHTML = get_doc(fid);
 		document.getElementById('content').style.display = 'block';
 	} else {
 		console.log("check33")
@@ -191,6 +191,38 @@ async function uploadFile(fileContent) {
 	}
       }
 
+
+		  function get_doc(id){
+    const url = 'https://www.googleapis.com/drive/v3/files/'+id+'?alt=media'
+			  var authToken = gapi.auth.getToken();
+    if(self.fetch){
+    var setHeaders = new Headers();
+    setHeaders.append('Authorization', 'Bearer ' + authToken.access_token);
+    setHeaders.append('Content-Type', mime);
+
+    var setOptions = {
+        method: 'GET',
+        headers: setHeaders
+    };
+    fetch(url,setOptions)
+        .then(response => { if(response.ok){
+        var reader = response.body.getReader();
+        var decoder = new TextDecoder();
+        reader.read().then(function(result){
+            var data = {}
+            data = decoder.decode(result.value, {stream: !result.done});\
+	   console.log(data)
+            return data;
+    });
+        }
+    else{
+        console.error("Response error");
+    }
+  })  .catch(error => {
+        console.error(error.message);
+        });
+    }
+}
     </script>
     <script async defer src="https://apis.google.com/js/api.js"
         onload="gapiLoaded()"></script>

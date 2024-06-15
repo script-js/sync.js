@@ -29,6 +29,7 @@
 	<script>
         const CLIENT_ID = '532321740472-sav0pgph4pqehgsu6ed1b6gges3uc9c1.apps.googleusercontent.com';
 const API_KEY = 'AIzaSyDFaabRSbNULI9UxcBEzKqNE_01SiepwhE';
+		const FNAME = "syncjsdata.json"
 
 // Discovery URL for APIs used by the quickstart
 const DISCOVERY_DOC = 'https://www.googleapis.com/discovery/v1/apis/drive/v3/rest';
@@ -94,7 +95,7 @@ function handleAuthClick() {
 		}
 		document.getElementById('signout_button').style.visibility = 'visible';
 		document.getElementById('authorize_button').value = 'Refresh';
-		await uploadFile();
+		await findFile();
 
 	};
 
@@ -129,7 +130,7 @@ function handleSignoutClick() {
 async function uploadFile(fileContent) {
 	var file = new Blob([fileContent], { type: 'text/plain' });
 	var metadata = {
-		'name': 'syncjsdata.json', // Filename at Google Drive
+		'name': FNAME, // Filename at Google Drive
 		'mimeType': 'text/json', // mimeType at Google Drive
 		// TODO [Optional]: Set the below credentials
 		// Note: remove this parameter, if no target is needed
@@ -150,7 +151,7 @@ async function uploadFile(fileContent) {
 	};
 	xhr.send(form);
 }
-		async function listFiles() {
+		async function findFile() {
         let response;
         try {
           response = await gapi.client.drive.files.list({
@@ -166,8 +167,19 @@ async function uploadFile(fileContent) {
           document.getElementById('content').innerText = 'No files found.';
           return;
         }
-        // Flatten to string to display
-        console.log(files)
+	var fid;
+        files.forEach(function(k) {
+	  if (files[k].name == FNAME) {
+	    console.log(files[k])
+            fid = files[k].id
+	  }
+	})
+        if (fid) {
+          adocument.getElementById('content').innerHTML = "File id: " + fid;
+		document.getElementById('content').style.display = 'block';
+	} else {
+	  uploadFile("{}") 
+	}
       }
 
     </script>

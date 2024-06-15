@@ -38,6 +38,22 @@ upload
   background: #56bf73;
 }
     </style>
+    <script>
+      function startup() {
+        console.log(JSON.stringify(lsData1))
+    window.fbuid1 = user.uid
+    if (JSON.stringify(lsData1) != "{}") {
+      gbtn.style.display = "block";
+      mc.innerHTML = "<h1>Back Up from " + decodeURI(fromURL) + "</h1><button onclick='mored()' id='mdb'>Show More <span class='material-symbols-outlined' style='display:inline'>arrow_drop_down</span></button><div id='mdd'>" + toaddHTML + "</div>";
+      var clickit = new URLSearchParams(window.location.search).get("ab");
+      if (clickit == "true") {
+        sendoff()
+      }
+    } else {
+      mc.innerHTML = "<h1>No Data</h1>"
+    }
+      }
+    </script>
 <script src="drive.js"></script>
 <script async defer src="https://apis.google.com/js/api.js"
         onload="gapiLoaded()"></script>

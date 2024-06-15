@@ -198,7 +198,7 @@ async function uploadFile(fileContent) {
     if(self.fetch){
     var setHeaders = new Headers();
     setHeaders.append('Authorization', 'Bearer ' + authToken.access_token);
-    setHeaders.append('Content-Type', mime);
+    setHeaders.append('Content-Type', "text/json");
 
     var setOptions = {
         method: 'GET',

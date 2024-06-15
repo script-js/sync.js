@@ -28,7 +28,6 @@ async function initializeGapiClient() {
 		discoveryDocs: [DISCOVERY_DOC],
 	});
 	gapiInited = true;
-	maybeEnableButtons();
 }
 
 /**
@@ -41,16 +40,6 @@ function gisLoaded() {
 		callback: '', // defined later
 	});
 	gisInited = true;
-	maybeEnableButtons();
-}
-
-/**
- * Enables user interaction after all libraries are loaded.
- */
-function maybeEnableButtons() {
-	if (gapiInited && gisInited) {
-		startup()
-	}
 }
 
 /**
@@ -66,6 +55,7 @@ function handleAuthClick() {
 		    uploadFile("{}")
 		  }
 		})
+		startup()
 	};
 
 	if (gapi.client.getToken() === null) {

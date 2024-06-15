@@ -56,7 +56,7 @@ function maybeEnableButtons() {
 /**
  *  Sign in the user upon button click.
  */
-function handleAuthClick(placeholder,func) {
+function handleAuthClick() {
 	tokenClient.callback = async (resp) => {
 		if (resp.error !== undefined) {
 			throw (resp);
@@ -66,9 +66,6 @@ function handleAuthClick(placeholder,func) {
 		    uploadFile("{}")
 		  }
 		})
-		if (func) {
-		  func()
-		}
 	};
 
 	if (gapi.client.getToken() === null) {

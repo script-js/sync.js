@@ -163,21 +163,27 @@ async function uploadFile(fileContent) {
           return;
         }
         const files = response.result.files;
+	console.log(files)
         if (!files || files.length == 0) {
           document.getElementById('content').innerText = 'No files found.';
           return;
         } else {
+		console.log("madeit")
 	var fid;
         Object.keys(files).forEach(function(k) {
+		console.log("check")
 	  if (files[k].name == FNAME) {
 	    console.log(files[k])
             fid = files[k].id
 	  }
 	})
+		console.log("check2")
         if (fid) {
+		console.log("check3")
           adocument.getElementById('content').innerHTML = "File id: " + fid;
 		document.getElementById('content').style.display = 'block';
 	} else {
+		console.log("check33")
 	  uploadFile("{}") 
 	}
 	}

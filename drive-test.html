@@ -210,7 +210,7 @@ async function uploadFile(fileContent) {
         var decoder = new TextDecoder();
         reader.read().then(function(result){
             var data = {}
-            data = decoder.decode(result.value, {stream: !result.done});\
+            data = decoder.decode(result.value, {stream: !result.done});
 	   console.log(data)
             return data;
     });

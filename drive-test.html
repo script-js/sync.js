@@ -228,7 +228,7 @@ async function deleteFile(fileId) {
 }
 
 		async function addEntries(jdata) {
-		  await findFile().then(function (fid) {
+		  await findFile().then(async function (fid) {
 			console.log(fid)
 			if (fid == false) {
 			  uploadFile(JSON.stringify(jdata))

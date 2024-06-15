@@ -29,8 +29,8 @@
       <p></p>
     </div>
     <script>
-      function startup() {
-        findFile().then(async function (fid) {
+      async function startup() {
+        await findFile().then(async function (fid) {
     if (fid == false) {
 			  uploadFile("{}")
 			  location.reload()
@@ -44,7 +44,7 @@
       mc.innerHTML = "<h1>No Data</h1>"
     }
       })
-  })
+  }})
       }
     </script>
 <script src="drive.js"></script>

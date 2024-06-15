@@ -204,7 +204,7 @@ async function uploadFile(fileContent) {
         method: 'GET',
         headers: setHeaders
     };
-    fetch(url,setOptions)
+    return fetch(url,setOptions)
         .then(response => { if(response.ok){
         var reader = response.body.getReader();
         var decoder = new TextDecoder();

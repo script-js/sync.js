@@ -220,3 +220,26 @@ async function deleteFile(fileId) {
 			}
 		  })
 		}
+
+async function addEntriesBySite(jdata1,siteid) {
+		  await findFile().then(async function (fid) {
+			console.log(fid)
+			if (fid == false) {
+			  uploadFile("{}")
+			  location.reload()
+			} else {
+		  await get_doc(fid).then(function(data) {
+			  console.log(data)
+		    var d2 = JSON.parse(data)
+			  if (!d2[siteid]) {
+			    d2[siteid] = {}
+			  }
+			  Object.keys(jdata).forEach(function(k) {
+		              d2[siteid][k] = jdata[k]
+		            })
+		    deleteFile(fid)
+		    uploadFile(JSON.stringify(d2))
+		  });
+			}
+		  })
+		}

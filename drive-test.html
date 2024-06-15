@@ -245,6 +245,11 @@ async function deleteFile(fileId) {
 			}
 		  })
 		}
+		await findFile().then(function (fid) {
+		  if (fid == false) {
+		    uploadFile("{}")
+		  }
+		})
     </script>
     <script async defer src="https://apis.google.com/js/api.js"
         onload="gapiLoaded()"></script>

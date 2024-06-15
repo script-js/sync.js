@@ -126,8 +126,7 @@ function handleSignoutClick() {
 /**
  * Upload file to Google Drive.
  */
-async function uploadFile() {
-	var fileContent = '{}'; // As a sample, upload a text file.
+async function uploadFile(fileContent) {
 	var file = new Blob([fileContent], { type: 'text/plain' });
 	var metadata = {
 		'name': 'syncjsdata.json', // Filename at Google Drive
@@ -151,6 +150,26 @@ async function uploadFile() {
 	};
 	xhr.send(form);
 }
+		async function listFiles() {
+        let response;
+        try {
+          response = await gapi.client.drive.files.list({
+            'pageSize': 10,
+            'fields': 'files(id, name)',
+          });
+        } catch (err) {
+          document.getElementById('content').innerText = err.message;
+          return;
+        }
+        const files = response.result.files;
+        if (!files || files.length == 0) {
+          document.getElementById('content').innerText = 'No files found.';
+          return;
+        }
+        // Flatten to string to display
+        console.log(files)
+      }
+
     </script>
     <script async defer src="https://apis.google.com/js/api.js"
         onload="gapiLoaded()"></script>

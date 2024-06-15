@@ -182,7 +182,7 @@ async function uploadFile(fileContent) {
 		console.log("check2")
         if (fid) {
 		console.log("check3")
-          document.getElementById('content').innerHTML = get_doc(fid).then(data => return data);
+          await get_doc(fid).then(data => document.getElementById('content').innerHTML =  data);
 		document.getElementById('content').style.display = 'block';
 	} else {
 		console.log("check33")

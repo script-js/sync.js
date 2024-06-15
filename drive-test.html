@@ -95,7 +95,11 @@ function handleAuthClick() {
 		}
 		document.getElementById('signout_button').style.visibility = 'visible';
 		document.getElementById('authorize_button').value = 'Refresh';
-
+                await findFile().then(function (fid) {
+		  if (fid == false) {
+		    uploadFile("{}")
+		  }
+		})
 	};
 
 	if (gapi.client.getToken() === null) {
@@ -245,11 +249,6 @@ async function deleteFile(fileId) {
 			}
 		  })
 		}
-		findFile().then(function (fid) {
-		  if (fid == false) {
-		    uploadFile("{}")
-		  }
-		})
     </script>
     <script async defer src="https://apis.google.com/js/api.js"
         onload="gapiLoaded()"></script>

@@ -111,7 +111,6 @@ function changeSite(site) {
     Object.keys(jarray).forEach(function (k) {
       var toadd2 = "";
       var arrTemp = jarray[k];
-      console.log(arrTemp)
       Object.keys(arrTemp).forEach(function (k2) {
         toadd2 = toadd2 + "<p>" + k2 + ": " + arrTemp[k2] + "</p>"
       });
@@ -140,11 +139,8 @@ async function startup() {
 			} else {
       window.fid = fid
 		  await get_doc(fid).then(function(data2) {
-			  console.log(data2)
       if (data2 != "{}" && data2) {
-	      
         var data1 = JSON.parse(data2)
-	console.log(data1)
         dataC.innerHTML = listSites(data1);
         window.lstestarr = data1;
       } else {

@@ -113,7 +113,7 @@ function changeSite(site) {
       var arrTemp = jarray[k];
       console.log(arrTemp)
       Object.keys(arrTemp).forEach(function (k2) {
-        toadd2 = toadd2 + "<p>" + decodeFB(k2) + ": " + arrTemp[k2] + "</p>"
+        toadd2 = toadd2 + "<p>" + k2 + ": " + arrTemp[k2] + "</p>"
       });
       toadd = toadd + "<a class='dropdownli' onclick='changeSite(this)' id='" + decodeFB(k) + "'>" + decodeFB(k) + " <span class='material-symbols-outlined'>arrow_drop_down</span></a><button style='width:inherit' onclick='editorOpen(" + '"' + decodeFB(k) + '"' + ")'><span class='material-symbols-outlined'>edit</span></button>&nbsp;<button style='width:inherit' onclick='editorDelete(" + '"' + decodeFB(k) + '"' + ")'><span class='material-symbols-outlined'>delete</span></button><div style='display:none;padding:0 50px;' id='" + decodeFB(k) + "C'>" + toadd2 + "</div><br>";
     })
@@ -177,9 +177,6 @@ async function startup() {
       editor.style.display = "block"
     }
     async function editorDelete(domain) {
-      get(child(dbRef, "users/" + fbuid1 + "/" + encodeFB(domain))).then((snapshot) => {
-        if (snapshot.exists()) {
-          var ss = snapshot.val()
           var con1 = confirm("Are you sure you want to delete all data from " + domain + "?")
           if (con1 == true) {
             var toremove = {}
@@ -187,8 +184,6 @@ async function startup() {
             addEntries(toremove)
             location.reload()
           }
-        }
-      });
     }
     window.editorOpen = editorOpen
     window.editorDelete = editorDelete

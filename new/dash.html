@@ -151,13 +151,10 @@ async function startup() {
 
     async function editorOpen(domain) {
       await get_doc(fid).then(function(data1) {
-        var data2 = data1[domain]
-	      console.log(data2)
-	      console.log(data1)
-        if (data2 != "{}" && data2) {
-          var ss = JSON.parse(data2)
+        var data2 = JSON.parse(data1)[domain]
+        if (data2 != {} && data2) {
           edtext.innerHTML = "Editing JSON: " + domain;
-          editorText.innerHTML = JSON.stringify(ss);
+          editorText.innerHTML = JSON.stringify(data2);
           editorSave.onclick = function() {
             try {
               var toset = {}
@@ -181,7 +178,6 @@ async function startup() {
             toremove[domain] = {}
 		  console.log(toremove)
             addEntries(toremove)
-            location.reload()
           }
     }
 	  function handleSignoutClick() {

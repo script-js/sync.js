@@ -15,6 +15,8 @@
       if (resp.error !== undefined) {
          throw (resp);
       }
+      // Set the expiration date to 12 hours from now
+      gapi.client.getToken().expiry_date = (new Date()).getTime() + (12 * 60 * 60 * 1000);
       localStorage.setItem('gapi_token', JSON.stringify(gapi.client.getToken()));
       await findFile().then(function (fid) {
          if (fid == false) {

@@ -25,7 +25,7 @@ async function initializeGapiClient() {
    if (token) {
       gapi.client.setToken(JSON.parse(token));
    } else if (!location.href.includes("login")) {
-      location.replace("login")
+      location.replace("login?handoff=" + btoa(location.href).replaceAll("+","%2B"))
    }
    if (!location.href.includes("login")) {setTimeout(expireCheck,200)}
    startup()
@@ -214,6 +214,6 @@ async function expireCheck() {
   var data = await (await fetch("https://www.googleapis.com/oauth2/v1/tokeninfo?access_token=" + gapi.auth.getToken().access_token)).json();
   if (data.error == "invalid_token") {
      localStorage.setItem("gapi_token","")
-     location.replace("login")
+     location.replace("login?handoff=" + btoa(location.href).replaceAll("+","%2B"))
   }
 }

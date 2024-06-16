@@ -77,6 +77,7 @@ async function findFile() {
          'pageSize': 10,
          'fields': 'files(id, name)',
       });
+      console.log(response)
    } catch (err) {
       console.error(err.message);
       return;

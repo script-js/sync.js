@@ -36,6 +36,16 @@ function gisLoaded() {
       callback: ''
    });
    gisInited = true;
+   await findFile().then(function (fid) {
+         if (fid == false) {
+            uploadFile("{}")
+         }
+      })
+      startup()
+}
+
+
+function handleAuthClick() {
    tokenClient.callback = async (resp) => {
       if (resp.error !== undefined) {
          throw (resp);
@@ -48,10 +58,6 @@ function gisLoaded() {
       })
       startup()
    }
-}
-
-
-function handleAuthClick() {
    if (gapi.client.getToken() === null) {
       // Prompt the user to select a Google Account and ask for consent to share their data
       // when establishing a new session.

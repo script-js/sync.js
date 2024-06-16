@@ -43,7 +43,7 @@ upload
         console.log(JSON.stringify(lsData1))
     if (JSON.stringify(lsData1) != "{}") {
       gbtn.style.display = "block";
-      mc.innerHTML = "<h1>Back Up from " + decodeURI(fromURL) + "</h1><button onclick='mored()' id='mdb'>Show More <span class='material-symbols-outlined' style='display:inline'>arrow_drop_down</span></button><div id='mdd'>" + toaddHTML + "</div>";
+      mc.innerHTML = "<h1>Back Up from " + fromURL + "</h1><button onclick='mored()' id='mdb'>Show More <span class='material-symbols-outlined' style='display:inline'>arrow_drop_down</span></button><div id='mdd'>" + toaddHTML + "</div>";
       var clickit = new URLSearchParams(window.location.search).get("ab");
       if (clickit == "true") {
         sendoff()
@@ -74,7 +74,7 @@ upload
     <script>
       var urijson = new URLSearchParams(window.location.search).get("data");
   var url2 = new URLSearchParams(window.location.search).get("fromURL");
-  var lsData1 = JSON.parse(atob(urijson.replaceAll("%2B","+")));  
+  var lsData1 = JSON.parse(atob(urijson));  
               function extractHostname(url) {
       let hostname;
       if (url.indexOf("://") > -1) {

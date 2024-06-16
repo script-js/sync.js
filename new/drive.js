@@ -24,6 +24,8 @@ async function initializeGapiClient() {
    var token = localStorage.getItem('gapi_token');
    if (token) {
       gapi.client.setToken(JSON.parse(token));
+   } else {
+      location.replace("login")
    }
    startup()
 }

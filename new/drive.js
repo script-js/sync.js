@@ -200,7 +200,6 @@ async function editorDelete(domain) {
             if (con1 == true) {
               deleteFile(fid)
               uploadFile(JSON.stringify(d2))
-              location.reload()
             }
          });
       }

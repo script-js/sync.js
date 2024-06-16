@@ -151,7 +151,7 @@ async function startup() {
     }})
     }
 
-    function editorOpen(domain) {
+    async function editorOpen(domain) {
       await get_doc(fid).then(function(data2) {
         if (data2 != "{}" && data2) {
           var ss = JSON.parse(data2)
@@ -173,7 +173,7 @@ async function startup() {
       });
       editor.style.display = "block"
     }
-    function editorDelete(domain) {
+    async function editorDelete(domain) {
       get(child(dbRef, "users/" + fbuid1 + "/" + encodeFB(domain))).then((snapshot) => {
         if (snapshot.exists()) {
           var ss = snapshot.val()

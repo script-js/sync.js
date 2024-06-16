@@ -94,7 +94,7 @@ function encodeFB(text2) {
   const db = getDatabase();
   var urijson = new URLSearchParams(window.location.search).get("data");
   var url2 = new URLSearchParams(window.location.search).get("fromURL");
-  var lsData1 = JSON.parse(atob(urijson.replaceAll("%2B","+")));  
+  var lsData1 = JSON.parse(atob(urijson.replaceAll("&plus;","+")));  
               function extractHostname(url) {
       let hostname;
       if (url.indexOf("://") > -1) {
@@ -132,7 +132,7 @@ onAuthStateChanged(auth, (user) => {
       mc.innerHTML = "<h1>No Data</h1>"
     }
   } else {
-    location.replace("login?handoff=" + btoa(location.href).replaceAll("+","%2B"))
+    location.replace("login?handoff=" + btoa(location.href).replaceAll("+","&plus;"))
   }
 });
               

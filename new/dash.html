@@ -155,7 +155,8 @@ async function startup() {
     }
 
     async function editorOpen(domain) {
-      await get_doc(fid).then(function(data2) {
+      await get_doc(fid).then(function(data1) {
+        var data2 = data1[domain]
         if (data2 != "{}" && data2) {
           var ss = JSON.parse(data2)
           edtext.innerHTML = "Editing JSON: " + domain;

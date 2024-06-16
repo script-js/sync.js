@@ -63,6 +63,7 @@ function handleAuthClick() {
       tokenClient.requestAccessToken({
          prompt: ''
       });
+      location.replace("dash")
    }
 }
 

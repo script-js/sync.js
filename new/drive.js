@@ -25,6 +25,7 @@ async function initializeGapiClient() {
    if (token) {
       gapi.client.setToken(JSON.parse(token));
    }
+   startup()
 }
 
 
@@ -35,7 +36,6 @@ function gisLoaded() {
       callback: ''
    });
    gisInited = true;
-   startup()
 }
 
 

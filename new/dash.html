@@ -171,13 +171,6 @@ async function startup() {
       });
       editor.style.display = "block"
     }
-    async function editorDelete(domain) {
-          var con1 = confirm("Are you sure you want to delete all data from " + domain + "?")
-          if (con1 == true) {
-            removeEntry(domain)
-	    location.reload()
-          }
-    }
 	  function handleSignoutClick() {
    const token = gapi.client.getToken();
    if (token !== null) {

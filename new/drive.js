@@ -136,6 +136,7 @@ function get_doc(id) {
    }
 }
 async function deleteFile(fileId) {
+   console.log("Delete: " + fileId)
    const access_token = gapi.auth.getToken().access_token;
    const url = `https://www.googleapis.com/drive/v3/files/${fileId}`;
    return await fetch(url, {

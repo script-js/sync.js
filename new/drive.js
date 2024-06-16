@@ -45,19 +45,13 @@ function gisLoaded() {
 /**
  *  Sign in the user upon button click.
  */
-function handleAuthClick() {
-	tokenClient.callback = async (resp) => {
-		if (resp.error !== undefined) {
-			throw (resp);
-		}
-                await findFile().then(function (fid) {
-		  if (fid == false) {
-		    uploadFile("{}")
-		  }
-		})
-		startup()
-	};
 
+var token = localStorage.getItem('gapi_token');
+	if (token) {
+		gapi.client.setToken(JSON.parse(token));
+		tokenClient.callback();
+	}
+function handleAuthClick() {
 	if (gapi.client.getToken() === null) {
 		// Prompt the user to select a Google Account and ask for consent to share their data
 		// when establishing a new session.
@@ -67,6 +61,19 @@ function handleAuthClick() {
 		tokenClient.requestAccessToken({ prompt: '' });
 	}
 }
+
+tokenClient.callback = async (resp) => {
+		if (resp.error !== undefined) {
+			throw (resp);
+		}
+		localStorage.setItem('gapi_token', JSON.stringify(gapi.client.getToken()));
+                await findFile().then(function (fid) {
+		  if (fid == false) {
+		    uploadFile("{}")
+		  }
+		})
+		startup()
+	};
 
 /**
  *  Sign out the user upon button click.

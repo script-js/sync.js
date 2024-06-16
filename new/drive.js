@@ -183,3 +183,19 @@ async function addEntriesBySite(jdata, siteid) {
       }
    })
 }
+
+async function removeEntry(domain) {
+   await findFile().then(async function (fid) {
+      if (fid == false) {
+         uploadFile("{}")
+         location.reload()
+      } else {
+         await get_doc(fid).then(function (data) {
+            var d2 = JSON.parse(data)
+            delete d2[domain]
+            deleteFile(fid)
+            uploadFile(JSON.stringify(d2))
+         });
+      }
+   })
+}

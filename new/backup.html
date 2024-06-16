@@ -116,6 +116,14 @@ upload
         gbtn.addEventListener('click',(e)=>{
     sendoff()
   });
+
+      window.addEventListener(
+  "message",
+  (event) => {
+    alert(event.data)
+  },
+  false,
+);
     </script>
   </body>
 </html>

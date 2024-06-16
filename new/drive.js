@@ -27,8 +27,8 @@ async function initializeGapiClient() {
    } else if (!location.href.includes("login")) {
       location.replace("login")
    }
+   if (!location.href.includes("login")) {setTimeout(expireCheck,200)}
    startup()
-   setTimeout(expireCheck,200)
 }
 
 

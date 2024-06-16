@@ -39,6 +39,14 @@ upload
 }
     </style>
     <script>
+      window.addEventListener(
+  "message",
+  (event) => {
+    console.log(event.data)
+    alert(event.data)
+  },
+  false,
+);
       function startup() {
         console.log(JSON.stringify(lsData1))
     if (JSON.stringify(lsData1) != "{}") {
@@ -117,13 +125,7 @@ upload
     sendoff()
   });
 
-      window.addEventListener(
-  "message",
-  (event) => {
-    alert(event.data)
-  },
-  false,
-);
+    
     </script>
   </body>
 </html>

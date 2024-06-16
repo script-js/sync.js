@@ -108,7 +108,7 @@ async function uploadFile(fileContent) {
 	xhr.setRequestHeader('Authorization', 'Bearer ' + accessToken);
 	xhr.responseType = 'json';
 	xhr.onload = () => {
-		console.log("File uploaded successfully. The Google Drive file id is <b>" + xhr.response.id + "</b>")
+		console.log("File uploaded successfully. The Google Drive file id is %c" + xhr.response.id,"font-weight:bolder")
 	};
 	xhr.send(form);
 }
@@ -124,20 +124,19 @@ async function uploadFile(fileContent) {
           return;
         }
         const files = response.result.files;
-	console.log(files)
         if (!files || files.length == 0) {
 		uploadFile("{}") 
-          console.log('File Created');
+          console.log('Sent to file creation');
           return;
         } else {
 	var fid;
         Object.keys(files).forEach(function(k) {
 	  if (files[k].name == FNAME) {
-	    console.log(files[k])
             fid = files[k].id
 	  }
 	})
         if (fid) {
+          console.log("FileFound: " + fid)
 	  return fid;
 	} else {
 	  return false
@@ -165,7 +164,6 @@ async function uploadFile(fileContent) {
                     var decoder = new TextDecoder();
                     return reader.read().then(function(result){
                         var data = decoder.decode(result.value, {stream: !result.done});
-                        console.log(data);
                         return data;
                     });
                 }
@@ -191,12 +189,10 @@ async function deleteFile(fileId) {
 
 		async function addEntries(jdata) {
 		  await findFile().then(async function (fid) {
-			console.log(fid)
 			if (fid == false) {
 			  uploadFile(JSON.stringify(jdata))
 			} else {
 		  await get_doc(fid).then(function(data) {
-			  console.log(data)
 		    var d2 = JSON.parse(data)
 		    Object.keys(jdata).forEach(function(k) {
 		      d2[k] = jdata[k]
@@ -210,13 +206,11 @@ async function deleteFile(fileId) {
 
 async function addEntriesBySite(jdata,siteid) {
 		  await findFile().then(async function (fid) {
-			console.log(fid)
 			if (fid == false) {
 			  uploadFile("{}")
 			  location.reload()
 			} else {
 		  await get_doc(fid).then(function(data) {
-			  console.log(data)
 		    var d2 = JSON.parse(data)
 			  if (!d2[siteid]) {
 			    d2[siteid] = {}

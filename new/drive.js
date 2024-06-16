@@ -208,3 +208,8 @@ async function editorDelete(domain) {
       }
    })
 }
+
+async function expires() {
+  var data = await (await fetch("https://www.googleapis.com/oauth2/v1/tokeninfo?access_token=" + gapi.auth.getToken().access_token)).json();
+  return data.expires_in
+}

@@ -143,7 +143,7 @@ async function deleteFile(fileId) {
       headers: {
          'Authorization': `Bearer ${access_token}`
       }
-   }).then(res => res.json());
+   }).then(res => console.log(res));
 }
 
 async function addEntries(jdata) {
@@ -192,9 +192,9 @@ async function editorDelete(domain) {
       } else {
          await get_doc(fid).then(function (data) {
             var d2 = JSON.parse(data)
+            console.log(d2[domain])
             delete d2[domain]
             console.log(d2)
-            console.log(d2[domain])
             var con1 = confirm("Are you sure you want to delete all data from " + domain + "?")
             if (con1 == true) {
               deleteFile(fid)

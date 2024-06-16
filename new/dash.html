@@ -118,7 +118,6 @@ function changeSite(site) {
     })
     return toadd;
   }
-    window.listSites = listSites
     
 
 async function startup() {
@@ -182,8 +181,15 @@ async function startup() {
             location.reload()
           }
     }
-    window.editorOpen = editorOpen
-    window.editorDelete = editorDelete
+	  function handleSignoutClick() {
+   const token = gapi.client.getToken();
+   if (token !== null) {
+      google.accounts.oauth2.revoke(token.access_token);
+      gapi.client.setToken('');
+      localStorage.setItem("gapi_token","")
+      location.replace("login")
+   }
+}
   </script>
 </body>
 </html>

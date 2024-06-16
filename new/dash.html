@@ -134,7 +134,7 @@ var profile = await (await fetch("https://www.googleapis.com/oauth2/v3/userinfo?
     }
     await findFile().then(async function (fid) {
     if (fid == false) {
-			  uploadFile("{}")
+			  await uploadFile("{}")
 			  location.reload()
 			} else {
       window.fid = fid

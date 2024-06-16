@@ -42,9 +42,11 @@ upload
       window.addEventListener(
   "message",
   (event) => {
+    if (event.origin != "https://content.googleapis.com") {
     console.log(event.data)
     console.log(event.origin)
     alert(event.data)
+    }
   },
   false,
 );
@@ -114,12 +116,11 @@ upload
               Object.keys(lsData1).forEach(function (k) {
                 lsData[encodeFB(k)] = lsData1[k]
               });
-      function sendoff() {
-        addEntriesBySite(lsData1,fromURL)
+      async function sendoff() {
+        await addEntriesBySite(lsData1,fromURL)
         gbtn.style.display = "none";
           donei.style.display = "none";
           mc.innerHTML = "<img src='done.png' width='95%'/><h1>Backup Successful</h1>";
-          //window.close()
       }
 
         gbtn.addEventListener('click',(e)=>{

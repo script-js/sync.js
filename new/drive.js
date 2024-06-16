@@ -21,6 +21,11 @@ async function initializeGapiClient() {
 		discoveryDocs: [DISCOVERY_DOC],
 	});
 	gapiInited = true;
+	var token = localStorage.getItem('gapi_token');
+	if (token) {
+		gapi.client.setToken(JSON.parse(token));
+		tokenClient.callback();
+	}
 }
 
 
@@ -42,12 +47,6 @@ function gisLoaded() {
 	      }
 	});
 	gisInited = true;
-
-	var token = localStorage.getItem('gapi_token');
-	if (token) {
-		gapi.client.setToken(JSON.parse(token));
-		tokenClient.callback();
-	}
 }
 
 

@@ -7,3 +7,7 @@ Do I collect any information from third parties? I do not collect any informatio
 In what situations and with which parties do I share personal information? I do not share personal information
 
 How do I keep your information safe? I do not handle your information. I simply provide an easy way to save data to Google Drive. If your data is leaked, I am not liable.
+
+What do I use your email for? Your email is used to show which account is logged in on the Dashboard
+
+How do you use Google Drive? Sync.js only interacts with the "syncjsdata.json" file

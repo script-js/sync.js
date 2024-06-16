@@ -15,8 +15,6 @@
       if (resp.error !== undefined) {
          throw (resp);
       }
-      // Set the expiration date to 12 hours from now
-      gapi.client.getToken().expiry_date = (new Date()).getTime() + (12 * 60 * 60 * 1000);
       localStorage.setItem('gapi_token', JSON.stringify(gapi.client.getToken()));
       await findFile().then(function (fid) {
          if (fid == false) {
@@ -30,7 +28,7 @@
       // when establishing a new session.
       tokenClient.requestAccessToken({
          prompt: 'consent',
-         expires_in: '30'
+         expires_in: '3600'
       });
    } else {
       // Skip display of account chooser and consent dialog for an existing session.

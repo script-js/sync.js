@@ -29,17 +29,17 @@ function gisLoaded() {
 		client_id: CLIENT_ID,
 		scope: SCOPES,
 		callback: async (resp) => {
-		if (resp.error !== undefined) {
-			throw (resp);
-		}
-		localStorage.setItem('gapi_token', JSON.stringify(gapi.client.getToken()));
-                await findFile().then(function (fid) {
-		  if (fid == false) {
-		    uploadFile("{}")
+		  if (resp.error !== undefined) {
+		    throw (resp);
 		  }
-		})
-		startup()
-	};, // defined later
+		  localStorage.setItem('gapi_token', JSON.stringify(gapi.client.getToken()));
+                  await findFile().then(function (fid) {
+		    if (fid == false) {
+		      uploadFile("{}")
+		    }
+		  })
+		  startup()
+	      }
 	});
 	gisInited = true;
 

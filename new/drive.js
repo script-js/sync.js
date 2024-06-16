@@ -11,17 +11,10 @@ let tokenClient;
 let gapiInited = false;
 let gisInited = false;
 
-/**
- * Callback after api.js is loaded.
- */
 function gapiLoaded() {
 	gapi.load('client', initializeGapiClient);
 }
 
-/**
- * Callback after the API client is loaded. Loads the
- * discovery doc to initialize the API.
- */
 async function initializeGapiClient() {
 	await gapi.client.init({
 		apiKey: API_KEY,
@@ -30,39 +23,12 @@ async function initializeGapiClient() {
 	gapiInited = true;
 }
 
-/**
- * Callback after Google Identity Services are loaded.
- */
+
 function gisLoaded() {
 	tokenClient = google.accounts.oauth2.initTokenClient({
 		client_id: CLIENT_ID,
 		scope: SCOPES,
-		callback: '', // defined later
-	});
-	gisInited = true;
-}
-
-/**
- *  Sign in the user upon button click.
- */
-
-var token = localStorage.getItem('gapi_token');
-	if (token) {
-		gapi.client.setToken(JSON.parse(token));
-		tokenClient.callback();
-	}
-function handleAuthClick() {
-	if (gapi.client.getToken() === null) {
-		// Prompt the user to select a Google Account and ask for consent to share their data
-		// when establishing a new session.
-		tokenClient.requestAccessToken({ prompt: 'consent' });
-	} else {
-		// Skip display of account chooser and consent dialog for an existing session.
-		tokenClient.requestAccessToken({ prompt: '' });
-	}
-}
-
-tokenClient.callback = async (resp) => {
+		callback: async (resp) => {
 		if (resp.error !== undefined) {
 			throw (resp);
 		}
@@ -73,7 +39,29 @@ tokenClient.callback = async (resp) => {
 		  }
 		})
 		startup()
-	};
+	};, // defined later
+	});
+	gisInited = true;
+
+	var token = localStorage.getItem('gapi_token');
+	if (token) {
+		gapi.client.setToken(JSON.parse(token));
+		tokenClient.callback();
+	}
+}
+
+
+
+function handleAuthClick() {
+	if (gapi.client.getToken() === null) {
+		// Prompt the user to select a Google Account and ask for consent to share their data
+		// when establishing a new session.
+		tokenClient.requestAccessToken({ prompt: 'consent' });
+	} else {
+		// Skip display of account chooser and consent dialog for an existing session.
+		tokenClient.requestAccessToken({ prompt: '' });
+	}
+}
 
 /**
  *  Sign out the user upon button click.

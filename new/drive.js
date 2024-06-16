@@ -28,6 +28,7 @@ async function initializeGapiClient() {
       location.replace("login")
    }
    startup()
+   setTimeout(expireCheck,200)
 }
 
 
@@ -209,7 +210,10 @@ async function editorDelete(domain) {
    })
 }
 
-async function expires() {
+async function expireCheck() {
   var data = await (await fetch("https://www.googleapis.com/oauth2/v1/tokeninfo?access_token=" + gapi.auth.getToken().access_token)).json();
-  return data.expires_in
+  if (data.error == "invalid_token") {
+     localStorage.setItem("gapi_token","")
+     location.replace("login")
+  }
 }

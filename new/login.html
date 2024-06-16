@@ -21,7 +21,11 @@
             uploadFile("{}")
          }
       })
-       location.replace("dash")
+       if (redirect) {
+      location.replace(atob(redirect.replaceAll("%2B","+")))
+    } else {
+      location.replace("dash")
+    }
    }
    if (gapi.client.getToken() === null) {
       // Prompt the user to select a Google Account and ask for consent to share their data
@@ -41,6 +45,8 @@
           function startup() {
               btn.style.display = "inline"
           }
+
+          var redirect = new URLSearchParams(window.location.search).get("handoff")
       </script>
       <script src="drive.js"></script>
 <script async defer src="https://apis.google.com/js/api.js"

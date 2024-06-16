@@ -94,7 +94,7 @@ function encodeFB(text2) {
   const db = getDatabase();
   var urijson = new URLSearchParams(window.location.search).get("data");
   var url2 = new URLSearchParams(window.location.search).get("fromURL");
-  var lsData1 = JSON.parse(atob(urijson.replaceAll("&plus;","+")));  
+  var lsData1 = JSON.parse(atob(urijson.replaceAll("%2B","+")));  
               function extractHostname(url) {
       let hostname;
       if (url.indexOf("://") > -1) {

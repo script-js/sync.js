@@ -6,7 +6,7 @@ var FNAME = "syncjsdata.json"
 const DISCOVERY_DOC = 'https://www.googleapis.com/discovery/v1/apis/drive/v3/rest';
 
 // Set API access scope before proceeding authorization request
-const SCOPES = 'https://www.googleapis.com/auth/drive.file';
+const SCOPES = ['https://www.googleapis.com/auth/drive.file','profile','email'];
 let tokenClient;
 let gapiInited = false;
 let gisInited = false;

@@ -175,9 +175,9 @@ async function startup() {
           var con1 = confirm("Are you sure you want to delete all data from " + domain + "?")
           if (con1 == true) {
             var toremove = {}
-            toremove[domain] = {}
-		  console.log(toremove)
+            toremove[domain] = null
             addEntries(toremove)
+	    location.reload()
           }
     }
 	  function handleSignoutClick() {

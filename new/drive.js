@@ -85,8 +85,7 @@ async function findFile() {
    }
    const files = response.result.files;
    if (!files || files.length == 0) {
-      uploadFile("{}")
-      console.log('Sent to file creation');
+      console.log('no files');
       return;
    } else {
       var fid;

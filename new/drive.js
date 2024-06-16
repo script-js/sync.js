@@ -36,12 +36,7 @@ function gisLoaded() {
       callback: ''
    });
    gisInited = true;
-   await findFile().then(function (fid) {
-         if (fid == false) {
-            uploadFile("{}")
-         }
-      })
-      startup()
+   startup()
 }
 
 

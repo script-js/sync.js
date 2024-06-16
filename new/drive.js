@@ -84,10 +84,6 @@ async function findFile() {
       return;
    }
    const files = response.result.files;
-   if (!files || files.length == 0) {
-      console.log('no files');
-      return;
-   } else {
       var fid;
       Object.keys(files).forEach(function (k) {
          if (files[k].name == FNAME) {
@@ -99,7 +95,6 @@ async function findFile() {
          return fid;
       } else {
          return false
-      }
    }
 }
 

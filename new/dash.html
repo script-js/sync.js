@@ -128,9 +128,9 @@ async function startup() {
       var extURL = "<a href='https://chrome.google.com/webstore/detail/syncjs/jobnjgnmbknekedfmaafenkejolhfgje' target='_blank'>Download Chrome Extension</a>"
     }
     if (!extURL) {
-      homeC.innerHTML = "<p></p><img src='icon.png' /><h1>Welcome, </h1><button onclick='handleSignoutClick()'><span class='material-symbols-outlined'>logout</span></button><p>Select a tab above to get started.</p>";
+      homeC.innerHTML = "<p></p><img src='icon.png' /><h1>Welcome</h1><button onclick='handleSignoutClick()'><span class='material-symbols-outlined'>logout</span></button><p>Select a tab above to get started.</p>";
     } else {
-      homeC.innerHTML = "<p></p><img src='icon.png' /><h1>Welcome, </h1><button onclick='handleSignoutClick()'><span class='material-symbols-outlined'>logout</span></button><p>Select a tab above to get started.</p><br><p>" + extURL + "</p>";
+      homeC.innerHTML = "<p></p><img src='icon.png' /><h1>Welcome</h1><button onclick='handleSignoutClick()'><span class='material-symbols-outlined'>logout</span></button><p>Select a tab above to get started.</p><br><p>" + extURL + "</p>";
     }
     await findFile().then(async function (fid) {
     if (fid == false) {

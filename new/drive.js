@@ -33,7 +33,10 @@ function gisLoaded() {
 	tokenClient = google.accounts.oauth2.initTokenClient({
 		client_id: CLIENT_ID,
 		scope: SCOPES,
-		callback: async (resp) => {
+		callback: ''
+	});
+	gisInited = true;
+	tokenClient.callback = async (resp) => {
 		  if (resp.error !== undefined) {
 		    throw (resp);
 		  }
@@ -45,8 +48,6 @@ function gisLoaded() {
 		  })
 		  startup()
 	      }
-	});
-	gisInited = true;
 }
 
 

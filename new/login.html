@@ -8,7 +8,7 @@
   <body style="width:100%;height:100%;background-image: url('icon.png');background-color: #464fb0;">
     <div class="modal-content" style="height:80%;align-items:center;text-align:center;" id="ibox">
 <p></p>
-<img src="icon.png" style="margin:auto" /><h1>Log In</h1><button class="addngbtns" onclick="handleAuthClick()"><span class='material-symbols-outlined'>login</span></button></div>
+<img src="icon.png" style="margin:auto" /><h1>Log In</h1><button id="btn" class="addngbtns" style="display:none" onclick="handleAuthClick()"><span class='material-symbols-outlined'>login</span></button></div>
       <script>
           function handleAuthClick() {
    tokenClient.callback = async (resp) => {
@@ -37,34 +37,11 @@
    }
 }
 
-          function gapiLoaded() {
-   gapi.load('client', initializeGapiClient);
-}
-
-async function initializeGapiClient() {
-   await gapi.client.init({
-      apiKey: API_KEY,
-      discoveryDocs: [DISCOVERY_DOC],
-   });
-   gapiInited = true;
-   var token = localStorage.getItem('gapi_token');
-   if (token) {
-      gapi.client.setToken(JSON.parse(token));
-   } else {
-      location.replace("login")
-   }
-}
-
-
-function gisLoaded() {
-   tokenClient = google.accounts.oauth2.initTokenClient({
-      client_id: CLIENT_ID,
-      scope: SCOPES,
-      callback: ''
-   });
-   gisInited = true;
-}
+          function startup() {
+              btn.style.display = "block"
+          }
       </script>
+      <script src="drive.js"></script>
 <script async defer src="https://apis.google.com/js/api.js"
         onload="gapiLoaded()"></script>
     <script async defer src="https://accounts.google.com/gsi/client"

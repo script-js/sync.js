@@ -70,7 +70,7 @@ ul.topnav li.right {float: right;}
   <div id="dataC" style="display:none">Loading...</div>
   <div id="setupC" style="display:none">
     <p>Drag this link into your bookmarks bar:</p>
-    <a href='javascript:try {void(window.open("https://sync-js.pages.dev/backup?fromURL=" + btoa(location.href) + "&data=" + btoa(JSON.stringify(localStorage)).replaceAll("+","%2B"),"","width=500,height=900"))} catch(error) {alert(error)}'>Back Up</a>
+    <a href='javascript:try {void(window.open("https://sync-js.pages.dev/backup?fromURL=" + btoa(location.href) + "&data=" + btoa(JSON.stringify(localStorage)).replaceAll("+",atob("JTJC")),"","width=500,height=900"))} catch(error) {alert(error)}'>Back Up</a>
         |
         <a href='javascript:var sjswin123 = window.open("https://sync-js.pages.dev/get?url=" + btoa(location.href),"","width=500,height=900"); var sjstimer = setInterval(function() { if(sjswin123.closed) { clearInterval(sjstimer); var sjsSYSjson = JSON.parse(prompt("Paste Data:"));Object.keys(sjsSYSjson).forEach(function (k) {localStorage.setItem(k,sjsSYSjson[k])}) } }, 1000)'>Restore</a>
 </div>

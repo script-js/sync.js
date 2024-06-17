@@ -36,6 +36,8 @@ function gisLoaded() {
    tokenClient = google.accounts.oauth2.initTokenClient({
       client_id: CLIENT_ID,
       scope: SCOPES,
+      access_type: 'offline',
+      expires_in: 3600,
       callback: ''
    });
    gisInited = true;

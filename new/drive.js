@@ -164,6 +164,7 @@ async function addEntriesBySite(jdata, siteid) {
    await findFile().then(async function (fid) {
       if (fid == false) {
          await uploadFile("{}")
+         alert("Storage file not found. Press OK to reload.")
          setTimeout(function() {location.reload()},200)
       } else {
          await get_doc(fid).then(function (data) {

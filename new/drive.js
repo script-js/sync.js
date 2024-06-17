@@ -89,6 +89,7 @@ async function findFile() {
          if (files[k].name == FNAME) {
             if (fid) {
                var combine = {};
+               console.log(combine)
                await get_doc(fid).then(function(data1) {
                   var data2 = JSON.parse(data1)
                   Object.keys(data2).forEach(function(k) {
@@ -101,6 +102,7 @@ async function findFile() {
                      combine[k] = data2[k]
                   })
                })
+               console.log(combine)
                deleteFile(fid)
                uploadFile(JSON.stringify(combine))
             } else {

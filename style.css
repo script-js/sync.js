@@ -46,7 +46,7 @@ button:hover {
   content: "arrow_drop_up"
 }
 
-    @media (prefers-dark-interface) { 
+    @media (prefers-color-scheme: dark) { 
       body {background-color:#212121}
       * {color: white}
     }

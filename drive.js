@@ -37,7 +37,7 @@ function gisLoaded() {
       client_id: CLIENT_ID,
       scope: SCOPES,
       access_type: 'offline',
-      expires_in: 3600,
+      expires_in: 43200,
       callback: ''
    });
    gisInited = true;

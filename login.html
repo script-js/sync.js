@@ -62,13 +62,14 @@
 
           function startup() {
               btn.style.display = "flex"
+              if (gapi.client.getToken() != null) {
+              location.replace("dash")
+          }
           }
 
           var redirect = new URLSearchParams(window.location.search).get("handoff")
 
-          if (gapi.client.getToken() != null) {
-              location.replace("dash")
-          }
+          
       </script>
       <script src="drive.js"></script>
 <script async defer src="https://apis.google.com/js/api.js"

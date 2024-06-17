@@ -10,4 +10,4 @@ How do I keep your information safe? I do not handle your information. I simply 
 
 How do you use Google Drive? Sync.js only interacts with the "syncjsdata.json" file
 
-How do we use the your Google profile info? We use it to show you what user is logged in.
+How do I use the your Google profile info? I use it to show you what user is logged in.

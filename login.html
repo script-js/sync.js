@@ -50,6 +50,7 @@
       // when establishing a new session.
       tokenClient.requestAccessToken({
          prompt: 'consent',
+         access_type: 'offline',
          expires_in: '3600'
       });
    } else {

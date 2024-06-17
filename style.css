@@ -45,3 +45,8 @@ button:hover {
 .dropdownliFocus.material-symbols-outlined {
   content: "arrow_drop_up"
 }
+
+    @media (prefers-dark-interface) { 
+      body {background-color:#212121}
+      * {color: white}
+    }

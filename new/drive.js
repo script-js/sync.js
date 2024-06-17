@@ -163,10 +163,8 @@ async function addEntries(jdata) {
 async function addEntriesBySite(jdata, siteid) {
    await findFile().then(async function (fid) {
       if (fid == false) {
-         console.log("before")
          await uploadFile("{}")
-         console.log("after")
-         location.reload()
+         setTimeout(function() {location.reload()},200)
       } else {
          await get_doc(fid).then(function (data) {
             var d2 = JSON.parse(data)

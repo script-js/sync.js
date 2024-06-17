@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="../style.css" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
   <title>Dashboard | sync.js</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -72,8 +72,13 @@ ul.topnav li.right {float: right;}
     <p>Drag this link into your bookmarks bar:</p>
     <a href='javascript:try {void(window.open("https://sync-js.pages.dev/backup?fromURL=" + btoa(location.href) + "&data=" + btoa(JSON.stringify(localStorage)).replaceAll("+",atob("JTJC")),"","width=500,height=900"))} catch(error) {alert(error)}'>Back Up</a>
         |
-        <a href='javascript:var sjswin123 = window.open("https://sync-js.pages.dev/get?url=" + btoa(location.href),"","width=500,height=900"); var sjstimer = setInterval(function() { if(sjswin123.closed) { clearInterval(sjstimer); var sjsSYSjson = JSON.parse(prompt("Paste Data:"));Object.keys(sjsSYSjson).forEach(function (k) {localStorage.setItem(k,sjsSYSjson[k])}) } }, 1000)'>Restore</a>
+        <a href='javascript:var sjswin123 = window.open("https://sync-js.pages.dev/get?url=" + btoa(location.href),"","width=500,height=900"); var sjstimer = setInterval(function() { if(sjswin123.closed) { clearInterval(sjstimer); var sjsSYSjson = JSON.parse(prompt("Paste Data:"));Object.keys(sjsSYSjson).forEach(function (k) {localStorage.setItem(k,sjsSYSjson[k])}); location.reload() } }, 1000)'>Restore</a>
 </div>
+<script src="drive.js"></script>
+<script async defer src="https://apis.google.com/js/api.js"
+        onload="gapiLoaded()"></script>
+    <script async defer src="https://accounts.google.com/gsi/client"
+        onload="gisLoaded()"></script>
 <script>
 var currentTab = "home";
 function tabChange(tab) {
@@ -100,131 +105,83 @@ function changeSite(site) {
   }
 }
 </script>
-  <script type="module">
-  // Import the functions you need from the SDKs you need
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-  import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-  import { getDatabase, ref, set, get, child } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
-  // TODO: Add SDKs for Firebase products that you want to use
-  // https://firebase.google.com/docs/web/setup#available-libraries
-
-  // Your web app's Firebase configuration
-  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-
-  const firebaseConfig = {
-
-    apiKey: "AIzaSyDWGbCICgDCm6XLz6gvuxnZTbsxACm-Fx4",
-
-    authDomain: "sync-js-6aa9d.firebaseapp.com",
-
-    projectId: "sync-js-6aa9d",
-
-    storageBucket: "sync-js-6aa9d.appspot.com",
-
-    messagingSenderId: "856081502457",
-
-    appId: "1:856081502457:web:8579832305cceae2e89228"
-
-  }; 
-  const app = initializeApp(firebaseConfig);
-  const auth = getAuth();
-  const dbRef = ref(getDatabase());
-  const db = getDatabase()
-
-  function decodeFB(text2) {
-     var text1 = text2.replaceAll("%2E",".").replaceAll("%23","#").replaceAll("%24","$").replaceAll("%2F","/").replaceAll("%5B","[").replaceAll("%5D","]").replaceAll('%22','"').replaceAll("%3A",":")
-     return text1;
-   }  
-
-    function encodeFB(text2) {
-     var text1 = text2.replaceAll(".","%2E").replaceAll("#","%23").replaceAll("$","%24").replaceAll("/","%2F").replaceAll("[","%5B").replaceAll("]","%5D").replaceAll('"',"%22").replaceAll(":","%3A")
-     return text1;
-   }
-    
+  <script>    
   function listSites(jarray) {
     var toadd = "<p></p>";
     Object.keys(jarray).forEach(function (k) {
       var toadd2 = "";
       var arrTemp = jarray[k];
-      console.log(arrTemp)
       Object.keys(arrTemp).forEach(function (k2) {
-        toadd2 = toadd2 + "<p>" + decodeFB(k2) + ": " + arrTemp[k2] + "</p>"
+        toadd2 = toadd2 + "<p>" + k2 + ": " + arrTemp[k2] + "</p>"
       });
-      toadd = toadd + "<a class='dropdownli' onclick='changeSite(this)' id='" + decodeFB(k) + "'>" + decodeFB(k) + " <span class='material-symbols-outlined'>arrow_drop_down</span></a><button style='width:inherit' onclick='editorOpen(" + '"' + decodeFB(k) + '"' + ")'><span class='material-symbols-outlined'>edit</span></button>&nbsp;<button style='width:inherit' onclick='editorDelete(" + '"' + decodeFB(k) + '"' + ")'><span class='material-symbols-outlined'>delete</span></button><div style='display:none;padding:0 50px;' id='" + decodeFB(k) + "C'>" + toadd2 + "</div><br>";
+      toadd = toadd + "<a class='dropdownli' onclick='changeSite(this)' id='" + k + "'>" + k + " <span class='material-symbols-outlined'>arrow_drop_down</span></a><button style='width:inherit' onclick='editorOpen(" + '"' + k + '"' + ")'><span class='material-symbols-outlined'>edit</span></button>&nbsp;<button style='width:inherit' onclick='editorDelete(" + '"' + k + '"' + ")'><span class='material-symbols-outlined'>delete</span></button><div style='display:none;padding:0 50px;' id='" + k + "C'>" + toadd2 + "</div><br>";
     })
     return toadd;
   }
-    window.listSites = listSites
     
-onAuthStateChanged(auth, (user) => {
-  if (user) {
-    window.fbuid1 = user.uid;
+
+async function startup() {
     if (getBrowser() == "FIREFOX") {
       var extURL = "<a href='https://addons.mozilla.org/en-US/firefox/addon/sync-js/' target='_blank'>Download Firefox Addon</a>"
     } else if (getBrowser() == "CHROMIUM") {
       var extURL = "<a href='https://chrome.google.com/webstore/detail/syncjs/jobnjgnmbknekedfmaafenkejolhfgje' target='_blank'>Download Chrome Extension</a>"
     }
+var profile = await (await fetch("https://www.googleapis.com/oauth2/v3/userinfo?access_token=" + gapi.auth.getToken().access_token)).json();
     if (!extURL) {
-      homeC.innerHTML = "<p></p><img src='icon.png' /><h1>Welcome, " + user.email + "</h1><button onclick='userLogout()'><span class='material-symbols-outlined'>logout</span></button><p>Select a tab above to get started.</p>";
+      homeC.innerHTML = "<p></p><img src='" + profile.picture + "' width='100' style='border-radius:100%' /><h1>Welcome, " + profile.given_name + "</h1><button onclick='handleSignoutClick()'><span class='material-symbols-outlined'>logout</span></button><p>Select a tab above to get started.</p>";
     } else {
-      homeC.innerHTML = "<p></p><img src='icon.png' /><h1>Welcome, " + user.email + "</h1><button onclick='userLogout()'><span class='material-symbols-outlined'>logout</span></button><p>Select a tab above to get started.</p><br><p>" + extURL + "</p>";
+      homeC.innerHTML = "<p></p><img src='" + profile.picture + "' width='100' style='border-radius:100%' /><h1>Welcome, " + profile.given_name + "</h1><button onclick='handleSignoutClick()'><span class='material-symbols-outlined'>logout</span></button><p>Select a tab above to get started.</p><br><p>" + extURL + "</p>";
     }
-    get(child(dbRef, "users/" + user.uid)).then((snapshot) => {
-      if (snapshot.exists()) {
-        dataC.innerHTML = listSites(snapshot.val());
-        window.lstestarr = snapshot.val();
+    await findFile().then(async function (fid) {
+    if (fid == false) {
+			  await uploadFile("{}")
+			  setTimeout(function() {location.reload()},200)
+			} else {
+      window.fid = fid
+		  await get_doc(fid).then(function(data2) {
+      if (data2 != "{}" && data2) {
+        var data1 = JSON.parse(data2)
+        dataC.innerHTML = listSites(data1);
+        window.lstestarr = data1;
       } else {
         dataC.innerHTML = "<h1 style='text-align:center'>No Data Yet!</h1>"
       }
-    });
-  } else {
-    location.replace("login")
-  }
-});
-    function userLogout() {
-      signOut(auth).then(() => {
-        location.replace("/")
-      }).catch((error) => {
-        alert(error)
-      });
+      })
+    }})
     }
-    window.userLogout = userLogout;
 
-    function editorOpen(domain) {
-      get(child(dbRef, "users/" + fbuid1 + "/" + encodeFB(domain))).then((snapshot) => {
-        if (snapshot.exists()) {
-          var ss = snapshot.val()
+    async function editorOpen(domain) {
+      await get_doc(fid).then(function(data1) {
+        var data2 = JSON.parse(data1)[domain]
+        if (data2 != {} && data2) {
           edtext.innerHTML = "Editing JSON: " + domain;
-          editorText.innerHTML = JSON.stringify(ss);
+          editorText.innerHTML = JSON.stringify(data2);
           editorSave.onclick = function() {
             try {
-              var toset = JSON.parse(editorText.value)
+              var toset = {}
+              toset[domain] = JSON.parse(editorText.value)
             } catch (error) {
               alert(error)
             }
             if (toset) {
-              set(ref(db, 'users/' + fbuid1 + "/" + encodeFB(domain)), toset)
-              location.reload()
+              addEntries(toset)
+              alert("Saved Successfully")
+	      startup()
             }
           }
         }
       });
       editor.style.display = "block"
     }
-    function editorDelete(domain) {
-      get(child(dbRef, "users/" + fbuid1 + "/" + encodeFB(domain))).then((snapshot) => {
-        if (snapshot.exists()) {
-          var ss = snapshot.val()
-          var con1 = confirm("Are you sure you want to delete all data from " + domain + "?")
-          if (con1 == true) {
-            set(ref(db, 'users/' + fbuid1 + "/" + encodeFB(domain)), {})
-            location.reload()
-          }
-        }
-      });
-    }
-    window.editorOpen = editorOpen
-    window.editorDelete = editorDelete
+	  function handleSignoutClick() {
+   const token = gapi.client.getToken();
+   if (token !== null) {
+      google.accounts.oauth2.revoke(token.access_token);
+      gapi.client.setToken('');
+      localStorage.setItem("gapi_token","")
+      location.replace("login")
+   }
+}
   </script>
 </body>
 </html>

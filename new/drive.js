@@ -91,12 +91,14 @@ async function findFile() {
                var combine = {};
                console.log(combine)
                await get_doc(fid).then(function(data1) {
+                  console.log(data1)
                   var data2 = JSON.parse(data1)
                   Object.keys(data2).forEach(function(k) {
                      combine[k] = data2[k]
                   })
                })
                await get_doc(files[k].id).then(function(data1) {
+                  console.log(data1)
                   var data2 = JSON.parse(data1)
                   Object.keys(data2).forEach(function(k) {
                      combine[k] = data2[k]

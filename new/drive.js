@@ -88,6 +88,7 @@ async function findFile() {
       Object.keys(files).forEach(async function (k) {
          if (files[k].name == FNAME) {
             if (fid) {
+               alert("Duplicate data file found. Cleaning up...")
                var combine = {};
                console.log(combine)
                await get_doc(fid).then(function(data1) {

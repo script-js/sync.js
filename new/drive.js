@@ -87,7 +87,25 @@ async function findFile() {
       var fid;
       Object.keys(files).forEach(function (k) {
          if (files[k].name == FNAME) {
-            fid = files[k].id
+            if (fid) {
+               var combine = {};
+               await get_doc(fid).then(function(data1) {
+                  var data2 = JSON.parse(data1)
+                  Object.keys(data2).forEach(function(k) {
+                     combine[k] = data2[k]
+                  })
+               })
+               await get_doc(files[k].id).then(function(data1) {
+                  var data2 = JSON.parse(data1)
+                  Object.keys(data2).forEach(function(k) {
+                     combine[k] = data2[k]
+                  })
+               })
+               deleteFile(fid)
+               uploadFile(JSON.stringify(combine))
+            } else {
+              fid = files[k].id
+            }
          }
       })
       if (fid) {

@@ -134,10 +134,8 @@ var profile = await (await fetch("https://www.googleapis.com/oauth2/v3/userinfo?
     }
     await findFile().then(async function (fid) {
     if (fid == false) {
-	    console.log("beforedash")
 			  await uploadFile("{}")
-	    console.log("afterdash")
-			  location.reload()
+			  setTimeout(function() {location.reload()},200)
 			} else {
       window.fid = fid
 		  await get_doc(fid).then(function(data2) {

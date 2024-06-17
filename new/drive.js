@@ -106,6 +106,7 @@ async function findFile() {
                })
                console.log(combine)
                deleteFile(fid)
+               deleteFile(files[k].id)
                uploadFile(JSON.stringify(combine))
             } else {
               fid = files[k].id

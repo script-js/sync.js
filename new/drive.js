@@ -85,7 +85,7 @@ async function findFile() {
    }
    const files = response.result.files;
       var fid;
-      Object.keys(files).forEach(function (k) {
+      Object.keys(files).forEach(async function (k) {
          if (files[k].name == FNAME) {
             if (fid) {
                var combine = {};

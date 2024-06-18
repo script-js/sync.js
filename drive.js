@@ -27,7 +27,7 @@ async function initializeGapiClient() {
    } else if (!location.href.includes("login")) {
       location.replace("login?handoff=" + btoa(location.href).replaceAll("+","%2B"))
    }
-   if (!location.href.includes("login")) {setTimeout(expireCheck,200)}
+   if (!location.href.includes("login")) {setInterval(expireCheck,500)}
    startup()
 }
 

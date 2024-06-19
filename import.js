@@ -15,7 +15,7 @@ var sjs = {
   showDot: function() {
     var sjsInjection = document.createElement("div")
       sjsInjection.innerHTML = `
-      <div style="position: absolute;right:50px;bottom:50px;"><img src="https://sync-js.pages.dev/icon.png" width="20" style="border: 5px solid rgba(0, 0, 0, 0.45);border-radius:20px;cursor:pointer;" onclick="sjs.openDialog()" title="sync.js" /></div>
+      <div style="position: fixed;right:50px;bottom:50px;"><img src="https://sync-js.pages.dev/icon.png" width="20" style="border: 5px solid rgba(0, 0, 0, 0.45);border-radius:20px;cursor:pointer;" onclick="sjs.openDialog()" title="sync.js" /></div>
       `;
       document.documentElement.appendChild(sjsInjection);
   },

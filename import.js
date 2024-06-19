@@ -29,7 +29,7 @@ var sjs = {
     } else {
       lsdata = JSON.stringify(localStorage)
     }
-      window.open("https://sync-js.pages.dev/backup?fromURL=" + btoa(location.href) + "&data=" + btoa(lsdata).replaceAll("+","%2B"),"","width=500,height=900")
+      window.open("https://sync-js.pages.dev/backup?fromURL=" + btoa(location.href) + "&data=" + btoa(lsdata).replaceAll("+",,atob("JTJC")),"","width=500,height=900")
     } catch(err) {
       alert(err)
     }

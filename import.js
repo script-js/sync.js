@@ -43,6 +43,7 @@ var sjs = {
         Object.keys(sjsSYSjson).forEach(function (k) {
           localStorage.setItem(k,sjsSYSjson[k])
         }) 
+        location.reload()
       } 
     }, 1000)
   },

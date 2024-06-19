@@ -27,9 +27,9 @@ var sjs = {
         lsdata[custom[k]] = localStorage.getItem(custom[k])
       })
     } else {
-      lsdata = JSON.stringify(localStorage)
+      lsdata = localStorage
     }
-      window.open("https://sync-js.pages.dev/backup?fromURL=" + btoa(location.href) + "&data=" + btoa(lsdata).replaceAll("+",atob("JTJC")),"","width=500,height=900")
+      window.open("https://sync-js.pages.dev/backup?fromURL=" + btoa(location.href) + "&data=" + btoa(JSON.stringify(lsdata)).replaceAll("+",atob("JTJC")),"","width=500,height=900")
     } catch(err) {
       alert(err)
     }

@@ -43,14 +43,12 @@ upload
   "message",
   (event) => {
     if (event.origin != "https://content.googleapis.com") {
-    console.log(event.data)
-    console.log(event.origin)
-    alert(event.data)
+      sessionStorage.setItem("currentdata",event.data)
     }
   },
   false,
 );
-      function startup() {
+      function startup2() {
         console.log(JSON.stringify(lsData1))
     if (JSON.stringify(lsData1) != "{}") {
       gbtn.style.display = "block";
@@ -62,6 +60,15 @@ upload
     } else {
       mc.innerHTML = "<h1>No Data</h1>"
     }
+      }
+
+      function startup() {
+        var inter = setInterval(function() {
+          if (sessionStorage.getItem("currentdata")) {
+            lsData1 = JSON.parse(sessionStorage.getItem("currentdata"))
+            clearInterval(inter)
+          }
+        },100)
       }
     </script>
 <script src="drive.js"></script>
@@ -127,12 +134,6 @@ upload
         gbtn.addEventListener('click',(e)=>{
     sendoff()
   });
-
-    window.addEventListener('message', function(event) {
-            console.log('Child received message:', event.data);
-            console.log(event.origin)
-            event.source.postMessage('Hello Parent!', event.origin);
-        }, false);
     </script>
   </body>
 </html>

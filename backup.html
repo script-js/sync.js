@@ -123,6 +123,7 @@ upload
   }
   var fromURL = extractHostname(atob(url2))
       async function sendoff() {
+        console.log(lsData1)
         gbtn.style.display = "none"
         mc.innerHTML = "<h1>Uploading...</h1>"
         await addEntriesBySite(lsData1,fromURL)

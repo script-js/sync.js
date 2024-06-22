@@ -56,7 +56,7 @@ upload
     if (JSON.stringify(lsData1) != "{}") {
       var toaddHTML = "";
               Object.keys(lsData1).forEach(function (k) {
-                toaddHTML = toaddHTML + k + ": " + lsData1[k] + "<br>";
+                toaddHTML = toaddHTML + k + ": " + atob(lsData1[k]) + "<br>";
               });
               var lsData = {};
               Object.keys(lsData1).forEach(function (k) {

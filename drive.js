@@ -205,6 +205,7 @@ async function addEntriesBySite(jdata, siteid) {
                d2[siteid][k] = jdata[k]
             })
             deleteFile(fid)
+            JSON.stringify(d2)
             uploadFile(JSON.stringify(d2))
          });
       }

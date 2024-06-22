@@ -67,6 +67,7 @@ upload
           if (sessionStorage.getItem("currentdata")) {
             lsData1 = JSON.parse(sessionStorage.getItem("currentdata"))
             clearInterval(inter)
+            startup2()
           }
         },100)
       }

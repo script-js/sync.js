@@ -93,7 +93,12 @@ upload
     <script>
       var urijson = new URLSearchParams(window.location.search).get("data");
   var url2 = new URLSearchParams(window.location.search).get("fromURL");
-  var lsData1 = JSON.parse(atob(urijson.replaceAll("%2B","+")));  
+      var lsData1;
+      try {
+        lsData1 = JSON.parse(atob(urijson.replaceAll("%2B","+")));  
+      } catch(error) {
+        console.log("noURI")
+      }
               function extractHostname(url) {
       let hostname;
       if (url.indexOf("://") > -1) {

@@ -121,7 +121,7 @@ function changeSite(site) {
       var toadd2 = "";
       var arrTemp = jarray[k];
       Object.keys(arrTemp).forEach(function (k2) {
-        toadd2 = toadd2 + "<p>" + k2 + ": " + arrTemp[k2] + "</p>"
+        toadd2 = toadd2 + "<p>" + k2 + ": " + atob(arrTemp[k2]) + "</p>"
       });
       toadd = toadd + "<a class='dropdownli' onclick='changeSite(this)' id='" + k + "'>" + k + " <span class='material-symbols-outlined'>arrow_drop_down</span></a><button style='width:inherit' onclick='editorOpen(" + '"' + k + '"' + ")'><span class='material-symbols-outlined'>edit</span></button>&nbsp;<button style='width:inherit' onclick='editorDelete(" + '"' + k + '"' + ")'><span class='material-symbols-outlined'>delete</span></button><div style='display:none;padding:0 50px;' id='" + k + "C'>" + toadd2 + "</div><br>";
     })

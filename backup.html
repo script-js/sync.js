@@ -128,7 +128,11 @@ upload
     sendoff()
   });
 
-    
+    window.addEventListener('message', function(event) {
+            console.log('Child received message:', event.data);
+            console.log(event.origin)
+            event.source.postMessage('Hello Parent!', event.origin);
+        }, false);
     </script>
   </body>
 </html>

@@ -9,23 +9,11 @@
     <script src='https://exactalytics.pages.dev/import.js'></script>
 <script>analyticsInit('sync.js','3moxYInXFN6fp')</script>
   </head>
-  <style>
-    #copyIP {
-      color: white;
-      border: none;
-      width: 1px
-    }
-
-    #copyIP:selection {
-      background:none
-    }
-  </style>
   <body style="background-image: url('icon.png');background-color: #464fb0;">
     <div class="modal-content" style="height:80%;align-items:center;text-align:center;">
       <p></p>
       <img src="icon.png" style="margin:auto" id="nd" />
       <div id="mc"><h1>Getting Data...</h1></div>
-      <input id="copyIP"/>
       <p></p>
     </div>
     <script>
@@ -47,7 +35,7 @@
 
 	   
 	    
-	    
+	    var datatosend;
       async function startup() {
         await findFile().then(async function (fid) {
     if (fid == false) {
@@ -59,8 +47,8 @@
   var url1 = extractHostname(atob(url2))
 			  var data1 = JSON.parse(data2)
   if (data1[url1]) {
-      copyIP.value = JSON.stringify(data1[url1])
-      mc.innerHTML = '<h1>Restore Data</h1><p>Would you like to restore data?</p><button style="margin:auto;" id="gbtn" onclick="copy()"><span class="material-symbols-outlined">check</span></button> <button style="margin:auto;" id="gbtn" onclick="window.close()"><span class="material-symbols-outlined">close</span></button>';
+      datatosend = JSON.stringify(data1[url1])
+      mc.innerHTML = '<h1>Restore Data</h1><p>Would you like to restore data?</p><button style="margin:auto;" id="gbtn" onclick="sendData()"><span class="material-symbols-outlined">check</span></button> <button style="margin:auto;" id="gbtn" onclick="window.close()"><span class="material-symbols-outlined">close</span></button>';
     } else {
       mc.innerHTML = "<h1>No Data</h1>"
     }
@@ -74,17 +62,14 @@
     <script async defer src="https://accounts.google.com/gsi/client"
         onload="gisLoaded()"></script>
     <script>
-      function copy() {
+      function sendData() {
         mc.innerHTML = "<img src='done.png' width='95%' /><h1>Please Close this Window</h1>";
         nd.style.display = "none";
-        copyIP.style.display = "none";
-	setTimeout(postData1,100)
+	setTimeout(function() {
+	  window.opener.postMessage(datatosend,"*")
+          window.close()
+	},100)
       }
-
-	    function postData1() {
-		window.opener.postMessage(copyIP.value,"*")
-                window.close()
-	    }
     </script>
     
       </body>

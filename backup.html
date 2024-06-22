@@ -49,6 +49,9 @@ upload
   false,
 );
       function startup2() {
+        Object.keys(lsData1).forEach(function(k) {
+          lsData1[k] = btoa(lsData1[k])
+        })
         console.log(JSON.stringify(lsData1))
     if (JSON.stringify(lsData1) != "{}") {
       var toaddHTML = "";

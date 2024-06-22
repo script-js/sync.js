@@ -43,25 +43,16 @@ upload
   "message",
   (event) => {
     if (event.origin != "https://content.googleapis.com") {
-      sessionStorage.setItem("currentdata",event.data)
+    console.log(event.data)
+    console.log(event.origin)
+    alert(event.data)
     }
   },
   false,
 );
-      function startup2() {
-        Object.keys(lsData1).forEach(function(k) {
-          lsData1[k] = btoa(lsData1[k])
-        })
+      function startup() {
         console.log(JSON.stringify(lsData1))
     if (JSON.stringify(lsData1) != "{}") {
-      var toaddHTML = "";
-              Object.keys(lsData1).forEach(function (k) {
-                toaddHTML = toaddHTML + k + ": " + atob(lsData1[k]) + "<br>";
-              });
-              var lsData = {};
-              Object.keys(lsData1).forEach(function (k) {
-                lsData[k] = lsData1[k]
-              });
       gbtn.style.display = "block";
       mc.innerHTML = "<h1>Back Up from " + fromURL + "</h1><button onclick='mored()' id='mdb'>Show More <span class='material-symbols-outlined' style='display:inline'>arrow_drop_down</span></button><div id='mdd'>" + toaddHTML + "</div>";
       var clickit = new URLSearchParams(window.location.search).get("ab");
@@ -71,16 +62,6 @@ upload
     } else {
       mc.innerHTML = "<h1>No Data</h1>"
     }
-      }
-
-      function startup() {
-        var inter = setInterval(function() {
-          if (sessionStorage.getItem("currentdata")) {
-            lsData1 = JSON.parse(sessionStorage.getItem("currentdata"))
-            clearInterval(inter)
-            startup2()
-          }
-        },100)
       }
     </script>
 <script src="drive.js"></script>
@@ -104,12 +85,7 @@ upload
     <script>
       var urijson = new URLSearchParams(window.location.search).get("data");
   var url2 = new URLSearchParams(window.location.search).get("fromURL");
-      var lsData1;
-      try {
-        lsData1 = JSON.parse(atob(urijson.replaceAll("%2B","+")));  
-      } catch(error) {
-        console.log("noURI")
-      }
+  var lsData1 = JSON.parse(atob(urijson.replaceAll("%2B","+")));  
               function extractHostname(url) {
       let hostname;
       if (url.indexOf("://") > -1) {
@@ -121,9 +97,26 @@ upload
       hostname = hostname.split('?')[0];
       return hostname;
   }
+
+      function encodeFB(text2) {
+     var text1 = text2.replaceAll(".","%2E").replaceAll("#","%23").replaceAll("$","%24").replaceAll("/","%2F").replaceAll("[","%5B").replaceAll("]","%5D").replaceAll('"',"%22").replaceAll(":","%3A")
+     return text1;
+   }
+   
+   function decodeFB(text2) {
+     var text1 = text2.replaceAll("%2E",".").replaceAll("%23","#").replaceAll("%24","$").replaceAll("%2F","/").replaceAll("%5B","[").replaceAll("%5D","]").replaceAll('%22','"').replaceAll("%3A",":")
+     return text1;
+   }  
   var fromURL = extractHostname(atob(url2))
+              var toaddHTML = "";
+              Object.keys(lsData1).forEach(function (k) {
+                toaddHTML = toaddHTML + k + ": " + lsData1[k] + "<br>";
+              });
+              var lsData = {};
+              Object.keys(lsData1).forEach(function (k) {
+                lsData[encodeFB(k)] = lsData1[k]
+              });
       async function sendoff() {
-        console.log(lsData1)
         gbtn.style.display = "none"
         mc.innerHTML = "<h1>Uploading...</h1>"
         await addEntriesBySite(lsData1,fromURL)
@@ -134,6 +127,8 @@ upload
         gbtn.addEventListener('click',(e)=>{
     sendoff()
   });
+
+    
     </script>
   </body>
 </html>

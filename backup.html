@@ -51,13 +51,20 @@ upload
       function startup2() {
         console.log(JSON.stringify(lsData1))
     if (JSON.stringify(lsData1) != "{}") {
+      var toaddHTML = "";
+              Object.keys(lsData1).forEach(function (k) {
+                toaddHTML = toaddHTML + k + ": " + lsData1[k] + "<br>";
+              });
+              var lsData = {};
+              Object.keys(lsData1).forEach(function (k) {
+                lsData[k] = lsData1[k]
+              });
       gbtn.style.display = "block";
       mc.innerHTML = "<h1>Back Up from " + fromURL + "</h1><button onclick='mored()' id='mdb'>Show More <span class='material-symbols-outlined' style='display:inline'>arrow_drop_down</span></button><div id='mdd'>" + toaddHTML + "</div>";
       var clickit = new URLSearchParams(window.location.search).get("ab");
       if (clickit == "true") {
         sendoff()
       }
-      showData1()
     } else {
       mc.innerHTML = "<h1>No Data</h1>"
     }
@@ -112,16 +119,6 @@ upload
       return hostname;
   }
   var fromURL = extractHostname(atob(url2))
-      function showData1() {
-              var toaddHTML = "";
-              Object.keys(lsData1).forEach(function (k) {
-                toaddHTML = toaddHTML + k + ": " + lsData1[k] + "<br>";
-              });
-              var lsData = {};
-              Object.keys(lsData1).forEach(function (k) {
-                lsData[k] = lsData1[k]
-              });
-      }
       async function sendoff() {
         gbtn.style.display = "none"
         mc.innerHTML = "<h1>Uploading...</h1>"

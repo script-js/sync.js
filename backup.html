@@ -57,6 +57,7 @@ upload
       if (clickit == "true") {
         sendoff()
       }
+      showData1()
     } else {
       mc.innerHTML = "<h1>No Data</h1>"
     }
@@ -110,25 +111,17 @@ upload
       hostname = hostname.split('?')[0];
       return hostname;
   }
-
-      function encodeFB(text2) {
-     var text1 = text2.replaceAll(".","%2E").replaceAll("#","%23").replaceAll("$","%24").replaceAll("/","%2F").replaceAll("[","%5B").replaceAll("]","%5D").replaceAll('"',"%22").replaceAll(":","%3A")
-     return text1;
-   }
-   
-   function decodeFB(text2) {
-     var text1 = text2.replaceAll("%2E",".").replaceAll("%23","#").replaceAll("%24","$").replaceAll("%2F","/").replaceAll("%5B","[").replaceAll("%5D","]").replaceAll('%22','"').replaceAll("%3A",":")
-     return text1;
-   }  
   var fromURL = extractHostname(atob(url2))
+      function showData1() {
               var toaddHTML = "";
               Object.keys(lsData1).forEach(function (k) {
                 toaddHTML = toaddHTML + k + ": " + lsData1[k] + "<br>";
               });
               var lsData = {};
               Object.keys(lsData1).forEach(function (k) {
-                lsData[encodeFB(k)] = lsData1[k]
+                lsData[k] = lsData1[k]
               });
+      }
       async function sendoff() {
         gbtn.style.display = "none"
         mc.innerHTML = "<h1>Uploading...</h1>"

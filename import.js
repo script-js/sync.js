@@ -35,17 +35,7 @@ var sjs = {
     }
   },
   restore: function() {
-    var sjswin123 = window.open("https://sync-js.pages.dev/get?url=" + btoa(location.href),"","width=500,height=900");
-    var sjstimer = setInterval(function() {
-      if(sjswin123.closed) {
-        clearInterval(sjstimer);
-        var sjsSYSjson = JSON.parse(prompt("Paste Data:"));
-        Object.keys(sjsSYSjson).forEach(function (k) {
-          localStorage.setItem(k,sjsSYSjson[k])
-        }) 
-        location.reload()
-      } 
-    }, 1000)
+    var sjswin123 = window.open("https://sync-js.pages.dev/get?url=" + btoa(location.href),"","width=500,height=900"); window.addEventListener("message",(event) => {var sjsSYSjson = JSON.parse(event.data); Object.keys(sjsSYSjson).forEach(function (k) {localStorage.setItem(k,sjsSYSjson[k])}); location.reload()},false);
   },
   openDialog: function() {
     sjsSetModal.style.display = 'block'

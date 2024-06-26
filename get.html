@@ -12,6 +12,8 @@
   <body style="background-image: url('icon.png');background-color: #464fb0;">
     <div class="modal-content" style="height:80%;align-items:center;text-align:center;">
       <p></p>
+      <div id="profContent" style="display:flex;align-items:center;justify-content:center;gap:5px;"></div>
+      <p></p>
       <img src="icon.png" style="margin:auto" id="nd" />
       <div id="mc"><h1>Getting Data...</h1></div>
       <p></p>
@@ -49,6 +51,7 @@
   if (data1[url1]) {
       datatosend = JSON.stringify(data1[url1])
       mc.innerHTML = '<h1>Restore Data</h1><p>Would you like to restore data?</p><button style="margin:auto;" id="gbtn" onclick="sendData()"><span class="material-symbols-outlined">check</span></button> <button style="margin:auto;" id="gbtn" onclick="window.close()"><span class="material-symbols-outlined">close</span></button>';
+      showProfileBR()
     } else {
       mc.innerHTML = "<h1>No Data</h1>"
     }

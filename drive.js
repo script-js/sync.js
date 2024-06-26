@@ -242,3 +242,8 @@ async function expireCheck() {
      location.replace("login?handoff=" + btoa(location.href).replaceAll("+","%2B"))
   }
 }
+
+async function showProfileBR() {
+   var profile = await (await fetch("https://www.googleapis.com/oauth2/v3/userinfo?access_token=" + gapi.auth.getToken().access_token)).json();
+   profContent.innerHTML = `<img src="${profile.picture}" style="border-radius:100%" width="25">${profile.name}`
+}

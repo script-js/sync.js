@@ -49,10 +49,9 @@
           uploadFile("{}")
           location.reload()
         } else {
-          await get_doc(fid).then(function (data2) {
+          await get_doc(fid).then(function (data1) {
             var url2 = new URLSearchParams(window.location.search).get("url");
             var url1 = extractHostname(atob(url2))
-            var data1 = JSON.parse(data2)
             if (data1[url1]) {
               datatosend = JSON.stringify(data1[url1])
               mc.innerHTML = '<h1>Restore Data</h1><p>Would you like to restore data?</p><button style="margin:auto;" id="gbtn" onclick="sendData()"><span class="material-symbols-outlined">check</span></button> <button style="margin:auto;" id="gbtn" onclick="window.close()"><span class="material-symbols-outlined">close</span></button>';

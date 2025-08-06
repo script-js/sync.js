@@ -42,7 +42,7 @@ var sjs = {
   restore: function () {
     window.open("https://sync-js.pages.dev/get?url=" + btoa(location.href), "", "width=500,height=900");
     window.addEventListener("message", (event) => {
-      if (e.origin.includes("sync-js.pages.dev")) {
+      if (event.origin.includes("sync-js.pages.dev")) {
         var sjsSYSjson = JSON.parse(event.data);
         Object.keys(sjsSYSjson).forEach(function (k) {
           localStorage.setItem(k, sjsSYSjson[k])

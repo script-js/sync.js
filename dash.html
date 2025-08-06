@@ -184,8 +184,9 @@
             setTimeout(function () { location.reload() }, 200)
           } else {
             window.fid = fid
-            await get_doc(fid).then(function (data1) {
-              if (data1 && data1 != "{}") {
+            await get_doc(fid).then(function (data2) {
+              if (data2 && data2 != "{}") {
+                var data1 = JSON.parse(data2)
                 dataC.innerHTML = listSites(data1);
                 window.lstestarr = data1;
               } else {

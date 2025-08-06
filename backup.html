@@ -51,12 +51,11 @@
       "message",
       (event) => {
         console.log(event);
-        console.log(event.origin)
-        console.log(atob(url2))
-        if (event.origin == atob(url2) && event.data.includes("SJSDATA:")) {
+        console.log(extractHostname(event.origin), fromURL)
+        if (extractHostname(event.origin) == fromURL && event.data.includes("SJSDATA:")) {
           console.log(event.data)
           console.log(event.origin)
-          lsData1 = JSON.parse(atob(event.data.replace("SJSDATA:","")));
+          lsData1 = JSON.parse(atob(event.data.replace("SJSDATA:", "")));
         }
       },
       false,

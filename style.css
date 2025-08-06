@@ -7,7 +7,9 @@
   color: black
 }
 
-body {background:white}
+body {
+  background: white
+}
 
 button {
   transition: ease 150ms;
@@ -34,6 +36,7 @@ button:hover {
   line-height: 1;
   cursor: pointer;
 }
+
 .dropdownli:where(:hover, :focus-visible) {
   background-size: 100% var(--bg-h);
   background-position-x: left;
@@ -48,7 +51,12 @@ button:hover {
   content: "arrow_drop_up"
 }
 
-    @media (prefers-color-scheme: dark) { 
-      body {background-color:#212121}
-      * {color: white}
-    }
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #212121
+  }
+
+  * {
+    color: white
+  }
+}

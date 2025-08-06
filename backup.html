@@ -1,137 +1,142 @@
 <!DOCTYPE HTML>
 <html>
-  <head>
-    <link rel="icon" href="icon.png"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Backup | sync.js</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
-    <link href="../login.css" rel="stylesheet" type="text/css" />
-    <script src='https://exactalytics.pages.dev/import.js'></script>
-<script>analyticsInit('sync.js','3moxYInXFN6fp')</script>
-  </head>
-  <body style="background-image: url('icon.png');background-color: #464fb0;">
-    <div class="modal-content" style="height:80%;align-items:center;text-align:center;">
-      <p></p>
-      <div id="profContent" style="display:flex;align-items:center;justify-content:center;gap:5px;"></div>
-      <p></p>
-      <img src="icon.png" style="margin:auto" id="donei" />
-      <div id="mc"><h1>Getting Ready...</h1></div>
-      <button style="display:none;margin:auto;" id="gbtn"><span class="material-symbols-outlined">
-upload
-</span></button>
-      <p></p>
+
+<head>
+  <link rel="icon" href="icon.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Backup | sync.js</title>
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+  <link href="../login.css" rel="stylesheet" type="text/css" />
+  <script src='https://exactalytics.pages.dev/import.js'></script>
+  <script>analyticsInit('sync.js', '3moxYInXFN6fp')</script>
+</head>
+
+<body style="background-image: url('icon.png');background-color: #464fb0;">
+  <div class="modal-content" style="height:80%;align-items:center;text-align:center;">
+    <p></p>
+    <div id="profContent" style="display:flex;align-items:center;justify-content:center;gap:5px;"></div>
+    <p></p>
+    <img src="icon.png" style="margin:auto" id="donei" />
+    <div id="mc">
+      <h1>Getting Ready...</h1>
     </div>
-    <style>
-      #mdd {
-        display:none
-      }
-      #mdb {
-  transition: ease 150ms;
-  background: #46b063;
-  border: none;
-  border-radius: 3px;
-  width: 100px;
-  height: 30px;
-        cursor:pointer
-}
-
-#mdb:hover {
-  border-radius: 8px;
-  background: #56bf73;
-}
-    </style>
-    <script>
-      window.addEventListener(
-  "message",
-  (event) => {
-    if (event.origin != "https://content.googleapis.com") {
-    console.log(event.data)
-    console.log(event.origin)
-    alert(event.data)
+    <button style="display:none;margin:auto;" id="gbtn"><span class="material-symbols-outlined">
+        upload
+      </span></button>
+    <p></p>
+  </div>
+  <style>
+    #mdd {
+      display: none
     }
-  },
-  false,
-);
-      function startup() {
-        console.log(JSON.stringify(lsData1))
-    if (JSON.stringify(lsData1) != "{}") {
-      gbtn.style.display = "block";
-      mc.innerHTML = "<h1>Back Up from " + fromURL + "</h1><button onclick='mored()' id='mdb'>Show More <span class='material-symbols-outlined' style='display:inline'>arrow_drop_down</span></button><div id='mdd'>" + toaddHTML + "</div>";
-      var clickit = new URLSearchParams(window.location.search).get("ab");
-      if (clickit == "true") {
-        sendoff()
-      }
-      showProfileBR()
-    } else {
-      mc.innerHTML = "<h1>No Data</h1>"
-    }
-      }
-    </script>
-<script src="drive.js"></script>
-<script async defer src="https://apis.google.com/js/api.js"
-        onload="gapiLoaded()"></script>
-    <script async defer src="https://accounts.google.com/gsi/client"
-        onload="gisLoaded()"></script>
-    <script>
-      function mored() {
-        mdb.innerHTML = "Show Less <span class='material-symbols-outlined'>arrow_drop_up</span>";
-        mdd.style.display = "block";
-        mdb.onclick = moreu;
-      }
 
-      function moreu() {
-        mdb.innerHTML = "Show More <span class='material-symbols-outlined' style='display:inline'>arrow_drop_down</span>";
-        mdd.style.display = "none";
-        mdb.onclick = mored;
+    #mdb {
+      transition: ease 150ms;
+      background: #46b063;
+      border: none;
+      border-radius: 3px;
+      width: 100px;
+      height: 30px;
+      cursor: pointer
+    }
+
+    #mdb:hover {
+      border-radius: 8px;
+      background: #56bf73;
+    }
+  </style>
+  <script>
+    window.addEventListener(
+      "message",
+      (event) => {
+        if (event.origin != "https://content.googleapis.com") {
+          console.log(event.data)
+          console.log(event.origin)
+          alert(event.data)
+        }
+      },
+      false,
+    );
+    function startup() {
+      console.log(JSON.stringify(lsData1))
+      if (JSON.stringify(lsData1) != "{}") {
+        gbtn.style.display = "block";
+        mc.innerHTML = "<h1>Back Up from " + fromURL + "</h1><button onclick='mored()' id='mdb'>Show More <span class='material-symbols-outlined' style='display:inline'>arrow_drop_down</span></button><div id='mdd'>" + toaddHTML + "</div>";
+        var clickit = new URLSearchParams(window.location.search).get("ab");
+        if (clickit == "true") {
+          sendoff()
+        }
+        showProfileBR()
+      } else {
+        mc.innerHTML = "<h1>No Data</h1>"
       }
-    </script>
-    <script>
-      var urijson = new URLSearchParams(window.location.search).get("data");
-  var url2 = new URLSearchParams(window.location.search).get("fromURL");
-  var lsData1 = JSON.parse(atob(urijson.replaceAll("%2B","+")));  
-              function extractHostname(url) {
+    }
+  </script>
+  <script src="drive.js"></script>
+  <script async defer src="https://apis.google.com/js/api.js" onload="gapiLoaded()"></script>
+  <script async defer src="https://accounts.google.com/gsi/client" onload="gisLoaded()"></script>
+  <script>
+    function mored() {
+      mdb.innerHTML = "Show Less <span class='material-symbols-outlined'>arrow_drop_up</span>";
+      mdd.style.display = "block";
+      mdb.onclick = moreu;
+    }
+
+    function moreu() {
+      mdb.innerHTML = "Show More <span class='material-symbols-outlined' style='display:inline'>arrow_drop_down</span>";
+      mdd.style.display = "none";
+      mdb.onclick = mored;
+    }
+  </script>
+  <script>
+    var urijson = new URLSearchParams(window.location.search).get("data");
+    var url2 = new URLSearchParams(window.location.search).get("fromURL");
+    var lsData1 = JSON.parse(atob(urijson.replaceAll("%2B", "+")));
+    function extractHostname(url) {
       let hostname;
       if (url.indexOf("://") > -1) {
-          hostname = url.split('/')[2];
+        hostname = url.split('/')[2];
       } else {
-          hostname = url.split('/')[0];
+        hostname = url.split('/')[0];
       }
       hostname = hostname.split(':')[0];
       hostname = hostname.split('?')[0];
       return hostname;
-  }
+    }
 
-      function encodeFB(text2) {
-     var text1 = text2.replaceAll(".","%2E").replaceAll("#","%23").replaceAll("$","%24").replaceAll("/","%2F").replaceAll("[","%5B").replaceAll("]","%5D").replaceAll('"',"%22").replaceAll(":","%3A")
-     return text1;
-   }
-   
-   function decodeFB(text2) {
-     var text1 = text2.replaceAll("%2E",".").replaceAll("%23","#").replaceAll("%24","$").replaceAll("%2F","/").replaceAll("%5B","[").replaceAll("%5D","]").replaceAll('%22','"').replaceAll("%3A",":")
-     return text1;
-   }  
-  var fromURL = extractHostname(atob(url2))
-              var toaddHTML = "";
-              Object.keys(lsData1).forEach(function (k) {
-                toaddHTML = toaddHTML + k + ": " + lsData1[k] + "<br>";
-              });
-              var lsData = {};
-              Object.keys(lsData1).forEach(function (k) {
-                lsData[encodeFB(k)] = lsData1[k]
-              });
-      async function sendoff() {
-        gbtn.style.display = "none"
-        mc.innerHTML = "<h1>Uploading...</h1>"
-        await addEntriesBySite(lsData1,fromURL)
-          donei.style.display = "none";
-          mc.innerHTML = "<img src='done.png' width='95%'/><h1>Backup Successful</h1>";
-      }
+    function encodeFB(text2) {
+      var text1 = text2.replaceAll(".", "%2E").replaceAll("#", "%23").replaceAll("$", "%24").replaceAll("/", "%2F").replaceAll("[", "%5B").replaceAll("]", "%5D").replaceAll('"', "%22").replaceAll(":", "%3A")
+      return text1;
+    }
 
-        gbtn.addEventListener('click',(e)=>{
-    sendoff()
-  });
+    function decodeFB(text2) {
+      var text1 = text2.replaceAll("%2E", ".").replaceAll("%23", "#").replaceAll("%24", "$").replaceAll("%2F", "/").replaceAll("%5B", "[").replaceAll("%5D", "]").replaceAll('%22', '"').replaceAll("%3A", ":")
+      return text1;
+    }
+    var fromURL = extractHostname(atob(url2))
+    var toaddHTML = "";
+    Object.keys(lsData1).forEach(function (k) {
+      toaddHTML = toaddHTML + k + ": " + lsData1[k] + "<br>";
+    });
+    var lsData = {};
+    Object.keys(lsData1).forEach(function (k) {
+      lsData[encodeFB(k)] = lsData1[k]
+    });
+    async function sendoff() {
+      gbtn.style.display = "none"
+      mc.innerHTML = "<h1>Uploading...</h1>"
+      await addEntriesBySite(lsData1, fromURL)
+      donei.style.display = "none";
+      mc.innerHTML = "<img src='done.png' width='95%'/><h1>Backup Successful</h1>";
+    }
 
-    
-    </script>
-  </body>
+    gbtn.addEventListener('click', (e) => {
+      sendoff()
+    });
+
+
+  </script>
+</body>
+
 </html>

@@ -51,62 +51,69 @@
   transition: ease 70ms;
 }
 
-        .inputBox input:focus ~ label,
-        .inputBox input:valid ~ label,
-        .inputBox input:not([value=""]) ~ label {
-            top: -1.125rem;
-            left: 10px;
-            color: #1a73e8;
-            font-size: 0.75rem;
-            background-color: white;
-            height: 10px;
-            padding-left: 5px;
-            padding-right: 5px;
-        }
-        .inputBox input:focus {
-            outline: none;
-            border: 2px solid #1a73e8;
-        }
+.inputBox input:focus~label,
+.inputBox input:valid~label,
+.inputBox input:not([value=""])~label {
+  top: -1.125rem;
+  left: 10px;
+  color: #1a73e8;
+  font-size: 0.75rem;
+  background-color: white;
+  height: 10px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.inputBox input:focus {
+  outline: none;
+  border: 2px solid #1a73e8;
+}
 
 .inputBox input {
-                width: 93%;
-                padding: 0.625rem 10px;
-                font-size: 1rem;
-                letter-spacing: 0.062rem;
-                margin-bottom: 1.875rem;
-                border: 1px solid #ccc;
-                background: transparent;
-                border-radius: 4px;
-                
-              }
+  width: 93%;
+  padding: 0.625rem 10px;
+  font-size: 1rem;
+  letter-spacing: 0.062rem;
+  margin-bottom: 1.875rem;
+  border: 1px solid #ccc;
+  background: transparent;
+  border-radius: 4px;
+
+}
+
 .inputBox label {
-                position: absolute;
-                top: 0;
-                left: 10px;
-                padding: 0.625rem 0;
-                font-size: 1rem;
-                color: grey;
-                pointer-events: none;
-                transition: 0.5s;
-              }
+  position: absolute;
+  top: 0;
+  left: 10px;
+  padding: 0.625rem 0;
+  font-size: 1rem;
+  color: grey;
+  pointer-events: none;
+  transition: 0.5s;
+}
 
 .inputBox input {
-                width: 93%;
-                padding: 0.625rem 10px;
-                font-size: 1rem;
-                letter-spacing: 0.062rem;
-                margin-bottom: 1.875rem;
-                border: 1px solid #ccc;
-                background: transparent;
-                border-radius: 4px;
-                
-              }
+  width: 93%;
+  padding: 0.625rem 10px;
+  font-size: 1rem;
+  letter-spacing: 0.062rem;
+  margin-bottom: 1.875rem;
+  border: 1px solid #ccc;
+  background: transparent;
+  border-radius: 4px;
+
+}
 
 .inputBox {
-                position: relative;
-              }
-    
+  position: relative;
+}
+
 @media (prefers-color-scheme: dark) {
-  * {color:white}
-  .modal-content {background:#212121}
+  * {
+    color: white
+  }
+
+  .modal-content {
+    background: #212121
+  }
 }

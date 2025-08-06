@@ -12,32 +12,32 @@ sjsInjection.innerHTML = `
 document.documentElement.appendChild(sjsInjection);
 
 var sjs = {
-  showDot: function() {
+  showDot: function () {
     var sjsInjection = document.createElement("div")
-      sjsInjection.innerHTML = `
+    sjsInjection.innerHTML = `
       <div style="position: fixed;right:50px;bottom:50px;"><img src="https://sync-js.pages.dev/icon.png" width="20" style="border: 5px solid rgba(0, 0, 0, 0.45);border-radius:20px;cursor:pointer;" onclick="sjs.openDialog()" title="sync.js" /></div>
       `;
-      document.documentElement.appendChild(sjsInjection);
+    document.documentElement.appendChild(sjsInjection);
   },
-  backUp: function(custom) {
+  backUp: function (custom) {
     try {
-    var lsdata = {}
-    if (custom) {
-      Object.keys(custom).forEach(function(k) {
-        lsdata[custom[k]] = localStorage.getItem(custom[k])
-      })
-    } else {
-      lsdata = localStorage
-    }
-      window.open("https://sync-js.pages.dev/backup?fromURL=" + btoa(location.href) + "&data=" + btoa(JSON.stringify(lsdata)).replaceAll("+",atob("JTJC")),"","width=500,height=900")
-    } catch(err) {
+      var lsdata = {}
+      if (custom) {
+        Object.keys(custom).forEach(function (k) {
+          lsdata[custom[k]] = localStorage.getItem(custom[k])
+        })
+      } else {
+        lsdata = localStorage
+      }
+      window.open("https://sync-js.pages.dev/backup?fromURL=" + btoa(location.href) + "&data=" + btoa(JSON.stringify(lsdata)).replaceAll("+", atob("JTJC")), "", "width=500,height=900")
+    } catch (err) {
       alert(err)
     }
   },
-  restore: function() {
-    var sjswin123 = window.open("https://sync-js.pages.dev/get?url=" + btoa(location.href),"","width=500,height=900"); window.addEventListener("message",(event) => {var sjsSYSjson = JSON.parse(event.data); Object.keys(sjsSYSjson).forEach(function (k) {localStorage.setItem(k,sjsSYSjson[k])}); location.reload()},false);
+  restore: function () {
+    var sjswin123 = window.open("https://sync-js.pages.dev/get?url=" + btoa(location.href), "", "width=500,height=900"); window.addEventListener("message", (event) => { var sjsSYSjson = JSON.parse(event.data); Object.keys(sjsSYSjson).forEach(function (k) { localStorage.setItem(k, sjsSYSjson[k]) }); location.reload() }, false);
   },
-  openDialog: function() {
+  openDialog: function () {
     sjsSetModal.style.display = 'block'
   }
 }

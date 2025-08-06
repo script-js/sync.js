@@ -25,9 +25,9 @@ async function initializeGapiClient() {
    if (token) {
       gapi.client.setToken(JSON.parse(token));
    } else if (!location.href.includes("login")) {
-      location.replace("login?handoff=" + btoa(location.href).replaceAll("+","%2B"))
+      location.replace("login?handoff=" + btoa(location.href).replaceAll("+", "%2B"))
    }
-   if (!location.href.includes("login")) {setInterval(expireCheck,500)}
+   if (!location.href.includes("login")) { setInterval(expireCheck, 500) }
    startup()
 }
 
@@ -86,42 +86,42 @@ async function findFile() {
       return;
    }
    const files = response.result.files;
-      var fid;
-      Object.keys(files).forEach(async function (k) {
-         if (files[k].name == FNAME) {
-            if (fid) {
-               alert("Duplicate data file found. Cleaning up...")
-               var combine = {};
-               console.log(combine)
-               await get_doc(fid).then(function(data1) {
-                  console.log(data1)
-                  var data2 = JSON.parse(data1)
-                  Object.keys(data2).forEach(function(k) {
-                     combine[k] = data2[k]
-                  })
+   var fid;
+   Object.keys(files).forEach(async function (k) {
+      if (files[k].name == FNAME) {
+         if (fid) {
+            alert("Duplicate data file found. Cleaning up...")
+            var combine = {};
+            console.log(combine)
+            await get_doc(fid).then(function (data1) {
+               console.log(data1)
+               var data2 = JSON.parse(data1)
+               Object.keys(data2).forEach(function (k) {
+                  combine[k] = data2[k]
                })
-               await get_doc(files[k].id).then(function(data1) {
-                  console.log(data1)
-                  var data2 = JSON.parse(data1)
-                  Object.keys(data2).forEach(function(k) {
-                     combine[k] = data2[k]
-                  })
+            })
+            await get_doc(files[k].id).then(function (data1) {
+               console.log(data1)
+               var data2 = JSON.parse(data1)
+               Object.keys(data2).forEach(function (k) {
+                  combine[k] = data2[k]
                })
-               console.log(combine)
-               await deleteFile(fid)
-               await deleteFile(files[k].id)
-               await uploadFile(JSON.stringify(combine))
-               setTimeout(function() {location.reload()},1000)
-            } else {
-              fid = files[k].id
-            }
+            })
+            console.log(combine)
+            await deleteFile(fid)
+            await deleteFile(files[k].id)
+            await uploadFile(JSON.stringify(combine))
+            setTimeout(function () { location.reload() }, 1000)
+         } else {
+            fid = files[k].id
          }
-      })
-      if (fid) {
-         console.log("FileFound: " + fid)
-         return fid;
-      } else {
-         return false
+      }
+   })
+   if (fid) {
+      console.log("FileFound: " + fid)
+      return fid;
+   } else {
+      return false
    }
 }
 
@@ -193,7 +193,7 @@ async function addEntriesBySite(jdata, siteid) {
       if (fid == false) {
          await uploadFile("{}")
          alert("Storage file not found. Press OK to reload.")
-         setTimeout(function() {location.reload()},200)
+         setTimeout(function () { location.reload() }, 200)
       } else {
          await get_doc(fid).then(function (data) {
             console.log(data)
@@ -225,10 +225,10 @@ async function editorDelete(domain) {
             console.log(d2)
             var con1 = confirm("Are you sure you want to delete all data from " + domain + "?")
             if (con1 == true) {
-              deleteFile(fid)
-              uploadFile(JSON.stringify(d2))
+               deleteFile(fid)
+               uploadFile(JSON.stringify(d2))
                alert("Deleted Successfully")
-            startup()
+               startup()
             }
          });
       }
@@ -236,11 +236,11 @@ async function editorDelete(domain) {
 }
 
 async function expireCheck() {
-  var data = await (await fetch("https://www.googleapis.com/oauth2/v1/tokeninfo?access_token=" + gapi.auth.getToken().access_token)).json();
-  if (data.error == "invalid_token") {
-     localStorage.setItem("gapi_token","")
-     location.replace("login?handoff=" + btoa(location.href).replaceAll("+","%2B"))
-  }
+   var data = await (await fetch("https://www.googleapis.com/oauth2/v1/tokeninfo?access_token=" + gapi.auth.getToken().access_token)).json();
+   if (data.error == "invalid_token") {
+      localStorage.setItem("gapi_token", "")
+      location.replace("login?handoff=" + btoa(location.href).replaceAll("+", "%2B"))
+   }
 }
 
 async function showProfileBR() {

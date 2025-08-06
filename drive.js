@@ -110,7 +110,7 @@ async function findFile() {
             console.log(combine)
             await deleteFile(fid)
             await deleteFile(files[k].id)
-            await uploadFile(JSON.stringify(combine))
+            await uploadFile(JSON.stringify(combine, null, 2))
             setTimeout(function () { location.reload() }, 1000)
          } else {
             fid = files[k].id
@@ -237,7 +237,7 @@ async function deleteFile(fileId) {
 async function addEntries(jdata) {
    await findFile().then(async function (fid) {
       if (fid == false) {
-         uploadFile(JSON.stringify(jdata))
+         uploadFile(JSON.stringify(jdata, null, 2))
       } else {
          await get_doc(fid).then(function (data) {
             var d2 = JSON.parse(data)
@@ -245,7 +245,7 @@ async function addEntries(jdata) {
                d2[k] = jdata[k]
             })
             deleteFile(fid)
-            uploadFile(JSON.stringify(d2))
+            uploadFile(JSON.stringify(d2, null, 2))
          });
       }
    })
@@ -269,8 +269,7 @@ async function addEntriesBySite(jdata, siteid) {
                d2[siteid][k] = jdata[k]
             })
             deleteFile(fid)
-            console.log(JSON.stringify(d2))
-            uploadFile(JSON.stringify(d2))
+            uploadFile(JSON.stringify(d2, null, 2))
          });
       }
    })
@@ -290,7 +289,7 @@ async function editorDelete(domain) {
             var con1 = confirm("Are you sure you want to delete all data from " + domain + "?")
             if (con1 == true) {
                deleteFile(fid)
-               uploadFile(JSON.stringify(d2))
+               uploadFile(JSON.stringify(d2, null, 2))
                alert("Deleted Successfully")
                startup()
             }

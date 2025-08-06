@@ -200,9 +200,9 @@
       async function editorOpen(domain) {
         await get_doc(fid).then(function (data1) {
           var data2 = JSON.parse(data1)[domain]
-          if (data2 != {} && data2) {
+          if (data2 && data2 != {}) {
             edtext.innerHTML = "Editing JSON: " + domain;
-            editorText.innerHTML = JSON.stringify(data2);
+            editorText.innerHTML = JSON.stringify(data2, null, 2);
             editorSave.onclick = function () {
               try {
                 var toset = {}

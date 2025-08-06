@@ -79,6 +79,8 @@
         } else {
           mc.innerHTML = "<h1>No Data</h1>"
         }
+      } else {
+        window.opener.postMessage("SJS:LOADED", atob(url2))
       }
     }
   </script>

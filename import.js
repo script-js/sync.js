@@ -29,13 +29,27 @@ var sjs = {
       } else {
         lsdata = localStorage
       }
-      window.open("https://sync-js.pages.dev/backup?fromURL=" + btoa(location.href) + "&data=" + btoa(JSON.stringify(lsdata)).replaceAll("+", atob("JTJC")), "", "width=500,height=900")
+      window.open("https://sync-js.pages.dev/backup?fromURL=" + btoa(location.href), "", "width=500,height=900")
+      window.addEventListener("message", function (e) {
+        if (e.origin.includes("sync-js.pages.dev") && e.data == "SJS:LOADED") {
+          e.source.postMessage("SJSDATA:" + btoa(JSON.stringify(localStorage)), "https://sync-js.pages.dev/")
+        }
+      })
     } catch (err) {
       alert(err)
     }
   },
   restore: function () {
-    var sjswin123 = window.open("https://sync-js.pages.dev/get?url=" + btoa(location.href), "", "width=500,height=900"); window.addEventListener("message", (event) => { var sjsSYSjson = JSON.parse(event.data); Object.keys(sjsSYSjson).forEach(function (k) { localStorage.setItem(k, sjsSYSjson[k]) }); location.reload() }, false);
+    window.open("https://sync-js.pages.dev/get?url=" + btoa(location.href), "", "width=500,height=900");
+    window.addEventListener("message", (event) => {
+      if (e.origin.includes("sync-js.pages.dev")) {
+        var sjsSYSjson = JSON.parse(event.data);
+        Object.keys(sjsSYSjson).forEach(function (k) {
+          localStorage.setItem(k, sjsSYSjson[k])
+        });
+        location.reload();
+      }
+    }, false);
   },
   openDialog: function () {
     sjsSetModal.style.display = 'block'

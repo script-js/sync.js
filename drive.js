@@ -239,13 +239,13 @@ async function addEntries(jdata) {
       if (fid == false) {
          uploadFile(JSON.stringify(jdata, null, 2))
       } else {
-         await get_doc(fid).then(function (data) {
+         await get_doc(fid).then(async function (data) {
             var d2 = JSON.parse(data)
             Object.keys(jdata).forEach(function (k) {
                d2[k] = jdata[k]
             })
-            uploadFile(JSON.stringify(d2, null, 2))
-            deleteFile(fid)
+            await uploadFile(JSON.stringify(d2, null, 2))
+            await deleteFile(fid)
          });
       }
    })
@@ -259,7 +259,7 @@ async function addEntriesBySite(jdata, siteid) {
          alert("Storage file not found. Press OK to create it and reload.")
          setTimeout(function () { location.reload() }, 200)
       } else {
-         await get_doc(fid).then(function (data) {
+         await get_doc(fid).then(async function (data) {
             console.log(data)
             var d2 = JSON.parse(data)
             if (!d2[siteid]) {
@@ -268,8 +268,8 @@ async function addEntriesBySite(jdata, siteid) {
             Object.keys(jdata).forEach(function (k) {
                d2[siteid][k] = jdata[k]
             })
-            uploadFile(JSON.stringify(d2, null, 2))
-            deleteFile(fid)
+            await uploadFile(JSON.stringify(d2, null, 2))
+            await deleteFile(fid)
          });
       }
    })
@@ -281,15 +281,15 @@ async function editorDelete(domain) {
          alert("How did you get this error?")
          location.reload()
       } else {
-         await get_doc(fid).then(function (data) {
+         await get_doc(fid).then(async function (data) {
             var d2 = JSON.parse(data)
             console.log(d2[domain])
             delete d2[domain]
             console.log(d2)
             var con1 = confirm("Are you sure you want to delete all data from " + domain + "?")
             if (con1 == true) {
-               uploadFile(JSON.stringify(d2, null, 2));
-               deleteFile(fid);
+               await uploadFile(JSON.stringify(d2, null, 2));
+               await deleteFile(fid);
                alert("Deleted Successfully")
                startup()
             }

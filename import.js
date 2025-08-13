@@ -19,7 +19,7 @@ var sjs = {
       `;
     document.documentElement.appendChild(sjsInjection);
   },
-  backUp: function (custom) {
+  backUp: function (custom, useurl) {
     try {
       var lsdata = {}
       if (custom) {
@@ -29,12 +29,16 @@ var sjs = {
       } else {
         lsdata = localStorage
       }
-      window.open("https://sync-js.pages.dev/backup?fromURL=" + btoa(location.href), "", "width=500,height=900")
-      window.addEventListener("message", function (e) {
-        if (e.origin.includes("sync-js.pages.dev") && e.data == "SJS:LOADED") {
-          e.source.postMessage("SJSDATA:" + btoa(JSON.stringify(lsData)), "https://sync-js.pages.dev/")
-        }
-      })
+      if (useurl) {
+        window.open("https://sync-js.pages.dev/backup?fromURL=" + btoa(location.href) + "&data=" + btoa(JSON.stringify(lsData)), "", "width=500,height=900")
+      } else {
+        window.open("https://sync-js.pages.dev/backup?fromURL=" + btoa(location.href), "", "width=500,height=900")
+        window.addEventListener("message", function (e) {
+          if (e.origin.includes("sync-js.pages.dev") && e.data == "SJS:LOADED") {
+            e.source.postMessage("SJSDATA:" + btoa(JSON.stringify(lsData)), "https://sync-js.pages.dev/")
+          }
+        })
+      }
     } catch (err) {
       alert(err)
     }

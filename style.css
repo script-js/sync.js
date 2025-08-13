@@ -4,11 +4,11 @@
   font-family: "Poppins", sans-serif;
   font-weight: 400;
   font-style: normal;
-  color: black
+  color: black;
 }
 
 body {
-  background: white
+  background: white;
 }
 
 button {
@@ -48,15 +48,15 @@ button:hover {
 }
 
 .dropdownliFocus.material-symbols-outlined {
-  content: "arrow_drop_up"
+  content: "arrow_drop_up";
 }
 
 @media (prefers-color-scheme: dark) {
   body {
-    background-color: #212121
+    background-color: #212121;
   }
 
   * {
-    color: white
+    color: white;
   }
 }

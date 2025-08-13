@@ -30,12 +30,12 @@ var sjs = {
         lsdata = localStorage
       }
       if (useurl) {
-        window.open("https://sync-js.pages.dev/backup?fromURL=" + btoa(location.href) + "&data=" + btoa(JSON.stringify(lsData)), "", "width=500,height=900")
+        window.open("https://sync-js.pages.dev/backup?fromURL=" + btoa(location.href) + "&data=" + btoa(JSON.stringify(lsdata)), "", "width=500,height=900")
       } else {
         window.open("https://sync-js.pages.dev/backup?fromURL=" + btoa(location.href), "", "width=500,height=900")
         window.addEventListener("message", function (e) {
           if (e.origin.includes("sync-js.pages.dev") && e.data == "SJS:LOADED") {
-            e.source.postMessage("SJSDATA:" + btoa(JSON.stringify(lsData)), "https://sync-js.pages.dev/")
+            e.source.postMessage("SJSDATA:" + btoa(JSON.stringify(lsdata)), "https://sync-js.pages.dev/")
           }
         })
       }

@@ -43,7 +43,9 @@ var sjs = {
     }, false);
   },
   openDialog: function () {
-    if (!sjsSetModal) {
+    if (sjsSetModal) {
+      sjsSetModal.style.display = 'block';
+    } else {
       var sjsInjection = document.createElement("div")
       sjsInjection.innerHTML = `
 <div style="display: block; /* Hidden by default */ position: fixed; /* Stay in place */ z-index: 1; /* Sit on top */ left: 0; top: 0; width: 100%; /* Full width */ height: 100%; /* Full height */ overflow: auto; /* Enable scroll if needed */ background-color: rgb(0,0,0); /* Fallback color */ background-color: rgba(0,0,0,0.4); /* Black w/ opacity */" id="sjsSetModal"><div style="display: block; position: fixed; z-index: 1; left: 0px; top: 0px; width: 100%; height: 100%; overflow: auto; background-color: rgba(0, 0, 0, 0.4);"><div style="margin: 15% auto; background: white; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); text-align: center; box-sizing: border-box; border-radius: 10px; width: 50%; border: 2px solid blue;padding: 20px;">
@@ -56,10 +58,8 @@ var sjs = {
 </div>
 `;
       document.documentElement.appendChild(sjsInjection);
-    } else {
-      sjsSetModal.style.display = 'block';
     }
   }
-} 
+}
 
 //postMessage script: try { window.open("https://sync-js.pages.dev/backup?fromURL=" + btoa(location.href), "", "width=500,height=900"); window.addEventListener("message", function (e) { if (e.origin.includes("sync-js.pages.dev") && e.data == "SJS:LOADED") { e.source.postMessage("SJSDATA:" + btoa(JSON.stringify(localStorage)), "https://sync-js.pages.dev/") } }); } catch (error) { alert(error) }

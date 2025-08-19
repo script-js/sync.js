@@ -24,6 +24,7 @@
     <p></p>
   </div>
   <script>
+sessionStorage.setItem("realRef",document.referrer)
 
     var sendoff = new URLSearchParams(window.location.search).get("sendoff");
 
@@ -72,7 +73,7 @@ var url2 = new URLSearchParams(window.location.search).get("url");
   <script async defer src="https://accounts.google.com/gsi/client" onload="gisLoaded()"></script>
   <script>
     function sendData() {
-      if (extractHostname(document.referrer) == url1) {
+      if (extractHostname(sessionStorage.getItem("realRef")) == url1) {
       mc.innerHTML = "<img src='done.png' width='95%' /><h1>Please Close this Window</h1>";
       nd.style.display = "none";
       setTimeout(function () {

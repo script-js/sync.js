@@ -24,7 +24,7 @@
     <p></p>
   </div>
   <script>
-sessionStorage.setItem("realRef",document.referrer)
+    if (!document.referrer.includes("sync-js.pages.dev")) sessionStorage.setItem("realRef",document.referrer)
 
     var sendoff = new URLSearchParams(window.location.search).get("sendoff");
 
@@ -74,15 +74,15 @@ var url2 = new URLSearchParams(window.location.search).get("url");
   <script>
     function sendData() {
       if (extractHostname(sessionStorage.getItem("realRef")) == url1) {
-      mc.innerHTML = "<img src='done.png' width='95%' /><h1>Please Close this Window</h1>";
-      nd.style.display = "none";
-      setTimeout(function () {
-        window.opener.postMessage(datatosend, "*")
-        window.close()
-      }, 100)
-      } else {
-        alert("Could not verify website authenticity.")
-      }
+        mc.innerHTML = "<img src='done.png' width='95%' /><h1>Please Close this Window</h1>";
+        nd.style.display = "none";
+        setTimeout(function () {
+          window.opener.postMessage(datatosend, "*")
+          window.close()
+        }, 100)
+        } else {
+          alert("Could not verify website authenticity.")
+        }
     }
   </script>
 

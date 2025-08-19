@@ -60,6 +60,6 @@ var sjs = {
       sjsSetModal.style.display = 'block';
     }
   }
-}
+} 
 
 //postMessage script: try { window.open("https://sync-js.pages.dev/backup?fromURL=" + btoa(location.href), "", "width=500,height=900"); window.addEventListener("message", function (e) { if (e.origin.includes("sync-js.pages.dev") && e.data == "SJS:LOADED") { e.source.postMessage("SJSDATA:" + btoa(JSON.stringify(localStorage)), "https://sync-js.pages.dev/") } }); } catch (error) { alert(error) }

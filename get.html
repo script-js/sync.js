@@ -43,6 +43,10 @@
 
 
     var datatosend;
+
+var url2 = new URLSearchParams(window.location.search).get("url");
+            var url1 = extractHostname(atob(url2));
+
     async function startup() {
       await findFile().then(async function (fid) {
         if (fid == false) {
@@ -50,8 +54,6 @@
           location.reload()
         } else {
           await get_doc(fid).then(function (data2) {
-            var url2 = new URLSearchParams(window.location.search).get("url");
-            var url1 = extractHostname(atob(url2))
             var data1 = JSON.parse(data2)
             if (data1[url1]) {
               datatosend = JSON.stringify(data1[url1])

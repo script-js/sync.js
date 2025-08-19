@@ -1,0 +1,48 @@
+<!DOCTYPE HTML>
+<html style="width:100%;height:100%;">
+
+<head>
+  <link rel="stylesheet" href="style.css" />
+  <title>API Reference</title>
+  <link rel="icon" href="icon.png" />
+  <meta name="google-site-verification" content="LKIThRhzjIXHbuJDOimsoB5O4Bb4eMFMp-YgYNFAG1M" />
+  <meta name="description" content="Backup and Restore website data to Google Account">
+  <meta name="title" content="sync.js">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src='https://exactalytics.pages.dev/import.js'></script>
+  <script>analyticsInit('sync.js', '3moxYInXFN6fp')</script>
+  <style>
+    .coderef {
+      font-family: monospace;
+      font-weight: bold;
+    }
+
+    .smallsnippet {
+        height: 20px;
+    }
+  </style>
+</head>
+
+<body style="width:99%;height:99%;">
+  <a href="/"><img src="icon.png" width="60px" /></a><a href="login" style="float:right"><button>Log In</button></a>
+  <div style="text-align: center;">
+    <h1>API Reference</h1>
+    <h2 class="coderef">showDot()</h2>
+    <p>Shows a small button in the bottom-right corner of the screen that opens the default popup.</p>
+    <textarea class="coderef smallsnippet">sjs.showDot()</textarea>
+    <h2 class="coderef">openDialog()</h2>
+    <p>Opens the default popup.</p>
+    <textarea class="coderef smallsnippet">sjs.openDialog()</textarea>
+    <h2 class="coderef">backUp()</h2>
+    <p>Starts the backup process.</p>
+    <p style="font-size: 13px;"><span class="coderef">custom (Array)</span>: The specific LocalStorage values to back up (leave null for everything)</p>
+    <p style="font-size: 13px;"><span class="coderef">useurl (Boolean)</span>: Whether or not to send data using the URL instead of postMessage (false by default)</p>
+    <textarea class="coderef smallsnippet">sjs.openDialog(custom, useurl)</textarea>
+    <h2 class="coderef">restore()</h2>
+    <p>Starts the restoration process.</p>
+    <textarea class="coderef smallsnippet">sjs.restore()</textarea>
+    <p>&nbsp;</p>
+  </div>
+</body>
+
+</html>

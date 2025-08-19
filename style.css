@@ -51,6 +51,14 @@ button:hover {
   content: "arrow_drop_up";
 }
 
+input,
+textarea {
+  color: black;
+  border: 2px solid #1a73e8;
+  border-radius: 5px;
+  padding: 5px;
+}
+
 @media (prefers-color-scheme: dark) {
   body {
     background-color: #212121;
@@ -59,4 +67,10 @@ button:hover {
   * {
     color: white;
   }
+
+  input, textarea {
+    background-color: rgb(78, 78, 78);
+    color: white;
+  }
+
 }

@@ -1,4 +1,5 @@
 var sjs = {
+  modal: 
   showDot: function () {
     var sjsInjection = document.createElement("div")
     sjsInjection.innerHTML = `
@@ -43,7 +44,9 @@ var sjs = {
     }, false);
   },
   openDialog: function () {
+    console.log(sjsSetModal)
     if (sjsSetModal) {
+      console.log("y")
       sjsSetModal.style.display = 'block';
     } else {
       var sjsInjection = document.createElement("div")

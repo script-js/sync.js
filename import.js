@@ -1,5 +1,4 @@
 var sjs = {
-  modal: 
   showDot: function () {
     var sjsInjection = document.createElement("div")
     sjsInjection.innerHTML = `
